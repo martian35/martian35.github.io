@@ -241,14 +241,6 @@
           "caption": "Official announcement for the 2025 competition.",
           "source_label": "SNU Electrical and Computer Engineering",
           "source_url": "https://ece.snu.ac.kr/community/etc?bbsidx=56492&md=v"
-        },
-        {
-          "url": "https://eng.snu.ac.kr/dext5editordata/2025/09/20250929_110411549_79724.jpg",
-          "fallback": "mri-overview.jpg",
-          "alt": "Official group photograph at the 2025 SNU FastMRI Challenge awards ceremony",
-          "caption": "Official competition coverage.",
-          "source_label": "SNU Engineering · 2025 awards",
-          "source_url": "https://eng.snu.ac.kr/communication/promotion/news?bbsidx=6126&md=v"
         }
       ]
     },

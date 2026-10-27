@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://martian35.github.io/sitemap.xml

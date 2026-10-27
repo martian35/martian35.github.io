@@ -1,0 +1,500 @@
+{
+  "person": {
+    "name": "Dong Hwi Kim",
+    "korean_name": "김동휘",
+    "affiliation": "Mechanical Engineering · Seoul National University",
+    "email": "martian35@snu.ac.kr",
+    "github": "https://github.com/martian35",
+    "linkedin": "https://www.linkedin.com/in/martian35/",
+    "updated": "October 2026",
+    "intro": "I am an undergraduate student in Mechanical Engineering at Seoul National University, working at the intersection of robotics, 3D vision, and machine learning.",
+    "bio": "I am an undergraduate researcher in the RPM Robotics Lab with Prof. Ayoung Kim and the AIDAS Lab with Prof. Jaeyoung Do. My current work focuses on 3D Gaussian Splatting for SLAM and visual data augmentation for robot learning.",
+    "interests": [
+      "3D scene representations",
+      "Robot perception & SLAM",
+      "Learning from visual data"
+    ]
+  },
+  "research": [
+    {
+      "id": "gaussian-slam",
+      "title": "3D Gaussian Splatting for SLAM",
+      "eyebrow": "3D vision · Mapping",
+      "status": "Manuscript in preparation",
+      "date": "Ongoing",
+      "image": "slam-concept.svg",
+      "image_alt": "Conceptual illustration of camera observations, Gaussian scene representation, and camera trajectory; not an experimental result",
+      "summary": "Investigating 3D Gaussian Splatting for simultaneous localization and mapping. A manuscript is currently in preparation.",
+      "role": "Ongoing research on 3DGS-based SLAM; manuscript in preparation.",
+      "tags": [
+        "3D Gaussian Splatting",
+        "SLAM",
+        "3D Reconstruction"
+      ],
+      "links": [],
+      "sections": [
+        {
+          "heading": "Research direction",
+          "body": "This ongoing project investigates the use of 3D Gaussian Splatting in simultaneous localization and mapping. The goal is to connect camera motion estimation with a 3D representation of the surrounding scene."
+        },
+        {
+          "heading": "Current status",
+          "body": "The manuscript is in preparation. Further method details, experimental results, and publication information will be shared as the work progresses."
+        }
+      ],
+      "illustrative": true
+    },
+    {
+      "id": "splataug-fr3",
+      "title": "3DGS Data Augmentation for Robot Learning",
+      "eyebrow": "Robot learning · Visual simulation",
+      "status": "Ongoing collaboration",
+      "date": "Ongoing",
+      "image": "splataug.jpg",
+      "image_alt": "An FR3 manipulation episode rendered from three camera viewpoints using Gaussian scene assets",
+      "summary": "Developing the 3D Gaussian Splatting augmentation module for a broader robotic dataset effort: reconstructing scenes and rendering manipulation demonstrations from multiple viewpoints.",
+      "role": "Responsible for the 3DGS data augmentation module within a larger collaborative dataset project.",
+      "tags": [
+        "3D Gaussian Splatting",
+        "Data Augmentation",
+        "Robot Learning"
+      ],
+      "links": [
+        {
+          "label": "Code",
+          "url": "https://github.com/martian35/splataug-fr3"
+        }
+      ],
+      "sections": [
+        {
+          "heading": "The larger effort",
+          "body": "This work contributes to an augmented robotic dataset that is being developed toward a publication. My responsibility is the 3D Gaussian Splatting data augmentation module, one component of the larger effort."
+        },
+        {
+          "heading": "My contribution",
+          "body": "The module turns captured workcell imagery and robot demonstrations into reusable 3D scene assets and rendered training views. The current implementation supports FR3 manipulation scenes and multiple calibrated camera viewpoints."
+        },
+        {
+          "heading": "Current status",
+          "body": "The broader dataset collaboration and its manuscript are in progress. Paper details and additional results will be added as the collaboration progresses."
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "robot-challenge",
+      "title": "Autonomous Perception for the SNU AI Robot Challenge",
+      "eyebrow": "Robotics · Team 7",
+      "date": "2026",
+      "category": "Robotics",
+      "badge": "2nd Place",
+      "image": "robot.jpg",
+      "image_alt": "Team 7's autonomous mecanum-wheel robot in the competition arena",
+      "summary": "An autonomous mobile robot that identifies, collects, and deposits target objects within a timed arena. I worked on perception and model training.",
+      "role": "Perception and model training, together with Jinyong Jun.",
+      "tags": [
+        "Robot Perception",
+        "Instance Segmentation",
+        "Jetson Orin Nano"
+      ],
+      "metrics": [
+        {
+          "value": "2nd",
+          "label": "Final placement"
+        },
+        {
+          "value": "140 / 200",
+          "label": "Final score"
+        },
+        {
+          "value": "180 s",
+          "label": "Match duration"
+        }
+      ],
+      "links": [
+        {
+          "label": "Code",
+          "url": "https://github.com/junjinyong/snu-ai-robot-challenge-2026-team7"
+        },
+        {
+          "label": "Final run 1",
+          "url": "https://www.youtube.com/shorts/eW8jHbDZwa0"
+        },
+        {
+          "label": "Final run 2",
+          "url": "https://www.youtube.com/shorts/kp1yWhTkPng"
+        }
+      ],
+      "sections": [
+        {
+          "heading": "The challenge",
+          "body": "A fully autonomous robot had to locate target classes announced at match time, collect the appropriate objects, and deliver them to a storage area. The system had to complete perception, navigation, collection, and delivery without operator input after the start signal."
+        },
+        {
+          "heading": "Our system",
+          "body": "The team built a mecanum-wheel platform with a Jetson Orin Nano, dual cameras, LiDAR, an IMU, and a passive collector. YOLO instance segmentation supplied visual detections, while navigation and geometric checks supported target selection and collection."
+        },
+        {
+          "heading": "My contribution",
+          "body": "I worked on perception and model training alongside Jinyong Jun. This was one part of the team system, alongside dedicated hardware, drivetrain, navigation, and strategy work."
+        },
+        {
+          "heading": "Outcome",
+          "body": "Team 7 placed second, earning 140 out of 200 points across the two final runs. The competition also provided the opportunity to attend the 2026 World Robot Conference."
+        }
+      ]
+    },
+    {
+      "id": "fastmri",
+      "title": "Accelerated MRI Reconstruction",
+      "eyebrow": "SNU FastMRI Challenge · Team 2rm1000",
+      "date": "2025",
+      "category": "Machine Learning",
+      "badge": "3rd Place",
+      "image": "mri-overview.jpg",
+      "image_alt": "Team MRI reconstruction framework using brain and knee experts with Feature VarNet and FI VarNet",
+      "summary": "Reconstructing brain and knee MRI from undersampled k-space using specialized VarNet models, data augmentation, checkpoint averaging, and ensembling.",
+      "role": "Team member, 2rm1000, with Jinseok Choi.",
+      "tags": [
+        "MRI Reconstruction",
+        "Variational Networks",
+        "Ensembling"
+      ],
+      "metrics": [
+        {
+          "value": "3rd",
+          "label": "Final placement"
+        },
+        {
+          "value": "₩2.5M",
+          "label": "Team prize"
+        },
+        {
+          "value": "4× / 8×",
+          "label": "Acceleration settings"
+        }
+      ],
+      "links": [
+        {
+          "label": "Code",
+          "url": "https://github.com/gates02/fastmri-2-1000"
+        },
+        {
+          "label": "Challenge",
+          "url": "https://fastmri.snu.ac.kr/"
+        },
+        {
+          "label": "2025 final leaderboard",
+          "url": "https://bespoke-douhua-7b42a9.netlify.app/final"
+        }
+      ],
+      "sections": [
+        {
+          "heading": "The reconstruction problem",
+          "body": "Accelerating MRI acquisition requires reconstructing images from incomplete frequency-domain measurements. Our team worked with brain and knee data at 4× and 8× acceleration in the 2025 SNU FastMRI Challenge."
+        },
+        {
+          "heading": "Our approach",
+          "body": "We combined Feature VarNet and FI VarNet with expert models specialized by anatomy and acceleration setting. The training pipeline included MRI-aware augmentation, and the final reconstruction pipeline used checkpoint averaging and ensembling to improve stability."
+        },
+        {
+          "heading": "Outcome",
+          "body": "Team 2rm1000 placed third and received a team prize of KRW 2,500,000. The repository documents training, reconstruction, and evaluation for the submission."
+        }
+      ]
+    },
+    {
+      "id": "scene-reordering",
+      "title": "Structured Scene Reordering with Multimodal LLMs",
+      "eyebrow": "SNU AI Challenge · GeekSeek",
+      "date": "2026",
+      "category": "Machine Learning",
+      "badge": "8th Place",
+      "image": "scene-ordering.svg",
+      "image_alt": "Diagram of mapping frame-order views into a common coordinate system for Random4 inference",
+      "summary": "Recovering the chronological order of four shuffled frames from a text description using multimodal reasoning and structured permutation decoding.",
+      "tags": [
+        "Multimodal LLMs",
+        "Temporal Reasoning",
+        "Structured Prediction"
+      ],
+      "metrics": [
+        {
+          "value": "8th",
+          "label": "Final placement"
+        },
+        {
+          "value": "4",
+          "label": "Input frames"
+        },
+        {
+          "value": "24",
+          "label": "Candidate orders"
+        }
+      ],
+      "links": [
+        {
+          "label": "Code",
+          "url": "https://github.com/martian35/geekseek-snuai-2026"
+        },
+        {
+          "label": "Challenge",
+          "url": "https://snuaichallenge.github.io/"
+        }
+      ],
+      "sections": [
+        {
+          "heading": "The task",
+          "body": "Given a natural-language storyline and four shuffled images, the model must recover a coherent chronological sequence. This requires reasoning across both visual observations and language, rather than recognizing each image independently."
+        },
+        {
+          "heading": "Our approach",
+          "body": "The documented submission uses Qwen3.5-27B with LoRA adaptation, structured pairwise and chronological readouts, and a decoder over the 24 possible permutations. Temporal-gap supervision and local hard-negative ranking support training, while Random4 aggregation and late-trajectory weight averaging form the final inference pipeline."
+        },
+        {
+          "heading": "Competition result",
+          "body": "GeekSeek finished eighth overall in SNU AI Challenge 2026. The linked repository distinguishes the official submission from experiments performed after the competition."
+        }
+      ]
+    },
+    {
+      "id": "wind-forecasting",
+      "title": "Physics-Guided Wind Power Forecasting",
+      "eyebrow": "BDA × EWP × 60Hertz · Zephyr Analytics",
+      "date": "2025",
+      "category": "Machine Learning",
+      "badge": "3rd Place · Excellence Award",
+      "image": "wind-method.svg",
+      "image_alt": "Method schematic: weather features and a physical power curve feed a residual-learning ensemble; not measured forecast data",
+      "summary": "A hybrid physics–ML ensemble for hourly wind generation forecasting. I worked on model architecture design and hyperparameter optimization.",
+      "role": "Model architecture design and hyperparameter optimization.",
+      "tags": [
+        "Physics-Guided ML",
+        "Residual Learning",
+        "Optuna"
+      ],
+      "metrics": [
+        {
+          "value": "3rd / 270",
+          "label": "Team placement"
+        },
+        {
+          "value": "19.34%",
+          "label": "NMAE"
+        },
+        {
+          "value": "22.09%",
+          "label": "Settlement revenue rate"
+        }
+      ],
+      "links": [],
+      "sections": [
+        {
+          "heading": "The forecasting problem",
+          "body": "The competition required hourly wind power forecasts for sites in Gyeongju, Yangyang, and Yeongdeok. Forecast quality was evaluated using both prediction error and an economic settlement metric."
+        },
+        {
+          "heading": "A hybrid physics–ML approach",
+          "body": "Our team used physics-based feature engineering, including air-density estimation informed by the Arden–Buck equation, and a physical power curve as a baseline prediction. A residual LightGBM model corrected remaining errors. The final ensemble combined Ridge Regression, Random Forest, and residual LightGBM, with weights optimized using Optuna."
+        },
+        {
+          "heading": "My contribution",
+          "body": "I worked on model architecture design and hyperparameter optimization. Derrick Junsu Lee led the team and worked on machine learning and testing; Hyunseung Lee worked on preprocessing and feature engineering."
+        },
+        {
+          "heading": "Outcome",
+          "body": "Zephyr Analytics received third place (Excellence Award) among 270 teams. The reported final metrics were 19.34% NMAE and a 22.09% settlement revenue rate."
+        }
+      ],
+      "illustrative": true
+    },
+    {
+      "id": "automated-filming",
+      "title": "Automated Filming Device",
+      "eyebrow": "HD Hyundai Mechatronics Competition",
+      "date": "2024",
+      "category": "Robotics",
+      "badge": "Grand Prize",
+      "image": "filming-device.webp",
+      "image_alt": "Sunflower-inspired face-tracking camera device with a yellow phone mount and white circular base",
+      "summary": "A portable hands-free filming device that combines face tracking, motorized pan–tilt motion, and infrared remote control for solo creators.",
+      "tags": [
+        "Mechatronics",
+        "Face Tracking",
+        "Embedded Control"
+      ],
+      "metrics": [
+        {
+          "value": "Grand Prize",
+          "label": "HD Hyundai Mechatronics"
+        },
+        {
+          "value": "2-axis",
+          "label": "Pan–tilt motion"
+        },
+        {
+          "value": "₩3M",
+          "label": "Team prize"
+        }
+      ],
+      "links": [
+        {
+          "label": "Team code",
+          "url": "https://github.com/alvin0808/face-traker"
+        },
+        {
+          "label": "Collaborator’s project page",
+          "url": "https://alvin0808.github.io/projects/1_project/"
+        },
+        {
+          "label": "Device demo",
+          "url": "https://alvin0808.github.io/assets/img/device_revelation.gif"
+        },
+        {
+          "label": "Filming result",
+          "url": "https://alvin0808.github.io/assets/img/device_film_result.gif"
+        }
+      ],
+      "sections": [
+        {
+          "heading": "Motivation",
+          "body": "Solo creators need to keep a subject framed without continuously adjusting a phone or relying on a camera operator. Our team built a compact filming device that follows a face and can also be repositioned using a remote control."
+        },
+        {
+          "heading": "Hardware",
+          "body": "The design combines a Raspberry Pi, a wide-view camera, two servo motors for horizontal and vertical motion, an infrared receiver, and a ball-transfer support mechanism. The sunflower-inspired assembly is designed for portability and straightforward assembly."
+        },
+        {
+          "heading": "Software and interaction",
+          "body": "Visual face tracking drives pan–tilt adjustments. Infrared remote commands provide manual directional control and operating-mode input, while LED indicators communicate device status. The team implementation uses LIRC and NEC infrared commands."
+        },
+        {
+          "heading": "Recognition",
+          "body": "The project received first prize in the 2024 SNU Mechatronics class and the Grand Prize (first place) in the HD Hyundai Mechatronics Competition, with a team prize of KRW 3,000,000."
+        }
+      ],
+      "gallery": [
+        {
+          "image": "filming-hardware.webp",
+          "alt": "Exploded hardware illustration of the filming device",
+          "caption": "Hardware components and mechanical assembly."
+        },
+        {
+          "image": "filming-software.webp",
+          "alt": "Face tracking, remote control, and device visibility design",
+          "caption": "Face tracking, infrared remote control, and status indicators."
+        }
+      ],
+      "credit": "Shared project photographs and diagrams are reproduced from teammate Seunghun Oh’s project page. Project descriptions are adapted for this joint team project."
+    },
+    {
+      "id": "taxer",
+      "title": "TaXer & WaXer: Forecasting Periodic Time Series",
+      "eyebrow": "Introduction to Deep Learning · SNU",
+      "date": "2025",
+      "category": "Coursework",
+      "badge": "Course Project",
+      "image": "taxer-method.webp",
+      "image_alt": "Original presentation slide showing the TaXer periodic feature extraction and cross-attention architecture",
+      "summary": "Combining explicit periodic feature extraction with transformer forecasting, evaluated on weather and retail time series.",
+      "tags": [
+        "Time-Series Forecasting",
+        "Transformers",
+        "Periodic Features"
+      ],
+      "metrics": [
+        {
+          "value": "0.1569",
+          "label": "TaXer Sticker MSE"
+        },
+        {
+          "value": "0.1647",
+          "label": "TimeXer Sticker MSE"
+        },
+        {
+          "value": "2025",
+          "label": "Course project"
+        }
+      ],
+      "links": [
+        {
+          "label": "Code",
+          "url": "https://github.com/GolfOscarr/DL-Project"
+        }
+      ],
+      "sections": [
+        {
+          "heading": "The question",
+          "body": "Can explicitly extracting periodic features improve transformer-based forecasting on strongly periodic sequences? We explored this question using weather observations and retail sales data."
+        },
+        {
+          "heading": "Two hybrid architectures",
+          "body": "TaXer incorporates a TimesNet-inspired block that identifies dominant periods and extracts features through 2D temporal modeling. WaXer instead uses WaveNet-inspired dilated causal convolutions. In both variants, the extracted features provide context to the transformer through cross-attention."
+        },
+        {
+          "heading": "Evaluation",
+          "body": "The course report compares the hybrids against iTransformer and TimeXer across global weather, Korean weather, and Sticker Sales data. In the reported Sticker Sales comparison, TaXer achieved an MSE of 0.1569 versus 0.1647 for TimeXer."
+        },
+        {
+          "heading": "Team and materials",
+          "body": "This SNU Introduction to Deep Learning project was completed by Donghwi Kim, Jinwoo Seo, Hyeonseop Shin, and Manyoung Han."
+        }
+      ],
+      "gallery": [
+        {
+          "image": "taxer-forecast.webp",
+          "alt": "Original presentation comparisons of ground-truth and predicted time series",
+          "caption": "Qualitative forecast comparisons from the course presentation."
+        }
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "title": "Undergraduate Student Researcher",
+      "organization": "RPM Robotics Lab · Seoul National University",
+      "date": "Feb 2026 — Present",
+      "detail": "PI: Prof. Ayoung Kim",
+      "url": "https://rpm.snu.ac.kr/"
+    },
+    {
+      "title": "Undergraduate Student Researcher",
+      "organization": "AIDAS Lab · Seoul National University",
+      "date": "Jun 2026 — Present",
+      "detail": "PI: Prof. Jaeyoung Do"
+    }
+  ],
+  "awards": [
+    {
+      "year": "2026",
+      "title": "2nd Place",
+      "event": "SNU AI Robot Challenge",
+      "type": "Team award"
+    },
+    {
+      "year": "2025",
+      "title": "3rd Place · Excellence Award",
+      "event": "BDA × EWP × 60Hertz Wind Power Forecasting Competition",
+      "type": "Team award"
+    },
+    {
+      "year": "2025",
+      "title": "3rd Place",
+      "event": "SNU FastMRI Challenge",
+      "type": "Team award"
+    },
+    {
+      "year": "2024",
+      "title": "1st Prize",
+      "event": "SNU Mechatronics class",
+      "type": "Team award"
+    },
+    {
+      "year": "2024",
+      "title": "Grand Prize",
+      "event": "HD Hyundai Mechatronics Competition",
+      "type": "Team award"
+    }
+  ]
+}

@@ -100,7 +100,7 @@ def home():
     body += f'''<main id="main" class="home-main">
 <section class="intro" aria-labelledby="name"><div class="intro-copy">
 <p class="overline">Seoul National University</p>
-<p class="academic-program">Double major · Mechanical Engineering<br>Electrical and Computer Engineering</p>
+<p class="academic-program">Mechanical Engineering<br>Electrical and Computer Engineering</p>
 <h1 id="name">Dong Hwi Kim <span lang="ko">김동휘</span></h1>
 <p class="intro-lead">Robotics, 3D vision,<br>and learning from the world.</p>
 <p>{esc(p['intro'])}</p><p>{esc(p['bio'])}</p>
@@ -120,13 +120,18 @@ def home():
         org = anchor(x['organization'], x['url']) if x.get('url') else esc(x['organization'])
         body += f'<article class="timeline-row"><p class="timeline-date">{esc(x["date"])}</p><div><h3>{esc(x["title"])}</h3><p class="organization">{org}</p><p class="muted">{esc(x["detail"])}</p></div></article>'
     body += '''<article class="timeline-row"><p class="timeline-date">Education</p><div><h3>Seoul National University</h3><p class="organization">Undergraduate · Double major</p><p class="muted">Mechanical Engineering<br>Electrical and Computer Engineering</p></div></article></div></section>
-<section id="honors" class="section" aria-labelledby="honors-title"><div class="section-heading"><div><p class="overline">Team achievements</p><h2 id="honors-title">Selected honors</h2></div></div><div class="honors-list">'''
-    for a in DATA['awards']:
-        body += f'<div class="honor-row"><span class="honor-year">{esc(a["year"])}</span><strong>{esc(a["title"])}</strong><span>{esc(a["event"])}</span></div>'
-    body += '</div>'
+<section id="honors" class="section" aria-labelledby="honors-title"><div class="section-heading"><div><p class="overline">Competitions & service</p><h2 id="honors-title">Selected honors</h2></div></div>'''
+    for label, group in [('Engineering competitions', [a for a in DATA['awards'] if not a['type'].startswith('Military')]), ('Military recognition', [a for a in DATA['awards'] if a['type'].startswith('Military')])]:
+        if not group:
+            continue
+        body += f'<div class="honors-group"><h3>{esc(label)}</h3><div class="honors-list">'
+        for a in group:
+            body += f'<div class="honor-row"><span class="honor-year">{esc(a["year"])}</span><strong>{esc(a["title"])}</strong><span>{esc(a["event"])}</span></div>'
+        body += '</div></div>'
+    body += '</section>'
     if DATA.get('service'):
-        body += f'''<details class="service"><summary><span>Military service & recognition</span><span aria-hidden="true" class="expand-mark">+</span></summary><div class="service-content"><div><p>{esc(DATA['service']['summary'])}</p><ul>{''.join('<li>'+esc(x)+'</li>' for x in DATA['service']['honors'])}</ul></div><figure><img src="assets/service-honors.jpg" alt="A personal collection of military medals, commendations, and challenge coins" width="640" height="370" loading="lazy"><figcaption>Recognition from my military service.</figcaption></figure></div></details>'''
-    body += f'''</section>
+        body += f'''<section id="military" class="section military-section" aria-labelledby="military-title"><div class="section-heading"><div><p class="overline">ROK–U.S. Combined Forces Command</p><h2 id="military-title">Military service & recognition</h2></div><span class="section-aside">September 2022 — March 2024</span></div><div class="military-overview"><p>{esc(DATA['service']['summary'])}</p><p class="military-note">Military decorations, formal commendations, and challenge coins from my service are shown below.</p></div><figure class="military-photo"><a href="assets/service-honors.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open the full-size photograph of military medals and commendations"><img src="assets/service-honors.jpg" alt="Joint Service Achievement Medal certificate, ROK Army commendations, and military challenge coins" width="1800" height="1013" loading="lazy"></a><figcaption><span>Decorations, commendations & challenge coins</span>{anchor('View full-size photograph','assets/service-honors.jpg')}</figcaption></figure></section>'''
+    body += f'''
 <section class="contact-section" aria-labelledby="contact-title"><p class="overline">Get in touch</p><h2 id="contact-title">Let’s talk about research.</h2><p>I’m interested in robotics, 3D vision, and learning-based perception.</p>{anchor(p['email'],'mailto:'+p['email'],'contact-link')}</section></main>'''
     return body + footer()
 

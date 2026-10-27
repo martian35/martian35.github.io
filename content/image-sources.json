@@ -9,9 +9,9 @@
     },
     {
       "project": "fastmri",
-      "selected_image": "https://eng.snu.ac.kr/dext5editordata/2025/09/20250929_110411549_79724.jpg",
-      "source_page": "https://eng.snu.ac.kr/communication/promotion/news?bbsidx=6126&md=v",
-      "selection_note": "Official 2025 awards photograph from SNU Engineering; the algorithm figure remains the project hero. Avoid the current challenge homepage, which now describes 2026."
+      "selected_image": "https://ece.snu.ac.kr/webdata/upimages/3fbz3acz035z3aazbabzc3fz851zcf0ze43zf7azf1.jpg",
+      "source_page": "https://ece.snu.ac.kr/community/etc?bbsidx=56492&md=v",
+      "selection_note": "Official 2025 announcement poster from the SNU ECE notice, dated May 7, 2025. The live challenge homepage now describes 2026 and its Google-hosted images returned 403 during retrieval. The 2025 awards photo remains in the detail gallery."
     },
     {
       "project": "scene-reordering",

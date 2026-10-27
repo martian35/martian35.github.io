@@ -209,6 +209,10 @@
         {
           "label": "Official coverage",
           "url": "https://eng.snu.ac.kr/communication/promotion/news?bbsidx=6126&md=v"
+        },
+        {
+          "label": "2025 announcement",
+          "url": "https://ece.snu.ac.kr/community/etc?bbsidx=56492&md=v"
         }
       ],
       "sections": [
@@ -225,11 +229,19 @@
           "body": "Team 2rm1000 placed third and received a team prize of KRW 2,500,000. The repository documents training, reconstruction, and evaluation for the submission."
         }
       ],
-      "thumbnail_url": "https://eng.snu.ac.kr/dext5editordata/2025/09/20250929_110411549_79724.jpg",
-      "thumbnail_source_url": "https://eng.snu.ac.kr/communication/promotion/news?bbsidx=6126&md=v",
-      "thumbnail_source_label": "SNU Engineering · 2025 awards",
-      "thumbnail_alt": "Official group photograph at the 2025 SNU FastMRI Challenge awards ceremony",
+      "thumbnail_url": "https://ece.snu.ac.kr/webdata/upimages/3fbz3acz035z3aazbabzc3fz851zcf0ze43zf7azf1.jpg",
+      "thumbnail_source_url": "https://ece.snu.ac.kr/community/etc?bbsidx=56492&md=v",
+      "thumbnail_source_label": "SNU ECE · official 2025 poster",
+      "thumbnail_alt": "Official poster for the fifth SNU FastMRI Challenge in 2025",
       "gallery": [
+        {
+          "url": "https://ece.snu.ac.kr/webdata/upimages/3fbz3acz035z3aazbabzc3fz851zcf0ze43zf7azf1.jpg",
+          "fallback": "mri-overview.jpg",
+          "alt": "Official 2025 SNU FastMRI Challenge announcement poster",
+          "caption": "Official announcement for the 2025 competition.",
+          "source_label": "SNU Electrical and Computer Engineering",
+          "source_url": "https://ece.snu.ac.kr/community/etc?bbsidx=56492&md=v"
+        },
         {
           "url": "https://eng.snu.ac.kr/dext5editordata/2025/09/20250929_110411549_79724.jpg",
           "fallback": "mri-overview.jpg",
@@ -408,10 +420,6 @@
           "url": "https://github.com/alvin0808/face-traker"
         },
         {
-          "label": "Collaborator’s project page",
-          "url": "https://alvin0808.github.io/projects/1_project/"
-        },
-        {
           "label": "Device demo",
           "url": "https://alvin0808.github.io/assets/img/device_revelation.gif"
         },
@@ -567,6 +575,24 @@
       "title": "Grand Prize",
       "event": "HD Hyundai Mechatronics Competition",
       "type": "Team award"
+    },
+    {
+      "year": "2024",
+      "title": "Joint Service Achievement Medal",
+      "event": "U.S. Department of Defense",
+      "type": "Military decoration"
+    },
+    {
+      "year": "2024",
+      "title": "Deputy Commander’s Commendation",
+      "event": "ROK–U.S. Combined Forces Command",
+      "type": "Military commendation"
+    },
+    {
+      "year": "2023",
+      "title": "Major General’s Commendation",
+      "event": "ROK–U.S. Combined Forces Command",
+      "type": "Military commendation"
     }
   ],
   "service": {

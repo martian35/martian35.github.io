@@ -1,21 +1,22 @@
 # Dong Hwi Kim — academic portfolio
 
-Static academic portfolio with ongoing research, six projects, academic experience, education, and honors.
+Seoul National University undergraduate, double majoring in Mechanical Engineering and Electrical and Computer Engineering.
 
-## GitHub Pages
+## Update the site
 
-In Settings → Pages → Build and deployment, select Deploy from a branch, main, / (root), then Save. The public URL is https://martian35.github.io/.
+1. Edit `content/portfolio.json`.
+2. Run `python3 scripts/build.py --public --github-root`.
+3. Run `python3 scripts/check.py --github-root`.
+4. Commit the generated HTML and the updated content together.
 
-## Editing
+The static site has no build dependencies beyond Python 3. CSS is in `style.css` and the project filter and image fallback are in `site.js`.
 
-Update index.html and pages under projects/. Styles live in style.css; the small project filter is in site.js. Project metadata is collected in content/portfolio.json. Check internal links with: python3 scripts/check.py --github-root.
+The ongoing research entries can be updated with results, paper links, and publication details as work progresses. Their current status labels do not imply acceptance or publication.
 
-Ongoing research entries can be updated with paper details, results, and links as the work progresses. No publication venue or acceptance is currently claimed.
+## Images and provenance
 
-## Materials
+See `content/image-sources.json` for official pages, image URLs, and selection decisions. Source links are also shown next to official competition images. Remote photographs fall back to a local project image if unavailable. Original Zephyr Analytics slides were supplied by the user. The course figures and Automated Filming Device imagery are team project materials. The SLAM and scene-ordering diagrams are conceptual explanations.
 
-The Automated Filming Device is a joint project. Shared project photographs and diagrams come from teammate Seunghun Oh's page, reused at the user's request: https://alvin0808.github.io/projects/1_project/.
+Project materials retain their respective ownership. The original HTML/CSS layout draws on the supplied academic portfolio references.
 
-Other project descriptions and figures come from the supplied team materials and linked repositories. The SLAM and wind forecasting diagrams are conceptual illustrations. SNU AI Challenge eighth place is a competition result and is not listed as an award.
-
-The implementation is original HTML/CSS inspired by Jon Barron's research-list format and the supplied portfolio references. Project materials retain their respective ownership.
+GitHub Pages serves the `main` branch at https://martian35.github.io/.

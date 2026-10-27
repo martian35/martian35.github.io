@@ -2,12 +2,12 @@
   "person": {
     "name": "Dong Hwi Kim",
     "korean_name": "김동휘",
-    "affiliation": "Mechanical Engineering · Seoul National University",
+    "affiliation": "Mechanical Engineering & Electrical and Computer Engineering · Seoul National University",
     "email": "martian35@snu.ac.kr",
     "github": "https://github.com/martian35",
     "linkedin": "https://www.linkedin.com/in/martian35/",
     "updated": "October 2026",
-    "intro": "I am an undergraduate student in Mechanical Engineering at Seoul National University, working at the intersection of robotics, 3D vision, and machine learning.",
+    "intro": "I am an undergraduate at Seoul National University, double majoring in Mechanical Engineering and Electrical and Computer Engineering. I work at the intersection of robotics, 3D vision, and machine learning.",
     "bio": "I am an undergraduate researcher in the RPM Robotics Lab with Prof. Ayoung Kim and the AIDAS Lab with Prof. Jaeyoung Do. My current work focuses on 3D Gaussian Splatting for SLAM and visual data augmentation for robot learning.",
     "interests": [
       "3D scene representations",
@@ -124,6 +124,10 @@
         {
           "label": "Final run 2",
           "url": "https://www.youtube.com/shorts/kp1yWhTkPng"
+        },
+        {
+          "label": "Official coverage",
+          "url": "https://robotics.snu.ac.kr/2026-ai%EB%A1%9C%EB%B4%87-%EC%B1%8C%EB%A6%B0%EC%A7%80-%EC%B0%BD%EA%B3%B5-1-2-3%EC%9D%84-%EC%99%84%EC%84%B1%ED%95%9C%EB%8B%A4/"
         }
       ],
       "sections": [
@@ -142,6 +146,20 @@
         {
           "heading": "Outcome",
           "body": "Team 7 placed second, earning 140 out of 200 points across the two final runs. The competition also provided the opportunity to attend the 2026 World Robot Conference."
+        }
+      ],
+      "thumbnail_url": "https://robotics.snu.ac.kr/wp-content/uploads/2026/08/%EB%8C%80%ED%9A%8C%EC%82%AC%EC%A7%843-960x624.png",
+      "thumbnail_source_url": "https://robotics.snu.ac.kr/2026-ai%EB%A1%9C%EB%B4%87-%EC%B1%8C%EB%A6%B0%EC%A7%80-%EC%B0%BD%EA%B3%B5-1-2-3%EC%9D%84-%EC%99%84%EC%84%B1%ED%95%9C%EB%8B%A4/",
+      "thumbnail_source_label": "SNU Robotics Institute · event photo",
+      "thumbnail_alt": "An official competition scene at the 2026 SNU AI Robot Challenge",
+      "gallery": [
+        {
+          "url": "https://robotics.snu.ac.kr/wp-content/uploads/2026/08/%EB%8C%80%ED%9A%8C%EC%82%AC%EC%A7%843-960x624.png",
+          "fallback": "robot.jpg",
+          "alt": "An official competition scene at the 2026 SNU AI Robot Challenge",
+          "caption": "Official competition coverage.",
+          "source_label": "SNU Robotics Institute · event photo",
+          "source_url": "https://robotics.snu.ac.kr/2026-ai%EB%A1%9C%EB%B4%87-%EC%B1%8C%EB%A6%B0%EC%A7%80-%EC%B0%BD%EA%B3%B5-1-2-3%EC%9D%84-%EC%99%84%EC%84%B1%ED%95%9C%EB%8B%A4/"
         }
       ]
     },
@@ -187,6 +205,10 @@
         {
           "label": "2025 final leaderboard",
           "url": "https://bespoke-douhua-7b42a9.netlify.app/final"
+        },
+        {
+          "label": "Official coverage",
+          "url": "https://eng.snu.ac.kr/communication/promotion/news?bbsidx=6126&md=v"
         }
       ],
       "sections": [
@@ -201,6 +223,20 @@
         {
           "heading": "Outcome",
           "body": "Team 2rm1000 placed third and received a team prize of KRW 2,500,000. The repository documents training, reconstruction, and evaluation for the submission."
+        }
+      ],
+      "thumbnail_url": "https://eng.snu.ac.kr/dext5editordata/2025/09/20250929_110411549_79724.jpg",
+      "thumbnail_source_url": "https://eng.snu.ac.kr/communication/promotion/news?bbsidx=6126&md=v",
+      "thumbnail_source_label": "SNU Engineering · 2025 awards",
+      "thumbnail_alt": "Official group photograph at the 2025 SNU FastMRI Challenge awards ceremony",
+      "gallery": [
+        {
+          "url": "https://eng.snu.ac.kr/dext5editordata/2025/09/20250929_110411549_79724.jpg",
+          "fallback": "mri-overview.jpg",
+          "alt": "Official group photograph at the 2025 SNU FastMRI Challenge awards ceremony",
+          "caption": "Official competition coverage.",
+          "source_label": "SNU Engineering · 2025 awards",
+          "source_url": "https://eng.snu.ac.kr/communication/promotion/news?bbsidx=6126&md=v"
         }
       ]
     },
@@ -256,6 +292,17 @@
           "heading": "Competition result",
           "body": "GeekSeek finished eighth overall in SNU AI Challenge 2026. The linked repository distinguishes the official submission from experiments performed after the competition."
         }
+      ],
+      "thumbnail": "snuai-official.webp",
+      "thumbnail_alt": "Official blue AI symbol of SNU AI Challenge",
+      "thumbnail_source_label": "SNU AI Challenge · official identity",
+      "thumbnail_source_url": "https://snuaichallenge.github.io/",
+      "gallery": [
+        {
+          "image": "scene-ordering.svg",
+          "alt": "Four input permutations are mapped to common frame coordinates before logit averaging and decoding over 24 orders",
+          "caption": "Input orderings are mapped to common frame identities before averaging scores and decoding the final chronological order."
+        }
       ]
     },
     {
@@ -265,8 +312,8 @@
       "date": "2025",
       "category": "Machine Learning",
       "badge": "3rd Place · Excellence Award",
-      "image": "wind-method.svg",
-      "image_alt": "Method schematic: weather features and a physical power curve feed a residual-learning ensemble; not measured forecast data",
+      "image": "wind-team-cover.webp",
+      "image_alt": "Zephyr Analytics team cover for the 2025 Wind Power Prediction Competition",
       "summary": "A hybrid physics–ML ensemble for hourly wind generation forecasting. I worked on model architecture design and hyperparameter optimization.",
       "role": "Model architecture design and hyperparameter optimization.",
       "tags": [
@@ -288,7 +335,12 @@
           "label": "Settlement revenue rate"
         }
       ],
-      "links": [],
+      "links": [
+        {
+          "label": "Official competition",
+          "url": "https://2025-bda-ewp-60hz-contest.webflow.io/"
+        }
+      ],
       "sections": [
         {
           "heading": "The forecasting problem",
@@ -307,7 +359,19 @@
           "body": "Zephyr Analytics received third place (Excellence Award) among 270 teams. The reported final metrics were 19.34% NMAE and a 22.09% settlement revenue rate."
         }
       ],
-      "illustrative": true
+      "gallery": [
+        {
+          "image": "wind-architecture.webp",
+          "alt": "Team presentation diagram of physics-based power curve, residual LightGBM, ensemble models, and Optuna optimization",
+          "caption": "Model architecture and optimization, from the original Zephyr Analytics presentation."
+        },
+        {
+          "image": "wind-evaluation.webp",
+          "alt": "Original team evaluation slide reporting 19.34 percent NMAE and 22.09 percent settlement revenue rate",
+          "caption": "Reported model evaluation and site-wise generation distributions, from the team presentation."
+        }
+      ],
+      "credit": "Cover, architecture, and evaluation images are from the original Zephyr Analytics team presentation, supplied by Dong Hwi Kim."
     },
     {
       "id": "automated-filming",

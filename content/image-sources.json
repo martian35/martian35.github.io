@@ -1,0 +1,41 @@
+{
+  "reviewed_on": "2026-10-27",
+  "images": [
+    {
+      "project": "robot-challenge",
+      "selected_image": "https://robotics.snu.ac.kr/wp-content/uploads/2026/08/%EB%8C%80%ED%9A%8C%EC%82%AC%EC%A7%843-960x624.png",
+      "source_page": "https://robotics.snu.ac.kr/2026-ai%EB%A1%9C%EB%B4%87-%EC%B1%8C%EB%A6%B0%EC%A7%80-%EC%B0%BD%EA%B3%B5-1-2-3%EC%9D%84-%EC%99%84%EC%84%B1%ED%95%9C%EB%8B%A4/",
+      "selection_note": "Official 2026 competition scene from the SNU Robotics Institute. It represents the event; the team-specific robot photograph remains in the detail page."
+    },
+    {
+      "project": "fastmri",
+      "selected_image": "https://eng.snu.ac.kr/dext5editordata/2025/09/20250929_110411549_79724.jpg",
+      "source_page": "https://eng.snu.ac.kr/communication/promotion/news?bbsidx=6126&md=v",
+      "selection_note": "Official 2025 awards photograph from SNU Engineering; the algorithm figure remains the project hero. Avoid the current challenge homepage, which now describes 2026."
+    },
+    {
+      "project": "scene-reordering",
+      "selected_image": "snuai-official.webp",
+      "source_page": "https://snuaichallenge.github.io/",
+      "selection_note": "Official competition identity from the organizer website and source repository. The explanatory inference diagram is retained inside the detail page."
+    },
+    {
+      "project": "wind-forecasting",
+      "selected_image": "wind-team-cover.webp",
+      "source_page": "https://2025-bda-ewp-60hz-contest.webflow.io/",
+      "selection_note": "The user-supplied Zephyr Analytics team cover identifies the actual entry more clearly than the text-heavy recruitment poster. Supplied architecture and evaluation slides are in the gallery."
+    },
+    {
+      "project": "automated-filming",
+      "selected_image": "filming-device.webp",
+      "source_page": "https://alvin0808.github.io/projects/1_project/",
+      "selection_note": "Retain the real shared device photograph. The official SNU article found in research concerns the 2024 second-semester contest and could not be matched to this July 2024 team project; it was not used."
+    },
+    {
+      "project": "taxer",
+      "selected_image": "taxer-method.webp",
+      "source_page": null,
+      "selection_note": "Retain the architecture figure from the supplied team course presentation."
+    }
+  ]
+}

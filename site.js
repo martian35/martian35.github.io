@@ -1,4 +1,15 @@
 (() => {
+  document.querySelectorAll('img[data-fallback]').forEach((img) => {
+    const fallback = () => {
+      if (!img.dataset.fallback) return;
+      img.src = img.dataset.fallback;
+      if (img.dataset.fallbackAlt) img.alt = img.dataset.fallbackAlt;
+      delete img.dataset.fallback;
+      delete img.dataset.fallbackAlt;
+    };
+    img.addEventListener('error', fallback, { once: true });
+    if (img.complete && !img.naturalWidth) fallback();
+  });
   const filters = document.querySelector('.filters');
   if (!filters) return;
   const rows = [...document.querySelectorAll('[data-category]')];

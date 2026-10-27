@@ -1,27 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="260" viewBox="0 0 900 260" role="img" aria-labelledby="title desc">
-  <title id="title">Random4 canonical mapping</title>
-  <desc id="desc">Four display permutations are inverse mapped to absolute Input coordinates before raw-logit averaging.</desc>
-  <style>
-    .title{font:700 20px system-ui;fill:#172033}.label{font:600 15px system-ui;fill:#172033}
-    .small{font:13px system-ui;fill:#42506a}.box{fill:#eef4ff;stroke:#4f6fae;stroke-width:1.5}
-    .target{fill:#eaf8f0;stroke:#32825b;stroke-width:1.5}.arrow{stroke:#65758b;stroke-width:2;marker-end:url(#a)}
-  </style>
-  <defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#65758b"/></marker></defs>
-  <text x="24" y="32" class="title">Production Random4 → canonical absolute coordinates</text>
-  <g transform="translate(24 58)">
-    <rect class="box" x="0" y="0" width="160" height="38" rx="7"/><text class="label" x="24" y="25">[1, 2, 3, 4]</text>
-    <rect class="box" x="0" y="48" width="160" height="38" rx="7"/><text class="label" x="24" y="73">[2, 1, 4, 3]</text>
-    <rect class="box" x="0" y="96" width="160" height="38" rx="7"/><text class="label" x="24" y="121">[3, 4, 2, 1]</text>
-    <rect class="box" x="0" y="144" width="160" height="38" rx="7"/><text class="label" x="24" y="169">[2, 3, 4, 1]</text>
-  </g>
-  <line class="arrow" x1="205" y1="149" x2="325" y2="149"/>
-  <rect class="box" x="340" y="95" width="205" height="108" rx="10"/>
-  <text class="label" x="373" y="126">Inverse-map each view</text>
-  <text class="small" x="363" y="153">order: relabel digit axis</text>
-  <text class="small" x="363" y="177">pair: route + sign correction</text>
-  <line class="arrow" x1="560" y1="149" x2="650" y2="149"/>
-  <rect class="target" x="665" y="95" width="210" height="108" rx="10"/>
-  <text class="label" x="695" y="126">Canonical raw-logit mean</text>
-  <text class="small" x="705" y="153">absolute Input₁…Input₄</text>
-  <text class="small" x="706" y="177">decode once over 24 perms</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="480" viewBox="0 0 1000 480" role="img" aria-labelledby="title desc">
+<title id="title">Permutation-aware inference</title><desc id="desc">Four input orderings are mapped to common frame coordinates. Logits are averaged before decoding over the 24 possible chronological orders.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#7c8e82"/></marker></defs>
+<rect width="1000" height="480" fill="#f5f6f0"/>
+<g font-family="Arial, sans-serif" text-anchor="middle" fill="#344b40">
+<text id="diagram-heading" x="500" y="53" font-size="25" font-weight="600">Permutation-aware inference</text>
+<text id="view-heading" x="150" y="105" font-size="14" fill="#718276">Four input views</text>
+<g fill="#fff" stroke="#c4d0c0"><rect x="40" y="129" width="220" height="49" rx="7"/><rect x="40" y="189" width="220" height="49" rx="7"/><rect x="40" y="249" width="220" height="49" rx="7"/><rect x="40" y="309" width="220" height="49" rx="7"/><rect x="370" y="158" width="250" height="170" rx="10"/><rect x="730" y="158" width="230" height="170" rx="10" fill="#e7eee1"/></g>
+<g font-size="18"><text id="view-1" x="150" y="160">[1, 2, 3, 4]</text><text id="view-2" x="150" y="220">[2, 1, 4, 3]</text><text id="view-3" x="150" y="280">[3, 4, 2, 1]</text><text id="view-4" x="150" y="340">[2, 3, 4, 1]</text></g>
+<text id="mapping-title" x="495" y="202" font-size="20" font-weight="600">Canonical mapping</text><text id="mapping-line-1" x="495" y="245" font-size="15">Common frame identities</text><text id="mapping-line-2" x="495" y="274" font-size="15">Aligned pairwise scores</text>
+<text id="average-title" x="845" y="202" font-size="20" font-weight="600">Average logits</text><text id="average-line-1" x="845" y="245" font-size="15">Aggregate the views</text><text id="average-line-2" x="845" y="274" font-size="15">Decode 24 orders</text>
+<text id="diagram-footer" x="500" y="428" font-size="14" fill="#718276">One chronological prediction from multiple input orderings</text>
+</g><g stroke="#7c8e82" stroke-width="2" marker-end="url(#arrow)"><path d="M277 243H349"/><path d="M638 243H708"/></g></svg>

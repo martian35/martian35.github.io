@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""Export the public portfolio without private photographs or attached PDFs."""
+"""Export the portfolio using its configured publication options."""
 import argparse
+import json
 import shutil
 import subprocess
 import sys
@@ -11,6 +12,7 @@ parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('destination', type=Path)
 parser.add_argument('--include-service-experience', action='store_true')
 args = parser.parse_args()
+publication = json.loads((ROOT/'content/portfolio.json').read_text()).get('publication', {})
 target = args.destination.resolve()
 if target == ROOT or ROOT in target.parents:
     raise SystemExit('Choose an export destination outside the source checkout.')
@@ -24,9 +26,16 @@ subprocess.run(command, check=True)
 for name in ['style.css', 'site.js']:
     shutil.copy2(ROOT/'dist'/name, target/name)
 (target/'assets').mkdir(exist_ok=True)
+excluded = set()
+if not publication.get('profile_photo', False):
+    excluded.add('portrait.jpg')
+if not publication.get('service_recognition', False):
+    excluded.add('service-honors.jpg')
 for asset in (ROOT/'dist/assets').iterdir():
-    if asset.is_file() and asset.name not in {'portrait.jpg', 'service-honors.jpg'}:
+    if asset.is_file() and asset.name not in excluded:
         shutil.copy2(asset, target/'assets'/asset.name)
+if publication.get('project_documents', False):
+    shutil.copytree(ROOT/'dist/documents', target/'documents')
 shutil.copytree(ROOT/'scripts', target/'scripts', ignore=shutil.ignore_patterns('__pycache__'))
 for name in ['image-sources.json']:
     if (ROOT/'content'/name).exists():

@@ -5,7 +5,7 @@ Seoul National University undergraduate, double majoring in Mechanical Engineeri
 ## Update the site
 
 1. Edit `content/portfolio.json`.
-2. Run `python3 scripts/build.py --public --include-service-experience --github-root`.
+2. Run `python3 scripts/build.py --public --github-root`.
 3. Run `python3 scripts/check.py --github-root`.
 4. Commit the generated HTML and the updated content together.
 

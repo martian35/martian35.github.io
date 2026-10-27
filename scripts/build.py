@@ -9,22 +9,25 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 ARGS = argparse.ArgumentParser(description=__doc__)
 ARGS.add_argument('--github-root', action='store_true')
-ARGS.add_argument('--public', action='store_true', help='Exclude personal photographs, service memorabilia, and PDF downloads')
+ARGS.add_argument('--public', action='store_true', help='Export according to the publication options in the content file')
 ARGS.add_argument('--include-service-experience', action='store_true', help='Include military employment text when explicitly authorized')
 ARGS.add_argument('--output', type=Path)
 OPTIONS = ARGS.parse_args()
 OUT = OPTIONS.output or (ROOT if OPTIONS.github_root else ROOT / 'dist')
 DATA = json.loads((ROOT / 'content/portfolio.json').read_text())
+PUBLICATION = DATA.get('publication', {})
 if OPTIONS.public:
-    DATA.pop('service', None)
-    if not OPTIONS.include_service_experience:
+    if not PUBLICATION.get('service_recognition', False):
+        DATA.pop('service', None)
+    if not (OPTIONS.include_service_experience or PUBLICATION.get('service_experience', False)):
         DATA['experience'] = [x for x in DATA['experience'] if x['title'] != 'Interpreter']
-    for item in DATA['research'] + DATA['projects']:
-        item['links'] = [x for x in item.get('links', []) if not x['url'].startswith('documents/')]
-        for section in item.get('sections', []):
-            section['body'] = section['body'].replace(' The original report and presentation are available above.', '')
+    if not PUBLICATION.get('project_documents', False):
+        for item in DATA['research'] + DATA['projects']:
+            item['links'] = [x for x in item.get('links', []) if not x['url'].startswith('documents/')]
+            for section in item.get('sections', []):
+                section['body'] = section['body'].replace(' The original report and presentation are available above.', '')
 PERSON = DATA['person']
-PROFILE_IMAGE = 'profile-mark.svg' if OPTIONS.public else 'portrait.jpg'
+PROFILE_IMAGE = 'portrait.jpg' if not OPTIONS.public or PUBLICATION.get('profile_photo', False) else 'profile-mark.svg'
 ORIGIN = 'https://martian35.github.io'
 
 
@@ -102,7 +105,7 @@ def home():
 <p class="intro-lead">Robotics, 3D vision,<br>and learning from the world.</p>
 <p>{esc(p['intro'])}</p><p>{esc(p['bio'])}</p>
 <div class="profile-links">{anchor('Email', 'mailto:'+p['email'])}{anchor('GitHub',p['github'])}{anchor('LinkedIn',p['linkedin'])}</div>
-</div><figure class="portrait"><img src="assets/{PROFILE_IMAGE}" width="240" height="310" alt="{'Dong Hwi Kim monogram' if OPTIONS.public else 'Dong Hwi Kim'}" fetchpriority="high"><figcaption>Based in Seoul, South Korea</figcaption></figure></section>
+</div><figure class="portrait"><img src="assets/{PROFILE_IMAGE}" width="240" height="310" alt="{'Dong Hwi Kim monogram' if PROFILE_IMAGE == 'profile-mark.svg' else 'Dong Hwi Kim'}" fetchpriority="high"><figcaption>Based in Seoul, South Korea</figcaption></figure></section>
 <div class="interest-line"><span class="tiny-label">Research interests</span><p>{' <span aria-hidden="true">/</span> '.join(esc(x) for x in p['interests'])}</p></div>
 <section id="research" class="section" aria-labelledby="research-title"><div class="section-heading"><div><p class="overline">What I am working on</p><h2 id="research-title">Ongoing research</h2></div><span class="section-aside">3D representations → robot perception</span></div>
 <p class="section-intro">My current research explores 3D Gaussian representations for mapping and visual data augmentation for robot learning.</p>

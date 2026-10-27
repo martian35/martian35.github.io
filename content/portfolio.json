@@ -435,7 +435,7 @@
         },
         {
           "heading": "Recognition",
-          "body": "The project received first prize in the 2024 SNU Mechatronics class and the Grand Prize (first place) in the HD Hyundai Mechatronics Competition, with a team prize of KRW 3,000,000."
+          "body": "The project received the Grand Prize (first place) at the 2024 HD Hyundai Mechatronics Competition, with a team prize of KRW 3,000,000."
         }
       ],
       "gallery": [
@@ -485,6 +485,14 @@
         {
           "label": "Code",
           "url": "https://github.com/GolfOscarr/DL-Project"
+        },
+        {
+          "label": "Report",
+          "url": "documents/taxer-report.pdf"
+        },
+        {
+          "label": "Slides",
+          "url": "documents/taxer-presentation.pdf"
         }
       ],
       "sections": [
@@ -502,7 +510,7 @@
         },
         {
           "heading": "Team and materials",
-          "body": "This SNU Introduction to Deep Learning project was completed by Donghwi Kim, Jinwoo Seo, Hyeonseop Shin, and Manyoung Han."
+          "body": "This SNU Introduction to Deep Learning project was completed by Donghwi Kim, Jinwoo Seo, Hyeonseop Shin, and Manyoung Han. The original report and presentation are available above."
         }
       ],
       "gallery": [
@@ -556,15 +564,23 @@
     },
     {
       "year": "2024",
-      "title": "1st Prize",
-      "event": "SNU Mechatronics class",
-      "type": "Team award"
-    },
-    {
-      "year": "2024",
       "title": "Grand Prize",
       "event": "HD Hyundai Mechatronics Competition",
       "type": "Team award"
     }
-  ]
+  ],
+  "service": {
+    "summary": "I served as an interpreter at the ROK–U.S. Combined Forces Command from September 2022 to March 2024. This experience strengthened my ability to communicate clearly across languages and work in a multinational environment.",
+    "honors": [
+      "Joint Service Achievement Medal",
+      "Commendations from Republic of Korea general officers",
+      "Multiple military challenge coins"
+    ]
+  },
+  "publication": {
+    "profile_photo": true,
+    "service_experience": true,
+    "service_recognition": true,
+    "project_documents": true
+  }
 }

@@ -7,13 +7,14 @@
     "linkedin": "https://www.linkedin.com/in/martian35/",
     "updated": "October 2026",
     "intro": "I am an undergraduate at Seoul National University studying Mechanical Engineering and Electrical and Computer Engineering. My interests lie in how machines perceive the physical world and turn that understanding into useful behavior.",
-    "bio": "At the RPM Robotics Lab, I work with Prof. Ayoung Kim on 3D Gaussian Splatting for SLAM: estimating camera motion while building a 3D map. At the AIDAS Lab, my collaboration with Prof. Jaeyoung Do uses reconstructed scenes and robot kinematics to generate visual training data for robot learning.",
+    "bio": "At the RPM Robotics Lab, I work with Prof. Ayoung Kim on 3D Gaussian Splatting for SLAM: estimating camera motion while building a 3D map. At the AIDAS Lab, my collaboration with Prof. Jaeyoung Do uses reconstructed scenes and robot kinematics to generate visual training data for robot learning. A first-author manuscript based on my ongoing research is currently in preparation.",
     "interests": [
       "3D scene representations",
       "Robot perception & SLAM",
       "Learning from visual data"
     ],
     "approach": [
+      "Projects and competitions have given me hands-on experience in AI, robotics, and control, including connecting learned models with software and physical systems. Lab research is teaching me a complementary discipline: formulating research questions, designing experiments, and critically evaluating results.",
       "An international-school education and four years in China exposed me early to different ways of learning. Later, serving as a Korean–English interpreter at the ROK–U.S. Combined Forces Command meant working across languages and military cultures. These experiences shape how I learn and collaborate: listen carefully, ask when assumptions differ, and stay willing to revise my own.",
       "Robotics and 3D vision are my current focus. My curiosity also extends to problems in other fields—especially when solving them could help people, or when the challenge of making an idea work offers something new to learn. I welcome conversations with people who bring different questions, tools, and perspectives."
     ]

@@ -38,14 +38,14 @@ def esc(value):
 def anchor(label, url, cls=''):
     external = url.startswith(('https://', 'http://'))
     attrs = ' target="_blank" rel="noopener noreferrer"' if external else ''
-    return f'<a href="{esc(url)}" class="{esc(cls)}"{attrs}>{esc(label)}<span aria-hidden="true"> {"↗" if external else "→"}</span></a>'
+    return f'<a href="{esc(url)}" class="{esc(cls)}"{attrs}>{esc(label)}</a>'
 
 
 def head(title, description, path='', prefix=''):
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{esc(title)}</title><meta name="description" content="{esc(description)}">
-<meta name="theme-color" content="#faf9f6"><link rel="canonical" href="{ORIGIN}/{path}">
+<meta name="theme-color" content="#ffffff"><link rel="canonical" href="{ORIGIN}/{path}">
 <meta property="og:type" content="website"><meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(description)}">
 <meta property="og:url" content="{ORIGIN}/{path}"><meta property="og:image" content="{ORIGIN}/assets/{PROFILE_IMAGE}"><meta name="twitter:card" content="summary">
 <link rel="icon" href="{prefix}assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="{prefix}style.css">
@@ -55,15 +55,11 @@ def head(title, description, path='', prefix=''):
 
 def header(prefix=''):
     home = prefix or './'
-    return f'''<header class="site-header"><div class="nav-wrap">
-<a class="wordmark" href="{home}" aria-label="Dong Hwi Kim, home">DHK<span>.</span></a>
-<nav aria-label="Main navigation"><a href="{home}#research">Research</a><a href="{home}#projects">Projects</a><a href="{home}#experience">Experience</a><a href="mailto:{esc(PERSON['email'])}">Contact <span aria-hidden="true">↗</span></a></nav>
-</div></header>'''
+    return f'<header class="site-header"><a href="{home}">Dong Hwi Kim</a><nav aria-label="Main navigation"><a href="{home}#research">Research</a> / <a href="{home}#projects">Projects</a> / <a href="{home}#experience">Experience</a></nav></header>'
 
 
 def footer(prefix=''):
-    return f'''<footer class="site-footer"><div><a href="{prefix or './'}">Dong Hwi Kim</a><span>Seoul National University</span></div>
-<div><span>Updated {esc(PERSON['updated'])}</span>{anchor('GitHub', PERSON['github'])}</div></footer></body></html>'''
+    return f'<footer class="site-footer"><p>Layout inspired by {anchor("Jon Barron", "https://jonbarron.info/")}.</p><p>Updated {esc(PERSON["updated"])}</p></footer></body></html>'
 
 
 def tags(item):
@@ -81,59 +77,49 @@ def item_links(item, detail=False):
 
 
 def row(item, research=False):
-    badge = item['status'] if research else item['badge']
-    cl = 'status' if research else ('badge subdued' if item['category']=='Coursework' or item['id']=='scene-reordering' else 'badge')
-    label = f'<span class="{cl}">{esc(badge)}</span>'
     thumbnail = item.get('thumbnail_url') or 'assets/' + item.get('thumbnail', item['image'])
     fallback = f' data-fallback="assets/{esc(item["image"])}" data-fallback-alt="{esc(item["image_alt"])}"' if item.get('thumbnail_url') else ''
+    badge = item['status'] if research else item['badge']
     credit = '<p class="thumbnail-credit">'+anchor(item['thumbnail_source_label'],item['thumbnail_source_url'])+'</p>' if item.get('thumbnail_source_url') else ''
-    return f'''<article class="work-row{' research-row' if research else ''}"{' data-category="'+esc(item['category'])+'"' if not research else ''}>
-<div class="work-media"><a class="work-image {esc(item['id'])}{' official-photo' if item.get('thumbnail_url') else ''}" href="projects/{item['id']}/" tabindex="-1" aria-hidden="true"><img src="{esc(thumbnail)}" alt="{esc(item.get('thumbnail_alt',item['image_alt']))}" width="560" height="360" loading="lazy" referrerpolicy="no-referrer"{fallback}></a>{credit}</div>
-<div class="work-copy"><div class="work-meta"><span>{esc(item['eyebrow'])} · {esc(item['date'])}</span>{label}</div>
-<h3><a href="projects/{item['id']}/">{esc(item['title'])}</a></h3>
-<p>{esc(item['summary'])}</p>{tags(item)}{item_links(item)}</div></article>'''
+    return f'''<article class="work-row">
+<div class="work-media"><a class="work-image {esc(item['id'])}" href="projects/{item['id']}/" tabindex="-1" aria-hidden="true"><img src="{esc(thumbnail)}" alt="{esc(item.get('thumbnail_alt',item['image_alt']))}" width="160" height="120" loading="lazy" referrerpolicy="no-referrer"{fallback}></a>{credit}</div>
+<div class="work-copy"><h3><a href="projects/{item['id']}/">{esc(item['title'])}</a></h3>
+<p class="work-meta">{esc(item['eyebrow'])} · {esc(item['date'])}<br><em>{esc(badge)}</em></p>
+{item_links(item)}<p class="work-description">{esc(item['summary'])}</p></div></article>'''
 
 
 def home():
     p = PERSON
-    body = head('Dong Hwi Kim | Robotics & 3D Vision', p['intro']) + header()
+    body = head('Dong Hwi Kim | Robotics & 3D Vision', p['intro'])
     body += f'''<main id="main" class="home-main">
 <section class="intro" aria-labelledby="name"><div class="intro-copy">
-<p class="overline">Seoul National University</p>
-<p class="academic-program">Mechanical Engineering<br>Electrical and Computer Engineering</p>
 <h1 id="name">Dong Hwi Kim <span lang="ko">김동휘</span></h1>
-<p class="intro-lead">Robotics, 3D vision,<br>and learning from the world.</p>
+<p class="academic-program"><strong>SEOUL NATIONAL UNIVERSITY</strong><br>Mechanical Engineering<br>Electrical and Computer Engineering</p>
 <p>{esc(p['intro'])}</p><p>{esc(p['bio'])}</p>
-<div class="profile-links">{anchor('Email', 'mailto:'+p['email'])}{anchor('GitHub',p['github'])}{anchor('LinkedIn',p['linkedin'])}</div>
-</div><figure class="portrait"><img src="assets/{PROFILE_IMAGE}" width="240" height="310" alt="{'Dong Hwi Kim monogram' if PROFILE_IMAGE == 'profile-mark.svg' else 'Dong Hwi Kim'}" fetchpriority="high"><figcaption>Based in Seoul, South Korea</figcaption></figure></section>
-<div class="interest-line"><span class="tiny-label">Research interests</span><p>{' <span aria-hidden="true">/</span> '.join(esc(x) for x in p['interests'])}</p></div>
-<section id="research" class="section" aria-labelledby="research-title"><div class="section-heading"><div><p class="overline">What I am working on</p><h2 id="research-title">Ongoing research</h2></div><span class="section-aside">3D representations → robot perception</span></div>
-<p class="section-intro">My current research explores 3D Gaussian representations for mapping and visual data augmentation for robot learning.</p>
+<p class="profile-links">{anchor('Email', 'mailto:'+p['email'])} / {anchor('GitHub',p['github'])} / {anchor('LinkedIn',p['linkedin'])}</p>
+</div><figure class="portrait"><img src="assets/{PROFILE_IMAGE}" width="210" height="210" alt="Dong Hwi Kim" fetchpriority="high"></figure></section>
+<section id="research" class="section" aria-labelledby="research-title"><h2 id="research-title">Research</h2>
+<p class="section-intro">I am interested in 3D scene representations, robot perception and SLAM, and learning from visual data. The following projects are ongoing.</p>
 <div class="work-list">{''.join(row(x,True) for x in DATA['research'])}</div></section>
-<section id="projects" class="section" aria-labelledby="projects-title"><div class="section-heading"><div><p class="overline">From models to working systems</p><h2 id="projects-title">Selected projects</h2></div><span class="section-aside">2024 — 2026</span></div>
-<div class="filters" aria-label="Filter projects" hidden><button type="button" class="active" data-filter="All" aria-pressed="true">All <span>06</span></button><button type="button" data-filter="Robotics" aria-pressed="false">Robotics</button><button type="button" data-filter="Machine Learning" aria-pressed="false">Machine learning</button><button type="button" data-filter="Coursework" aria-pressed="false">Coursework</button></div>
-<p class="sr-only" id="filter-result" role="status" aria-live="polite"></p>
+<section id="projects" class="section" aria-labelledby="projects-title"><h2 id="projects-title">Selected Projects</h2>
+<p class="section-intro">Engineering and machine learning projects, with implementation details, design decisions, and results on each project page.</p>
 <div class="work-list">{''.join(row(x) for x in DATA['projects'])}</div></section>
-<section id="experience" class="section" aria-labelledby="experience-title"><div class="section-heading"><div><p class="overline">Where I have been</p><h2 id="experience-title">Experience & education</h2></div></div>
-<div class="timeline">'''
+<section id="experience" class="section" aria-labelledby="experience-title"><h2 id="experience-title">Experience &amp; Education</h2><div class="timeline">'''
     for x in DATA['experience']:
         org = anchor(x['organization'], x['url']) if x.get('url') else esc(x['organization'])
-        body += f'<article class="timeline-row"><p class="timeline-date">{esc(x["date"])}</p><div><h3>{esc(x["title"])}</h3><p class="organization">{org}</p><p class="muted">{esc(x["detail"])}</p></div></article>'
-    body += '''<article class="timeline-row"><p class="timeline-date">Education</p><div><h3>Seoul National University</h3><p class="organization">Undergraduate · Double major</p><p class="muted">Mechanical Engineering<br>Electrical and Computer Engineering</p></div></article></div></section>
-<section id="honors" class="section" aria-labelledby="honors-title"><div class="section-heading"><div><p class="overline">Competitions & service</p><h2 id="honors-title">Selected honors</h2></div></div>'''
+        body += f'<article class="timeline-row"><p class="timeline-date">{esc(x["date"])}</p><div><h3>{esc(x["title"])}</h3><p>{org}</p><p class="muted">{esc(x["detail"])}</p></div></article>'
+    body += '<article class="timeline-row"><p class="timeline-date">Education</p><div><h3>Seoul National University</h3><p>Mechanical Engineering<br>Electrical and Computer Engineering</p></div></article></div></section>'
+    body += '<section id="honors" class="section" aria-labelledby="honors-title"><h2 id="honors-title">Selected Honors</h2>'
     for label, group in [('Engineering competitions', [a for a in DATA['awards'] if not a['type'].startswith('Military')]), ('Military recognition', [a for a in DATA['awards'] if a['type'].startswith('Military')])]:
-        if not group:
-            continue
-        body += f'<div class="honors-group"><h3>{esc(label)}</h3><div class="honors-list">'
+        if not group: continue
+        body += f'<h3 class="honors-heading">{esc(label)}</h3><ul class="honors-list">'
         for a in group:
-            body += f'<div class="honor-row"><span class="honor-year">{esc(a["year"])}</span><strong>{esc(a["title"])}</strong><span>{esc(a["event"])}</span></div>'
-        body += '</div></div>'
+            body += f'<li><span class="honor-year">{esc(a["year"])}</span> <strong>{esc(a["title"])}</strong> — {esc(a["event"])}</li>'
+        body += '</ul>'
     body += '</section>'
     if DATA.get('service'):
-        body += f'''<section id="military" class="section military-section" aria-labelledby="military-title"><div class="section-heading"><div><p class="overline">ROK–U.S. Combined Forces Command</p><h2 id="military-title">Military service & recognition</h2></div><span class="section-aside">September 2022 — March 2024</span></div><div class="military-overview"><p>{esc(DATA['service']['summary'])}</p><p class="military-note">Military decorations, formal commendations, and challenge coins from my service are shown below.</p></div><figure class="military-photo"><a href="assets/service-honors.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open the full-size photograph of military medals and commendations"><img src="assets/service-honors.jpg" alt="Joint Service Achievement Medal certificate, ROK Army commendations, and military challenge coins" width="1800" height="1013" loading="lazy"></a><figcaption><span>Decorations, commendations & challenge coins</span>{anchor('View full-size photograph','assets/service-honors.jpg')}</figcaption></figure></section>'''
-    body += f'''
-<section class="contact-section" aria-labelledby="contact-title"><p class="overline">Get in touch</p><h2 id="contact-title">Let’s talk about research.</h2><p>I’m interested in robotics, 3D vision, and learning-based perception.</p>{anchor(p['email'],'mailto:'+p['email'],'contact-link')}</section></main>'''
-    return body + footer()
+        body += f'''<section id="military" class="section military-section" aria-labelledby="military-title"><h2 id="military-title">Military Service &amp; Recognition</h2><p>{esc(DATA['service']['summary'])}</p><figure class="military-photo"><a href="assets/service-honors.jpg" target="_blank" rel="noopener noreferrer"><img src="assets/service-honors.jpg" alt="Joint Service Achievement Medal certificate, ROK Army commendations, and military challenge coins" width="1800" height="1013" loading="lazy"></a><figcaption>Decorations, commendations and challenge coins. {anchor('View full-size photograph','assets/service-honors.jpg')}</figcaption></figure></section>'''
+    return body + '</main>' + footer()
 
 
 def project(item, research=False):

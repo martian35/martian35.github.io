@@ -1,7 +1,6 @@
 {
   "person": {
     "name": "Dong Hwi Kim",
-    "korean_name": "김동휘",
     "affiliation": "Mechanical Engineering & Electrical and Computer Engineering · Seoul National University",
     "email": "martian35@snu.ac.kr",
     "github": "https://github.com/martian35",
@@ -802,7 +801,8 @@
       "title": "Undergraduate Student Researcher",
       "organization": "AIDAS Lab · Seoul National University",
       "date": "Jun 2026 — Present",
-      "detail": "PI: Prof. Jaeyoung Do"
+      "detail": "PI: Prof. Jaeyoung Do",
+      "url": "https://aidas.snu.ac.kr/"
     },
     {
       "title": "Interpreter",

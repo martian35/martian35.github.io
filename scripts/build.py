@@ -90,12 +90,13 @@ def row(item, research=False):
 
 def home():
     p = PERSON
+    bio = esc(p['bio']).replace('AIDAS Lab', anchor('AIDAS Lab', 'https://aidas.snu.ac.kr/'))
     body = head('Dong Hwi Kim | Robotics & 3D Vision', p['intro'])
     body += f'''<main id="main" class="home-main">
 <section class="intro" aria-labelledby="name"><div class="intro-copy">
-<h1 id="name">Dong Hwi Kim <span lang="ko">김동휘</span></h1>
+<h1 id="name">Dong Hwi Kim</h1>
 <p class="academic-program"><strong>SEOUL NATIONAL UNIVERSITY</strong><br>Mechanical Engineering<br>Electrical and Computer Engineering</p>
-<p>{esc(p['intro'])}</p><p>{esc(p['bio'])}</p>
+<p>{esc(p['intro'])}</p><p>{bio}</p>
 <p class="profile-links">{anchor('Email', 'mailto:'+p['email'])} / {anchor('GitHub',p['github'])} / {anchor('LinkedIn',p['linkedin'])}</p>
 </div><figure class="portrait"><img src="assets/{PROFILE_IMAGE}" width="210" height="210" alt="Dong Hwi Kim" fetchpriority="high"></figure></section>
 <section id="research" class="section" aria-labelledby="research-title"><h2 id="research-title">Research</h2>

@@ -28,7 +28,7 @@ for name in ['style.css', 'site.js']:
 (target/'assets').mkdir(exist_ok=True)
 excluded = set()
 if not publication.get('profile_photo', False):
-    excluded.add('portrait.jpg')
+    excluded.update({'portrait.jpg', 'portrait-enhanced.jpg'})
 if not publication.get('service_recognition', False):
     excluded.add('service-honors.jpg')
 for asset in (ROOT/'dist/assets').iterdir():

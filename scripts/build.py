@@ -27,7 +27,7 @@ if OPTIONS.public:
             for section in item.get('sections', []):
                 section['body'] = section['body'].replace(' The original report and presentation are available above.', '')
 PERSON = DATA['person']
-PROFILE_IMAGE = 'portrait.jpg' if not OPTIONS.public or PUBLICATION.get('profile_photo', False) else 'profile-mark.svg'
+PROFILE_IMAGE = 'portrait-enhanced.jpg' if not OPTIONS.public or PUBLICATION.get('profile_photo', False) else 'profile-mark.svg'
 ORIGIN = 'https://martian35.github.io'
 
 

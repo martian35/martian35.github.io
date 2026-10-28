@@ -2,6 +2,12 @@
   "reviewed_on": "2026-10-27",
   "images": [
     {
+      "project": "profile",
+      "selected_image": "portrait-enhanced.jpg",
+      "source_page": null,
+      "selection_note": "AI-enhanced profile crop of the person on the right in the user-supplied IMG_7706.JPG, made with imagegen at the user’s request. Fine detail is AI-reconstructed; the original upload is preserved separately."
+    },
+    {
       "project": "robot-challenge",
       "selected_image": "https://robotics.snu.ac.kr/wp-content/uploads/2026/08/%EB%8C%80%ED%9A%8C%EC%82%AC%EC%A7%843-960x624.png",
       "source_page": "https://robotics.snu.ac.kr/2026-ai%EB%A1%9C%EB%B4%87-%EC%B1%8C%EB%A6%B0%EC%A7%80-%EC%B0%BD%EA%B3%B5-1-2-3%EC%9D%84-%EC%99%84%EC%84%B1%ED%95%9C%EB%8B%A4/",

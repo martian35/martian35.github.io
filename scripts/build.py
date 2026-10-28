@@ -115,7 +115,6 @@ def home():
 <p>{esc(p['intro'])}</p><p>{bio}</p>
 <p class="profile-links">{anchor('Email', 'mailto:'+p['email'])} / {anchor('GitHub',p['github'])} / {anchor('LinkedIn',p['linkedin'])}</p>
 </div>{profile_portrait()}</section>
-<div class="profile-context">{''.join('<p>'+esc(t)+'</p>' for t in p.get('background', []))}</div>
 <section id="research" class="section" aria-labelledby="research-title"><h2 id="research-title">Research</h2>
 <p class="section-intro">{esc(DATA.get('research_intro', 'Ongoing projects in 3D mapping and visual data augmentation for robot learning.'))}</p>
 <div class="work-list">{''.join(row(x,True) for x in DATA['research'])}</div></section>

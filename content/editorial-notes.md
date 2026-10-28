@@ -35,7 +35,7 @@ Both research entries remain ongoing. Manuscript preparation is not publication.
 
 ## Personal introduction
 
-The basic introduction combines engineering experience, research training, broad interests in perception, control, robotics, and autonomous driving, and the first-author CVPR submission plan. There is no separate “How I approach research” section. The background about China, international schooling, and military interpretation comes from the user's account. It supports an account of learning across perspectives and communicating across assumptions. It is not used as proof of technical expertise or as a childhood-origin story. Current research remains specific; openness is expressed through interest in useful problems, engineering, and collaboration beyond the current specialties.
+Keep the homepage introduction concise: academic background, broad research interests, and current laboratory work. Reflective paragraphs about engineering training, cultural background, and learning attitudes are excluded from the homepage. The manuscript is described only as a first-author manuscript in preparation, without a target venue.
 
 Example SOPs and other people's CVs were used only as writing references. Their publications, roles, and achievements are not the user's credentials.
 
@@ -57,4 +57,4 @@ Edit `summary`, `at_glance`, `sections`, `technical_notes`, and `status` in `con
 
 ## Scope corrections
 
-The user clarified that their Robot Challenge contribution spans vision, planning, data collection, hardware, and integration. README role summaries must not narrow that first-hand account to vision alone. The Gaussian SLAM manuscript is first-author work being prepared for a planned CVPR submission, with no public repository. OpenMAVIS/Aria pipeline materials are not evidence for this manuscript and must not be linked as its implementation. The paper is in preparation, not submitted, under review, or accepted.
+The user clarified that their Robot Challenge contribution spans vision, planning, data collection, hardware, and integration. README role summaries must not narrow that first-hand account to vision alone. The Gaussian SLAM work has a first-author manuscript in preparation and no public repository. Do not name a planned submission venue. OpenMAVIS/Aria pipeline materials are not evidence for this manuscript and must not be linked as its implementation. The paper is in preparation, not submitted, under review, or accepted.

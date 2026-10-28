@@ -27,7 +27,7 @@ if OPTIONS.public:
             for section in item.get('sections', []):
                 section['body'] = section['body'].replace(' The original report and presentation are available above.', '')
 PERSON = DATA['person']
-PROFILE_IMAGE = 'portrait-enhanced.jpg' if not OPTIONS.public or PUBLICATION.get('profile_photo', False) else 'profile-mark.svg'
+PROFILE_IMAGE = 'portrait-original.jpg' if not OPTIONS.public or PUBLICATION.get('profile_photo', False) else 'profile-mark.svg'
 ORIGIN = 'https://martian35.github.io'
 
 
@@ -100,7 +100,7 @@ def home():
 <p class="academic-program"><strong>SEOUL NATIONAL UNIVERSITY</strong><br>Mechanical Engineering<br>Electrical and Computer Engineering</p>
 <p>{esc(p['intro'])}</p><p>{bio}</p>
 <p class="profile-links">{anchor('Email', 'mailto:'+p['email'])} / {anchor('GitHub',p['github'])} / {anchor('LinkedIn',p['linkedin'])}</p>
-</div><figure class="portrait"><img src="assets/{PROFILE_IMAGE}" width="210" height="210" alt="Dong Hwi Kim" fetchpriority="high"></figure></section>
+</div><figure class="portrait{' original-photo' if PROFILE_IMAGE == 'portrait-original.jpg' else ''}"><img src="assets/{PROFILE_IMAGE}" width="210" height="210" alt="Dong Hwi Kim" fetchpriority="high"></figure></section>
 <section id="research" class="section" aria-labelledby="research-title"><h2 id="research-title">Research</h2>
 <p class="section-intro">Ongoing projects in 3D mapping and visual data augmentation for robot learning.</p>
 <div class="work-list">{''.join(row(x,True) for x in DATA['research'])}</div></section>

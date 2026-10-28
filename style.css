@@ -10,3 +10,9 @@
 @media(max-width:440px){.intro{display:flex;flex-direction:column-reverse;gap:20px}.portrait img{width:150px;height:150px}.intro h1 span{display:inline;margin-left:5px}.intro h1{font-size:28px}.academic-program{text-align:center}.work-row{grid-template-columns:100px minmax(0,1fr);gap:15px;align-items:start}.work-image{min-height:85px}.work-image img{width:100px;height:85px}.thumbnail-credit{font-size:9px}.work-copy h3,.work-copy p,.item-links{font-size:13px}.work-row .item-links{line-height:1.7}.timeline-row{grid-template-columns:1fr;gap:3px}.timeline-date{font-size:12px}.site-header{flex-wrap:wrap}.metrics{gap:10px}.metrics dd{font-size:20px}.metrics dt{font-size:11px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 @media print{.site-header,.project-bottom,.site-footer{display:none}body{font-size:11pt}.home-main,.detail-main{max-width:none}.work-row{break-inside:avoid}.intro{padding-top:0}a{color:inherit}}
+
+/* Frame the original photograph without altering its pixels. Crop: x=505,y=735,w=180,h=180. */
+.portrait.original-photo{--portrait-size:210px;position:relative;width:var(--portrait-size);height:var(--portrait-size);border-radius:50%;overflow:hidden}
+.portrait.original-photo img{position:absolute;max-width:none;width:600%;height:800%;left:-280.555556%;top:-408.333333%;object-fit:fill;border-radius:0}
+@media(max-width:620px){.portrait.original-photo{--portrait-size:155px}}
+@media(max-width:440px){.portrait.original-photo{--portrait-size:150px}}

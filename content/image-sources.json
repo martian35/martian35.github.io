@@ -3,9 +3,9 @@
   "images": [
     {
       "project": "profile",
-      "selected_image": "portrait-enhanced.jpg",
+      "selected_image": "portrait-original.jpg",
       "source_page": null,
-      "selection_note": "AI-enhanced profile crop of the person on the right in the user-supplied IMG_7706.JPG, made with imagegen at the user’s request. Fine detail is AI-reconstructed; the original upload is preserved separately."
+      "selection_note": "Original user-supplied IMG_7706.JPG, preserved byte-for-byte. The profile uses a CSS crop centered on the person on the right; no generative enhancement or face alteration is applied."
     },
     {
       "project": "robot-challenge",

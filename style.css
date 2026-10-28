@@ -26,9 +26,8 @@
 .project-heading>.overline{margin:5px 0}
 
 /* Keep the academic page compact; put the explanation before implementation detail. */
-.research-approach{padding:10px 0 22px;border-bottom:1px solid var(--line);margin-bottom:12px}
-.research-approach h2{font-size:19px;margin-bottom:10px}
-.research-approach p{line-height:1.6}
+.profile-context{margin:-6px 0 20px}
+.profile-context p{line-height:1.6}
 .project-glance{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0;margin-bottom:18px}
 .project-glance h2{font-size:20px;margin-bottom:14px}
 .project-glance dl{display:grid;grid-template-columns:1fr 1fr;gap:18px 28px}
@@ -78,7 +77,6 @@
  .step-index{position:absolute;left:0;top:16px}
  .process-flow li:not(:last-child)::after{display:block;content:'↓';right:auto;left:1px;top:auto;bottom:-8px}
  .process-flow p{font-size:14px}
- .research-approach{padding-top:0}
 }
 @media print{
  .implementation-body{display:block!important}

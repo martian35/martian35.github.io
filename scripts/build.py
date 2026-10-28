@@ -115,7 +115,7 @@ def home():
 <p>{esc(p['intro'])}</p><p>{bio}</p>
 <p class="profile-links">{anchor('Email', 'mailto:'+p['email'])} / {anchor('GitHub',p['github'])} / {anchor('LinkedIn',p['linkedin'])}</p>
 </div>{profile_portrait()}</section>
-<section class="research-approach" aria-labelledby="approach-title"><h2 id="approach-title">How I approach research</h2>{''.join('<p>'+esc(t)+'</p>' for t in p.get('approach', []))}</section>
+<div class="profile-context">{''.join('<p>'+esc(t)+'</p>' for t in p.get('background', []))}</div>
 <section id="research" class="section" aria-labelledby="research-title"><h2 id="research-title">Research</h2>
 <p class="section-intro">{esc(DATA.get('research_intro', 'Ongoing projects in 3D mapping and visual data augmentation for robot learning.'))}</p>
 <div class="work-list">{''.join(row(x,True) for x in DATA['research'])}</div></section>
@@ -169,7 +169,10 @@ def project(item, research=False):
         for fact in item['at_glance']:
             body += f'<div><dt>{esc(fact["label"])}</dt><dd>{esc(fact["text"])}</dd></div>'
         body += '</dl></section>'
-    body += '<nav class="detail-contents" aria-label="On this page"><a href="#how-it-works">How it works</a> / <a href="#engineering">Engineering decisions</a> / <a href="#implementation">Implementation &amp; evidence</a></nav>'
+    contents = ['<a href="#how-it-works">How it works</a>', '<a href="#engineering">Engineering decisions</a>']
+    if item.get('technical_notes'):
+        contents.append('<a href="#implementation">Implementation &amp; evidence</a>')
+    body += '<nav class="detail-contents" aria-label="On this page">' + ' / '.join(contents) + '</nav>'
     hero = item.get('hero_image', item['image'])
     hero_alt = item.get('hero_alt', item['image_alt'])
     dims = f'width="{item.get("hero_width",1100)}" height="{item.get("hero_height",640)}"'

@@ -152,7 +152,10 @@ def project(item, research=False):
         body += f'<aside class="contribution"><span class="tiny-label">My role</span><p>{esc(item["role"])}</p></aside>'
     body += '<div class="project-body">'
     for s in item['sections']:
-        body += f'<section><h2>{esc(s["heading"])}</h2><p>{esc(s["body"])}</p></section>'
+        body += f'<section><h2>{esc(s["heading"])}</h2><p>{esc(s["body"])}</p>'
+        if s.get('sources'):
+            body += '<p class="credit">Implementation &amp; evidence: '+ ' · '.join(anchor(ref['label'], ref['url']) for ref in s['sources']) + '</p>'
+        body += '</section>'
     if item.get('gallery'):
         body += '<section class="gallery"><h2>Inside the project</h2>'
         for g in item['gallery']:

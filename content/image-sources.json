@@ -1,5 +1,5 @@
 {
-  "reviewed_on": "2026-10-27",
+  "reviewed_on": "2026-10-28",
   "images": [
     {
       "project": "profile",
@@ -43,5 +43,22 @@
       "source_page": null,
       "selection_note": "Retain the architecture figure from the supplied team course presentation."
     }
-  ]
+  ],
+  "project_explanation_figures": {
+    "robot-arena.png": {
+      "source": "https://github.com/junjinyong/snu-ai-robot-challenge-2026-team7/blob/a1ee6825b8520c3f9ae39a45872f4587d7bb493d/media/arena-layout.png",
+      "purpose": "Explain the task geometry alongside the team prototype.",
+      "type": "Team task diagram"
+    },
+    "splataug-scale.jpg": {
+      "source": "https://github.com/martian35/splataug-fr3/blob/74464cbe4040e98944670e8718a85d7164e9cc8d/docs/images/fig_scale.jpg",
+      "purpose": "Show measured scale validation on the reference capture.",
+      "type": "Repository result figure; not a cross-scene benchmark"
+    },
+    "splataug-progress.jpg": {
+      "source": "https://github.com/martian35/splataug-fr3/blob/74464cbe4040e98944670e8718a85d7164e9cc8d/docs/images/task_progress.jpg",
+      "purpose": "Show stages of one generated episode.",
+      "type": "Rendered episode montage; not a physical policy trial"
+    }
+  }
 }

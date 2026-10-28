@@ -1,4 +1,22 @@
 (() => {
+  // A direct link to the implementation section should reveal its contents.
+  const revealHashTarget = () => {
+    if (!location.hash) return;
+    let id;
+    try { id = decodeURIComponent(location.hash.slice(1)); } catch { return; }
+    const target = document.getElementById(id);
+    if (!target) return;
+    const disclosure = target.matches('details') ? target : target.closest('details');
+    if (disclosure) disclosure.open = true;
+  };
+  revealHashTarget();
+  window.addEventListener('hashchange', revealHashTarget);
+  document.querySelectorAll('a[href="#implementation"]').forEach((link) => {
+    link.addEventListener('click', () => {
+      const section = document.getElementById('implementation');
+      if (section) section.open = true;
+    });
+  });
   document.querySelectorAll('img[data-fallback]').forEach((img) => {
     const fallback = () => {
       if (!img.dataset.fallback) return;

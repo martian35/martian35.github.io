@@ -6,12 +6,16 @@
     "github": "https://github.com/martian35",
     "linkedin": "https://www.linkedin.com/in/martian35/",
     "updated": "October 2026",
-    "intro": "I am an undergraduate at Seoul National University, double majoring in Mechanical Engineering and Electrical and Computer Engineering. My interests span robotics, 3D vision, and machine learning.",
-    "bio": "At the RPM Robotics Lab, I study 3D Gaussian Splatting for SLAM with Prof. Ayoung Kim. My collaboration with Prof. Jaeyoung Do at the AIDAS Lab focuses on visual data augmentation for robot learning.",
+    "intro": "I am an undergraduate at Seoul National University studying Mechanical Engineering and Electrical and Computer Engineering. My interests lie in how machines perceive the physical world and turn that understanding into useful behavior.",
+    "bio": "At the RPM Robotics Lab, I work with Prof. Ayoung Kim on 3D Gaussian Splatting for SLAM: estimating camera motion while building a 3D map. At the AIDAS Lab, my collaboration with Prof. Jaeyoung Do uses reconstructed scenes and robot kinematics to generate visual training data for robot learning.",
     "interests": [
       "3D scene representations",
       "Robot perception & SLAM",
       "Learning from visual data"
+    ],
+    "approach": [
+      "An international-school education and four years in China exposed me early to different ways of learning. Later, serving as a Korean–English interpreter at the ROK–U.S. Combined Forces Command meant working across languages and military cultures. These experiences shape how I learn and collaborate: listen carefully, ask when assumptions differ, and stay willing to revise my own.",
+      "Robotics and 3D vision are my current focus. My curiosity also extends to problems in other fields—especially when solving them could help people, or when the challenge of making an idea work offers something new to learn. I welcome conversations with people who bring different questions, tools, and perspectives."
     ]
   },
   "research": [
@@ -23,15 +27,42 @@
       "date": "Ongoing",
       "image": "slam-concept.svg",
       "image_alt": "Conceptual illustration of camera observations, Gaussian scene representation, and camera trajectory; not an experimental result",
-      "summary": "Research on estimating camera motion and building 3D scene representations using Gaussian splatting.",
-      "role": "Ongoing research on 3DGS-based SLAM; manuscript in preparation.",
+      "summary": "Building 3D maps from moving cameras, with an emphasis on geometric consistency and how mapping computation is spent.",
+      "role": "Research on 3D Gaussian Splatting mapping, optimization, and geometric consistency at RPM Robotics Lab.",
       "tags": [
         "3D Gaussian Splatting",
         "SLAM",
         "3D Reconstruction"
       ],
-      "links": [],
+      "links": [
+        {
+          "label": "Public pipeline",
+          "url": "https://github.com/martian35/OpenMAVIS_custom"
+        }
+      ],
       "sections": [
+        {
+          "heading": "A useful map must explain more than its training images",
+          "body": "3D Gaussian Splatting represents a scene as many small, oriented 3D elements that can be rendered into an image. My research asks how that representation can support mapping: which observations to optimize, how to use geometric evidence, and how to spend computation where the reconstruction still needs work."
+        },
+        {
+          "heading": "One concrete engineering problem: coordinate consistency",
+          "body": "In my public Aria-to-3DGS pipeline, stereo-inertial tracking exports camera poses, map points, and observations into the same raw map frame before conversion to a reconstruction dataset. Mixing those map points with a separately normalized trajectory would silently break their spatial relationship. Sparse depth targets, consistency checks, and ablation tools make this interface explicit.",
+          "sources": [
+            {
+              "label": "Public pipeline and coordinate convention",
+              "url": "https://github.com/martian35/OpenMAVIS_custom"
+            }
+          ]
+        },
+        {
+          "heading": "What I am investigating now",
+          "body": "Current experiments examine how optimization effort is allocated across views and how depth or free-space evidence can constrain spurious geometry. These are research questions under evaluation. The work is ongoing, and I am preparing a manuscript; results across scenes and computational trade-offs still need broader validation."
+        }
+      ],
+      "illustrative": true,
+      "category": "3D Vision & SLAM",
+      "technical_notes": [
         {
           "heading": "Research direction",
           "body": "This ongoing project investigates the use of 3D Gaussian Splatting in simultaneous localization and mapping. The goal is to connect camera motion estimation with a 3D representation of the surrounding scene."
@@ -39,10 +70,64 @@
         {
           "heading": "Current status",
           "body": "The manuscript is in preparation. Further method details, experimental results, and publication information will be shared as the work progresses."
+        },
+        {
+          "heading": "Public implementation thread",
+          "body": "The Aria-to-3DGS repository contains tracking exports, dataset conversion, sparse-depth target generation, consistency checks, and mapping ablation scripts. It is a supporting pipeline within the broader mapping research.",
+          "sources": [
+            {
+              "label": "OpenMAVIS custom pipeline",
+              "url": "https://github.com/martian35/OpenMAVIS_custom"
+            }
+          ]
         }
       ],
-      "illustrative": true,
-      "category": "3D Vision & SLAM"
+      "card_role": "3DGS mapping research; experiments and manuscript in progress.",
+      "at_glance": [
+        {
+          "label": "The problem",
+          "text": "A visually convincing map can still contain incorrect geometry, and mapping has a limited computation budget."
+        },
+        {
+          "label": "The approach",
+          "text": "Study how camera observations, geometric evidence, and optimization choices affect a Gaussian map."
+        },
+        {
+          "label": "Outcome / status",
+          "text": "Ongoing research; manuscript in preparation. Broader validation remains in progress."
+        },
+        {
+          "label": "My contribution",
+          "text": "Research on 3D Gaussian Splatting mapping, optimization, and geometric consistency at RPM Robotics Lab."
+        }
+      ],
+      "hero_caption": "Conceptual illustration of camera poses and a Gaussian map. This is an explanatory schematic, not a reconstruction result.",
+      "flow_title": "From camera observations to a map that can be checked",
+      "flow": [
+        {
+          "title": "Capture observations",
+          "body": "Images, calibration, and camera motion provide the mapping inputs."
+        },
+        {
+          "title": "Keep one world frame",
+          "body": "Camera poses and map points must describe the same coordinates."
+        },
+        {
+          "title": "Build and refine the map",
+          "body": "Optimize Gaussian appearance and geometry using the available observations."
+        },
+        {
+          "title": "Test the representation",
+          "body": "Compare rendering, geometry, and computation under controlled experiments."
+        }
+      ],
+      "flow_caption": "Conceptual research workflow. The public Aria-to-3DGS pipeline below is one implementation thread; it does not establish a complete real-time SLAM result.",
+      "connection": "This work studies how a 3D representation is built and checked. At AIDAS Lab, I explore the next step: using reconstructed geometry to create robot-learning data.",
+      "related": [
+        "splataug-fr3",
+        "robot-challenge"
+      ],
+      "technical_notes_title": "Implementation notes & source evidence"
     },
     {
       "id": "splataug-fr3",
@@ -52,7 +137,7 @@
       "date": "Ongoing",
       "image": "splataug.jpg",
       "image_alt": "An FR3 manipulation episode rendered from three camera viewpoints using Gaussian scene assets",
-      "summary": "Turning captured workcell imagery and robot demonstrations into metrically aligned 3D assets and synchronized training views for robot learning.",
+      "summary": "Turning workcell captures and robot motion into reusable 3D assets that render the same manipulation episode from multiple cameras.",
       "role": "Responsible for the 3DGS data augmentation module within a larger collaborative dataset project.",
       "tags": [
         "3D Gaussian Splatting",
@@ -66,6 +151,58 @@
         }
       ],
       "sections": [
+        {
+          "heading": "My part: making reconstructed scenes reusable",
+          "body": "I develop the 3DGS augmentation module within a larger robotic dataset collaboration. The module connects captured appearance to calibrated cameras, robot link geometry, and demonstration motion. It builds on RoboSplat and SplatSim; my focus is the reconstruction, alignment, asset preparation, rendering, and validation needed for the FR3 workcell.",
+          "sources": [
+            {
+              "label": "RoboSplat upstream",
+              "url": "https://github.com/OpenRobotLab/RoboSplat"
+            },
+            {
+              "label": "SplatSim upstream",
+              "url": "https://github.com/qureshinomaan/SplatSim"
+            },
+            {
+              "label": "My FR3 pipeline",
+              "url": "https://github.com/martian35/splataug-fr3"
+            }
+          ]
+        },
+        {
+          "heading": "Looking aligned is not the same as being metrically aligned",
+          "body": "A soft Gaussian silhouette can make an incorrectly scaled robot look plausible. I therefore use calibration and distances between rigid robot parts to check scale against the robot CAD model. Registration is refined on opaque Gaussian cores with scale fixed. This makes the alignment decision depend on physical dimensions.",
+          "figure": {
+            "image": "splataug-scale.jpg",
+            "alt": "Repository figure comparing robot length-ruler errors and Gaussian-core distances before and after scale correction",
+            "caption": "Scale checks compare rigid-part distances against CAD. The figure reports the repository’s reference capture, rather than a result across all scenes.",
+            "source_url": "https://github.com/martian35/splataug-fr3/blob/74464cbe4040e98944670e8718a85d7164e9cc8d/docs/ROBOT_ALIGNMENT_METHOD.md",
+            "source_label": "Alignment method and measurements",
+            "width": 1170,
+            "height": 468
+          }
+        },
+        {
+          "heading": "Motion, appearance, and object state must agree",
+          "body": "Each Gaussian belongs to a robot link. Inverse forward kinematics brings those assets into a reusable reference pose; forward kinematics then animates them along a trajectory. Explicit attachment and release rules keep objects connected to the gripper at the right times. Camera visibility and object-pose continuity are checked before an episode is accepted.",
+          "figure": {
+            "image": "splataug-progress.jpg",
+            "alt": "Four rendered stages of the same FR3 cube-stacking episode",
+            "caption": "A generated episode progresses through approach, grasp, and stacking. The montage illustrates the kinematic replay; it is not a physical policy-success trial.",
+            "source_url": "https://github.com/martian35/splataug-fr3/blob/74464cbe4040e98944670e8718a85d7164e9cc8d/README.md",
+            "source_label": "Pipeline overview",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        {
+          "heading": "Turn visible failures into explicit checks",
+          "body": "Missing cube bottoms, a hazy tabletop, and objects disappearing from the wrist view exposed different pipeline failures. The module uses targeted asset repairs and numerical acceptance checks rather than relying only on a convincing render. The next research question is how such generated data affects downstream robot learning; generation checks alone do not answer it."
+        }
+      ],
+      "category": "Robot Learning",
+      "card_role": "Developing the 3DGS augmentation module in a larger dataset collaboration.",
+      "technical_notes": [
         {
           "heading": "My scope within the collaboration",
           "body": "My contribution to the broader robotic dataset collaboration is the 3D Gaussian Splatting augmentation module. It turns workcell captures and demonstrations into reusable scene assets that can be reposed and rendered as synchronized training views. The collaboration and manuscript remain in progress.",
@@ -133,8 +270,53 @@
           ]
         }
       ],
-      "category": "Robot Learning",
-      "card_role": "3DGS data augmentation module within a larger dataset collaboration."
+      "at_glance": [
+        {
+          "label": "The problem",
+          "text": "Collecting robot demonstrations is costly, and a good-looking reconstruction may have the wrong scale or motion."
+        },
+        {
+          "label": "The approach",
+          "text": "Align reconstructed assets to the real robot, animate them with its kinematics, and render calibrated views."
+        },
+        {
+          "label": "Outcome / status",
+          "text": "A working scene-generation and validation pipeline; the broader robot-learning collaboration remains ongoing."
+        },
+        {
+          "label": "My contribution",
+          "text": "Responsible for the 3DGS data augmentation module within a larger collaborative dataset project."
+        }
+      ],
+      "hero_caption": "The same rendered manipulation episode seen by two standing cameras and a wrist camera. These are generated views, not three new real-world demonstrations.",
+      "flow_title": "From a captured workcell to reusable demonstrations",
+      "flow": [
+        {
+          "title": "Capture",
+          "body": "Workcell images, camera calibration, and robot demonstrations."
+        },
+        {
+          "title": "Reconstruct and align",
+          "body": "Gaussian assets are checked against physical dimensions and robot CAD."
+        },
+        {
+          "title": "Repose and render",
+          "body": "Robot kinematics drive the link assets; calibrated cameras observe the same episode."
+        },
+        {
+          "title": "Validate and export",
+          "body": "Check geometry, grasp state, continuity, and visibility before writing a dataset."
+        }
+      ],
+      "flow_caption": "Implementation overview of my augmentation module. Geometric and rendering checks are distinct from evaluating a learned policy on a physical robot.",
+      "connection": "The link to my SLAM work is the representation itself: a scene model becomes useful only when its geometry, coordinates, and rendering support the next task.",
+      "related": [
+        "gaussian-slam",
+        "automated-filming"
+      ],
+      "technical_notes_title": "Implementation notes & source evidence",
+      "hero_width": 1400,
+      "hero_height": 262
     }
   ],
   "projects": [
@@ -147,7 +329,7 @@
       "badge": "2nd Place",
       "image": "robot.jpg",
       "image_alt": "Team 7's autonomous mecanum-wheel robot in the competition arena",
-      "summary": "A mecanum-wheel robot that identifies, collects, and delivers target objects within a 180-second match.",
+      "summary": "An autonomous robot that recognizes, collects, and delivers target objects during a 180-second match.",
       "role": "Perception and model training, together with Jinyong Jun.",
       "tags": [
         "Robot Perception",
@@ -187,6 +369,55 @@
         }
       ],
       "sections": [
+        {
+          "heading": "The mechanism shaped the software",
+          "body": "The collector holds three objects and has no capture actuator: moving forward collects, while reversing releases. The team therefore used a fixed sweep route with live target decisions and planned returns for delivery. Braking and turning were calibrated as part of that route. A small corrective move could cost time or lose the load.",
+          "figure": {
+            "image": "robot-arena.png",
+            "alt": "Official team repository diagram showing the object grid, storage corner, and robot start corner",
+            "caption": "The arena separates the start and storage corners. Target recognition must lead to a collection and delivery plan within the match clock.",
+            "source_url": "https://github.com/junjinyong/snu-ai-robot-challenge-2026-team7/blob/a1ee6825b8520c3f9ae39a45872f4587d7bb493d/README.md",
+            "source_label": "Team task and arena",
+            "width": 733,
+            "height": 696,
+            "layout": "narrow"
+          }
+        },
+        {
+          "heading": "My contribution: perception that motion can use",
+          "body": "I worked on perception and model training with Jinyong Jun. The two cameras look outward so objects can be observed as the robot passes. Their detections are expressed in a shared forward-bearing convention and sent together to navigation. This gives the planner visual evidence it can combine with position and target rules, rather than asking the detector to make the whole collection decision."
+        },
+        {
+          "heading": "The integration lesson: accuracy has a time budget",
+          "body": "A moving robot sees each object for a limited time. Model latency, camera reliability, detection thresholds, and vehicle speed therefore have to work together. The code includes on-device model benchmarks and camera-freeze checks. The team finished second, scoring 70 points in each final run; the linked videos show the competition behavior.",
+          "sources": [
+            {
+              "label": "Final run 1",
+              "url": "https://www.youtube.com/shorts/eW8jHbDZwa0"
+            },
+            {
+              "label": "Final run 2",
+              "url": "https://www.youtube.com/shorts/kp1yWhTkPng"
+            }
+          ]
+        }
+      ],
+      "thumbnail_url": "https://robotics.snu.ac.kr/wp-content/uploads/2026/08/%EB%8C%80%ED%9A%8C%EC%82%AC%EC%A7%843-960x624.png",
+      "thumbnail_source_url": "https://robotics.snu.ac.kr/2026-ai%EB%A1%9C%EB%B4%87-%EC%B1%8C%EB%A6%B0%EC%A7%80-%EC%B0%BD%EA%B3%B5-1-2-3%EC%9D%84-%EC%99%84%EC%84%B1%ED%95%9C%EB%8B%A4/",
+      "thumbnail_source_label": "SNU Robotics Institute · event photo",
+      "thumbnail_alt": "An official competition scene at the 2026 SNU AI Robot Challenge",
+      "gallery": [
+        {
+          "url": "https://robotics.snu.ac.kr/wp-content/uploads/2026/08/%EB%8C%80%ED%9A%8C%EC%82%AC%EC%A7%843-960x624.png",
+          "fallback": "robot.jpg",
+          "alt": "An official competition scene at the 2026 SNU AI Robot Challenge",
+          "caption": "Official competition coverage.",
+          "source_label": "SNU Robotics Institute · event photo",
+          "source_url": "https://robotics.snu.ac.kr/2026-ai%EB%A1%9C%EB%B4%87-%EC%B1%8C%EB%A6%B0%EC%A7%80-%EC%B0%BD%EA%B3%B5-1-2-3%EC%9D%84-%EC%99%84%EC%84%B1%ED%95%9C%EB%8B%A4/"
+        }
+      ],
+      "card_role": "Perception and model training, with Jinyong Jun.",
+      "technical_notes": [
         {
           "heading": "The engineering problem",
           "body": "The robot had 180 seconds to find, collect, and deliver two target classes announced at match time. A Jetson Orin Nano ran perception and navigation on a four-wheel mecanum chassis. The key mechanical constraint was a passive, three-object basket: driving forward captured an object, while reversing released it. That made motion planning, stopping, and perception part of the same collection problem.",
@@ -260,21 +491,53 @@
           ]
         }
       ],
-      "thumbnail_url": "https://robotics.snu.ac.kr/wp-content/uploads/2026/08/%EB%8C%80%ED%9A%8C%EC%82%AC%EC%A7%843-960x624.png",
-      "thumbnail_source_url": "https://robotics.snu.ac.kr/2026-ai%EB%A1%9C%EB%B4%87-%EC%B1%8C%EB%A6%B0%EC%A7%80-%EC%B0%BD%EA%B3%B5-1-2-3%EC%9D%84-%EC%99%84%EC%84%B1%ED%95%9C%EB%8B%A4/",
-      "thumbnail_source_label": "SNU Robotics Institute · event photo",
-      "thumbnail_alt": "An official competition scene at the 2026 SNU AI Robot Challenge",
-      "gallery": [
+      "at_glance": [
         {
-          "url": "https://robotics.snu.ac.kr/wp-content/uploads/2026/08/%EB%8C%80%ED%9A%8C%EC%82%AC%EC%A7%843-960x624.png",
-          "fallback": "robot.jpg",
-          "alt": "An official competition scene at the 2026 SNU AI Robot Challenge",
-          "caption": "Official competition coverage.",
-          "source_label": "SNU Robotics Institute · event photo",
-          "source_url": "https://robotics.snu.ac.kr/2026-ai%EB%A1%9C%EB%B4%87-%EC%B1%8C%EB%A6%B0%EC%A7%80-%EC%B0%BD%EA%B3%B5-1-2-3%EC%9D%84-%EC%99%84%EC%84%B1%ED%95%9C%EB%8B%A4/"
+          "label": "The problem",
+          "text": "Find the announced targets and deliver them before time runs out, using a basket that drops its load when the robot reverses."
+        },
+        {
+          "label": "The approach",
+          "text": "Combine dual-camera segmentation, a calibrated route, and sensor-informed motion on a Jetson–ESP32 robot."
+        },
+        {
+          "label": "Outcome / status",
+          "text": "Team 7: 2nd place, 140/200 points across two final runs."
+        },
+        {
+          "label": "My contribution",
+          "text": "Perception and model training with Jinyong Jun. The motion and hardware descriptions below describe the team system."
         }
       ],
-      "card_role": "Perception and model training, with Jinyong Jun."
+      "hero_caption": "The competition prototype approaches objects on the arena floor. Its passive front basket makes the direction of travel part of the collection mechanism.",
+      "flow_title": "How a detection becomes a collection action",
+      "flow": [
+        {
+          "title": "See the objects",
+          "body": "Two cameras feed YOLO segmentation on the Jetson Orin Nano."
+        },
+        {
+          "title": "Choose a target",
+          "body": "Combine visual detections with bearing, range, and arena-cell checks."
+        },
+        {
+          "title": "Execute the motion",
+          "body": "Jetson velocity commands go to the ESP32 and four wheel drivers."
+        },
+        {
+          "title": "Collect and deliver",
+          "body": "Forward motion loads the basket; return and deposit when it is full."
+        }
+      ],
+      "flow_caption": "Team system overview. LiDAR and IMU inform motion; the mechanical basket constrains route and braking. My primary scope was perception and model training.",
+      "connection": "This project made perception’s downstream constraints tangible. My current mapping and data-augmentation research asks how visual representations can become more useful to a robot before they reach the action stage.",
+      "related": [
+        "gaussian-slam",
+        "splataug-fr3"
+      ],
+      "technical_notes_title": "Implementation notes & source evidence",
+      "hero_width": 1800,
+      "hero_height": 1013
     },
     {
       "id": "fastmri",
@@ -285,7 +548,7 @@
       "badge": "3rd Place",
       "image": "mri-overview.jpg",
       "image_alt": "Team MRI reconstruction framework using brain and knee experts with Feature VarNet and FI VarNet",
-      "summary": "Reconstructing brain and knee MRI from undersampled multi-coil measurements using anatomy-specific networks, data-consistency updates, and checkpoint averaging.",
+      "summary": "Reconstructing brain and knee MRI images from undersampled measurements using learned models tied to the acquisition process.",
       "role": "Team member, 2rm1000, with Jinseok Choi.",
       "tags": [
         "MRI Reconstruction",
@@ -329,6 +592,34 @@
         }
       ],
       "sections": [
+        {
+          "heading": "Why a plausible image is not enough",
+          "body": "MRI reconstruction is an inverse problem: the model sees a partial measurement of the image it must recover. Feature VarNet and FI VarNet couple learned features with the acquisition model and data-consistency operations. That structure keeps the reconstruction connected to the acquired signal."
+        },
+        {
+          "heading": "Specialize the model, make the routing explicit",
+          "body": "Brain and knee scans, and 4× versus 8× acceleration, create different input conditions. The team trained experts for these settings. The inference code identifies anatomy from coil count and acceleration from the sampling mask. The routing follows the challenge data conventions rather than a learned gating network."
+        },
+        {
+          "heading": "The engineering work extends beyond the architecture",
+          "body": "DeepSpeed, activation checkpointing, resumable training, MRI-aware augmentation, and checkpoint conversion make the models practical to train and reuse. Weight averaging produces one model; prediction ensembling runs multiple models. Keeping those choices separate makes the inference-cost trade-off clear. Team 2rm1000 placed third in the 2025 challenge."
+        }
+      ],
+      "thumbnail_url": "https://ece.snu.ac.kr/webdata/upimages/3fbz3acz035z3aazbabzc3fz851zcf0ze43zf7azf1.jpg",
+      "thumbnail_source_url": "https://ece.snu.ac.kr/community/etc?bbsidx=56492&md=v",
+      "thumbnail_source_label": "SNU ECE · official 2025 poster",
+      "thumbnail_alt": "Official poster for the fifth SNU FastMRI Challenge in 2025",
+      "gallery": [
+        {
+          "url": "https://ece.snu.ac.kr/webdata/upimages/3fbz3acz035z3aazbabzc3fz851zcf0ze43zf7azf1.jpg",
+          "fallback": "mri-overview.jpg",
+          "alt": "Official 2025 SNU FastMRI Challenge announcement poster",
+          "caption": "Official announcement for the 2025 competition.",
+          "source_label": "SNU Electrical and Computer Engineering",
+          "source_url": "https://ece.snu.ac.kr/community/etc?bbsidx=56492&md=v"
+        }
+      ],
+      "technical_notes": [
         {
           "heading": "Measurement-consistent reconstruction",
           "body": "The input is undersampled multi-coil k-space, so plausible appearance alone is insufficient: a reconstruction must remain tied to the acquired measurements. The Feature VarNet and FI VarNet implementations estimate coil sensitivities and combine learned updates with data-consistency operations. FI VarNet also includes image-domain cascades. The design couples a learned image prior to the MRI acquisition model.",
@@ -388,20 +679,53 @@
           ]
         }
       ],
-      "thumbnail_url": "https://ece.snu.ac.kr/webdata/upimages/3fbz3acz035z3aazbabzc3fz851zcf0ze43zf7azf1.jpg",
-      "thumbnail_source_url": "https://ece.snu.ac.kr/community/etc?bbsidx=56492&md=v",
-      "thumbnail_source_label": "SNU ECE · official 2025 poster",
-      "thumbnail_alt": "Official poster for the fifth SNU FastMRI Challenge in 2025",
-      "gallery": [
+      "at_glance": [
         {
-          "url": "https://ece.snu.ac.kr/webdata/upimages/3fbz3acz035z3aazbabzc3fz851zcf0ze43zf7azf1.jpg",
-          "fallback": "mri-overview.jpg",
-          "alt": "Official 2025 SNU FastMRI Challenge announcement poster",
-          "caption": "Official announcement for the 2025 competition.",
-          "source_label": "SNU Electrical and Computer Engineering",
-          "source_url": "https://ece.snu.ac.kr/community/etc?bbsidx=56492&md=v"
+          "label": "The problem",
+          "text": "Recover an MRI image from fewer acquired measurements without losing the connection to the measured signal."
+        },
+        {
+          "label": "The approach",
+          "text": "Use anatomy- and acceleration-specific reconstruction models with repeated learned updates and measurement consistency."
+        },
+        {
+          "label": "Outcome / status",
+          "text": "3rd place, SNU FastMRI Challenge 2025; a team result."
+        },
+        {
+          "label": "My contribution",
+          "text": "Team 2rm1000 with Jinseok Choi. The architecture and training choices described here are team work."
         }
-      ]
+      ],
+      "hero_caption": "The team’s model overview routes measurements to anatomy-specific reconstruction experts. This is an architecture figure, not a before-and-after image-quality comparison.",
+      "flow_title": "Learn an image prior while respecting the measurement",
+      "flow": [
+        {
+          "title": "Acquire less data",
+          "body": "Input: undersampled multi-coil k-space, the MRI frequency-domain measurements."
+        },
+        {
+          "title": "Select an expert",
+          "body": "Route by anatomy and 4×/8× sampling conditions."
+        },
+        {
+          "title": "Refine with constraints",
+          "body": "Feature/FI VarNet cascades combine learned updates with data consistency."
+        },
+        {
+          "title": "Reconstruct the image",
+          "body": "Combine model outputs where configured and write the final reconstruction."
+        }
+      ],
+      "flow_caption": "The measurement-consistency operations occur inside the reconstruction cascades. Expert routing is rule-based in the submitted implementation.",
+      "connection": "MRI and 3D mapping share a useful question: how can a learned representation stay anchored to the measurements that produced it? The physical models differ, but that discipline carries into my current research.",
+      "related": [
+        "gaussian-slam",
+        "wind-forecasting"
+      ],
+      "technical_notes_title": "Implementation notes & source evidence",
+      "hero_width": 1837,
+      "hero_height": 919
     },
     {
       "id": "scene-reordering",
@@ -412,7 +736,7 @@
       "badge": "8th Place",
       "image": "scene-ordering.svg",
       "image_alt": "Diagram of mapping frame-order views into a common coordinate system for Random4 inference",
-      "summary": "Recovering the chronological order of four shuffled images from a text description using multimodal reasoning and a decoder over valid frame orders.",
+      "summary": "Recovering the chronological order of four shuffled video frames from images and a sentence, with an output that is always a valid ordering.",
       "tags": [
         "Multimodal LLMs",
         "Temporal Reasoning",
@@ -443,6 +767,25 @@
         }
       ],
       "sections": [
+        {
+          "heading": "Make correctness part of the output interface",
+          "body": "Free-form answers can repeat a frame, omit one, or confuse an ordered list with per-input ranks. The team instead scores all 24 valid permutations using pairwise comparisons and chronological-slot evidence. The decoder guarantees a valid ordering format, although the predicted chronology can still be wrong."
+        },
+        {
+          "heading": "Average evidence only after matching frame identities",
+          "body": "The same image can appear in a different input position in each test view. Before averaging scores, the implementation maps them to the original frame identities. Otherwise, apparently compatible tensor positions would refer to different images. Tests check those mappings and the final submission format."
+        },
+        {
+          "heading": "Keep the official result reproducible",
+          "body": "The final adapter averages nine LoRA snapshots into one adapter, without adding a forward pass. Random4 inference still evaluates four input orderings. The official final-selected private score is 0.91463 and the team placed eighth. Later crop-based inference experiments are documented separately from the competition result."
+        }
+      ],
+      "thumbnail": "snuai-official.webp",
+      "thumbnail_alt": "Official blue AI symbol of SNU AI Challenge",
+      "thumbnail_source_label": "SNU AI Challenge · official identity",
+      "thumbnail_source_url": "https://snuaichallenge.github.io/",
+      "gallery": [],
+      "technical_notes": [
         {
           "heading": "A structured output contract",
           "body": "Given a sentence and four shuffled frames, the system must return each input frame’s chronological rank. Chronological sequence and per-input rank are inverse permutations; confusing them can invalidate an otherwise correct prediction. The implementation explicitly converts between the two representations and formats the submission through a shared utility.",
@@ -502,17 +845,51 @@
           ]
         }
       ],
-      "thumbnail": "snuai-official.webp",
-      "thumbnail_alt": "Official blue AI symbol of SNU AI Challenge",
-      "thumbnail_source_label": "SNU AI Challenge · official identity",
-      "thumbnail_source_url": "https://snuaichallenge.github.io/",
-      "gallery": [
+      "at_glance": [
         {
-          "image": "scene-ordering.svg",
-          "alt": "Four input permutations are mapped to common frame coordinates before logit averaging and decoding over 24 orders",
-          "caption": "Input orderings are mapped to common frame identities before averaging scores and decoding the final chronological order."
+          "label": "The problem",
+          "text": "Understand an event and return each shuffled frame’s chronological rank."
+        },
+        {
+          "label": "The approach",
+          "text": "Adapt a vision-language model, combine pairwise and position evidence, and decode over the 24 possible orders."
+        },
+        {
+          "label": "Outcome / status",
+          "text": "Team GeekSeek: 8th overall; official final-selected private score 0.91463."
+        },
+        {
+          "label": "My contribution",
+          "text": "Team GeekSeek member, working on the multimodal frame-ordering project."
         }
-      ]
+      ],
+      "hero_caption": "Conceptual illustration of shuffled-frame ordering and aggregation. The diagram does not show an experimental example or a measured accuracy gain.",
+      "flow_title": "From visual evidence to a valid sequence",
+      "flow": [
+        {
+          "title": "Read the event",
+          "body": "Input: a sentence and four shuffled video frames."
+        },
+        {
+          "title": "Score relationships",
+          "body": "A LoRA-adapted Qwen3.5-27B model provides pair and position evidence."
+        },
+        {
+          "title": "Align the views",
+          "body": "Map scores from different input permutations back to the same frame identities."
+        },
+        {
+          "title": "Decode one order",
+          "body": "Score the 24 valid orders and return the required per-input ranks."
+        }
+      ],
+      "flow_caption": "A chronological sequence and a rank assigned to each input are inverse permutations. The submission utilities convert between them explicitly.",
+      "connection": "This project highlights the importance of representation contracts. In my current 3D work, the same discipline applies to camera frames, robot links, and demonstration coordinates.",
+      "related": [
+        "splataug-fr3",
+        "taxer"
+      ],
+      "technical_notes_title": "Implementation notes & source evidence"
     },
     {
       "id": "wind-forecasting",
@@ -523,7 +900,7 @@
       "badge": "3rd Place · Excellence Award",
       "image": "wind-team-cover.webp",
       "image_alt": "Zephyr Analytics team cover for the 2025 Wind Power Prediction Competition",
-      "summary": "Forecasting hourly generation at three wind farms by combining a physical power curve with learned residual corrections and an optimized ensemble.",
+      "summary": "Predicting hourly wind-farm generation with a physical power curve, learned error corrections, and an optimized ensemble.",
       "role": "Model architecture design and hyperparameter optimization.",
       "tags": [
         "Physics-Guided ML",
@@ -551,6 +928,30 @@
         }
       ],
       "sections": [
+        {
+          "heading": "Divide the problem between physics and learning",
+          "body": "A turbine’s power curve provides a physically meaningful starting point. Weather-derived features, including air-density estimation, support that baseline. A residual model then learns the difference between the baseline and observed generation, leaving the ensemble to combine complementary predictions."
+        },
+        {
+          "heading": "My contribution: architecture and optimization",
+          "body": "I worked on model architecture design and hyperparameter optimization. The team combined the hybrid forecast with Ridge Regression and Random Forest predictions and tuned parameters and ensemble weights with Optuna. Derrick Junsu Lee led machine learning and testing; Hyunseung Lee handled preprocessing and feature engineering."
+        },
+        {
+          "heading": "Assess the forecast in its operating context",
+          "body": "The team placed third among 270 teams. The presentation reports 19.34% normalized mean absolute error (NMAE) and a 22.09% settlement revenue rate under the competition rule. The site-wise distributions below provide context for the aggregate scores. These are team-reported competition results, not a claim about deployment performance.",
+          "figure": {
+            "image": "wind-evaluation.webp",
+            "alt": "Original team evaluation slide with NMAE, settlement revenue rate, and wind-farm distributions",
+            "caption": "Prediction error and settlement outcome are reported together, with site-wise generation distributions from the team presentation.",
+            "width": 1080,
+            "height": 608
+          }
+        }
+      ],
+      "gallery": [],
+      "credit": "Cover, architecture, and evaluation images are from the original Zephyr Analytics team presentation, supplied by Dong Hwi Kim.",
+      "card_role": "Model architecture design and hyperparameter optimization.",
+      "technical_notes": [
         {
           "heading": "Two objectives for an operational forecast",
           "body": "The competition required hourly generation forecasts for Gyeongju, Yangyang, and Yeongdeok. Prediction error and settlement revenue describe different aspects of usefulness, so the project reported both. A forecast that looks numerically close must still be evaluated under the competition’s economic scoring rule."
@@ -580,20 +981,55 @@
           ]
         }
       ],
-      "gallery": [
+      "at_glance": [
         {
-          "image": "wind-architecture.webp",
-          "alt": "Team presentation diagram of physics-based power curve, residual LightGBM, ensemble models, and Optuna optimization",
-          "caption": "Model architecture and optimization, from the original Zephyr Analytics presentation."
+          "label": "The problem",
+          "text": "Forecast generation at three wind farms and assess both prediction error and the competition’s settlement criterion."
         },
         {
-          "image": "wind-evaluation.webp",
-          "alt": "Original team evaluation slide reporting 19.34 percent NMAE and 22.09 percent settlement revenue rate",
-          "caption": "Reported model evaluation and site-wise generation distributions, from the team presentation."
+          "label": "The approach",
+          "text": "Start with a physical power curve, learn its remaining error, and combine predictions in a tuned ensemble."
+        },
+        {
+          "label": "Outcome / status",
+          "text": "3rd of 270 teams; reported NMAE 19.34% and settlement revenue rate 22.09%."
+        },
+        {
+          "label": "My contribution",
+          "text": "Model architecture design and hyperparameter optimization in Team Zephyr Analytics."
         }
       ],
-      "credit": "Cover, architecture, and evaluation images are from the original Zephyr Analytics team presentation, supplied by Dong Hwi Kim.",
-      "card_role": "Model architecture design and hyperparameter optimization."
+      "hero_caption": "The original team architecture slide separates the physical baseline, learned residual, and ensemble. The full-size image is available for the detailed model connections.",
+      "hero_image": "wind-architecture.webp",
+      "flow_title": "Let physics explain the baseline, then learn the remainder",
+      "flow": [
+        {
+          "title": "Describe the weather",
+          "body": "Input: weather and derived atmospheric features for each wind farm."
+        },
+        {
+          "title": "Predict and correct",
+          "body": "A physical power curve gives the baseline; LightGBM estimates its residual error."
+        },
+        {
+          "title": "Combine models",
+          "body": "Blend the hybrid forecast with other predictors; tune with Optuna."
+        },
+        {
+          "title": "Evaluate usefulness",
+          "body": "Report forecast error and the competition’s settlement revenue rate."
+        }
+      ],
+      "flow_caption": "Architecture summary from the supplied team slides. The two reported metrics measure different aspects of the forecast and should be read separately.",
+      "connection": "This project broadened my experience beyond robotics while reinforcing an approach I still use: keep the physical structure where it is useful, and make the learned component’s role explicit.",
+      "related": [
+        "fastmri",
+        "taxer"
+      ],
+      "technical_notes_title": "Implementation notes & source evidence",
+      "hero_width": 1080,
+      "hero_height": 608,
+      "hero_alt": "Original team architecture diagram showing the physical power curve, residual correction, ensemble, and Optuna optimization"
     },
     {
       "id": "automated-filming",
@@ -604,7 +1040,7 @@
       "badge": "Grand Prize",
       "image": "filming-device.webp",
       "image_alt": "Sunflower-inspired face-tracking camera device with a yellow phone mount and white circular base",
-      "summary": "A two-axis filming device that keeps a face in frame using Raspberry Pi vision, servo motion, and infrared remote control.",
+      "summary": "A two-axis camera mount that detects a face and adjusts its pan and tilt to keep the subject in frame.",
       "tags": [
         "Mechatronics",
         "Face Tracking",
@@ -639,6 +1075,39 @@
         }
       ],
       "sections": [
+        {
+          "heading": "The algorithm has to move a physical assembly",
+          "body": "The team combined a Raspberry Pi, camera, two servos, infrared receiver, and a ball-transfer support. The support distributes the load and reduces friction. The software then has to translate an image-space target into motion the pan–tilt mechanism can execute.",
+          "figure": {
+            "image": "filming-hardware.webp",
+            "alt": "Exploded hardware diagram of the pan–tilt filming device",
+            "caption": "The assembly links camera framing to the mount’s two mechanical axes.",
+            "width": 1962,
+            "height": 845
+          }
+        },
+        {
+          "heading": "Pixels become pulse widths through an explicit controller",
+          "body": "The largest face supplies a center point. Its normalized offset drives incremental pan and tilt commands, with angle limits and a calibrated pulse-width mapping. Although the source contains derivative terms, their gains are zero in the final code. The implemented visual controller therefore uses proportional feedback."
+        },
+        {
+          "heading": "A usable prototype includes the operator",
+          "body": "A separate thread handles infrared commands while the vision loop runs. The operator can switch modes, move either axis, and stop the device. The prototype won the HD Hyundai Mechatronics Grand Prize. The demos show its behavior; quantitative tracking-error and settling-time results are not supplied.",
+          "sources": [
+            {
+              "label": "Device demonstration",
+              "url": "https://alvin0808.github.io/assets/img/device_revelation.gif"
+            },
+            {
+              "label": "Recorded filming result",
+              "url": "https://alvin0808.github.io/assets/img/device_film_result.gif"
+            }
+          ]
+        }
+      ],
+      "gallery": [],
+      "credit": "Shared project photographs and diagrams are reproduced from teammate Seunghun Oh’s project page. Project descriptions are adapted for this joint team project.",
+      "technical_notes": [
         {
           "heading": "The mechanism and the control objective",
           "body": "A solo creator needs the subject to stay framed while the camera moves smoothly enough to remain usable. The team combined a Raspberry Pi, a wide-view camera, two pan–tilt servos, an infrared receiver, and a ball-transfer support. The support reduces friction and distributes the assembly’s load; the two axes provide horizontal and vertical reframing."
@@ -678,19 +1147,53 @@
           "body": "The team received the 2024 HD Hyundai Mechatronics Competition Grand Prize and a KRW 3,000,000 team prize. The project’s engineering value lies in connecting camera coordinates, control gains, calibrated pulse widths, mechanical support, and user input. The linked demos show prototype behavior; the repository does not supply quantitative tracking-error or settling-time measurements."
         }
       ],
-      "gallery": [
+      "at_glance": [
         {
-          "image": "filming-hardware.webp",
-          "alt": "Exploded hardware illustration of the filming device",
-          "caption": "Hardware components and mechanical assembly."
+          "label": "The problem",
+          "text": "Let a solo creator stay in frame without continuously repositioning the camera."
         },
         {
-          "image": "filming-software.webp",
-          "alt": "Face tracking, remote control, and device visibility design",
-          "caption": "Face tracking, infrared remote control, and status indicators."
+          "label": "The approach",
+          "text": "Connect Raspberry Pi face detection to two servo axes, with infrared remote control for manual operation."
+        },
+        {
+          "label": "Outcome / status",
+          "text": "Grand Prize, 2024 HD Hyundai Mechatronics Competition; a team prototype."
+        },
+        {
+          "label": "My contribution",
+          "text": "Team member on the face-tracking pan–tilt filming prototype."
         }
       ],
-      "credit": "Shared project photographs and diagrams are reproduced from teammate Seunghun Oh’s project page. Project descriptions are adapted for this joint team project."
+      "hero_caption": "The physical prototype: a phone mount, two-axis mechanism, and base. The linked demonstrations show the device moving and the resulting footage.",
+      "flow_title": "The camera closes the visual feedback loop",
+      "flow": [
+        {
+          "title": "Locate the subject",
+          "body": "OpenCV detects faces and selects the largest detected face."
+        },
+        {
+          "title": "Measure image error",
+          "body": "Normalize its horizontal and vertical offset from the frame center."
+        },
+        {
+          "title": "Command the servos",
+          "body": "Proportional updates become angle commands and pigpio pulse widths."
+        },
+        {
+          "title": "Observe again",
+          "body": "The camera sees the new framing; an infrared remote can select manual control."
+        }
+      ],
+      "flow_caption": "The checked-in final code has zero derivative gains, so the external visual loop is proportional. The software stores commanded angles, without a separate joint-angle sensor readout.",
+      "connection": "This was an early opportunity to connect perception to actuation. The later robot challenge added navigation and timing constraints to that same software–hardware interface.",
+      "related": [
+        "robot-challenge",
+        "splataug-fr3"
+      ],
+      "technical_notes_title": "Implementation notes & source evidence",
+      "hero_width": 808,
+      "hero_height": 685
     },
     {
       "id": "taxer",
@@ -701,7 +1204,7 @@
       "badge": "Course Project",
       "image": "taxer-method.webp",
       "image_alt": "Original presentation slide showing the TaXer periodic feature extraction and cross-attention architecture",
-      "summary": "Forecasting weather and retail sales by combining periodic or dilated-convolution features with transformer-based sequence modeling.",
+      "summary": "Testing whether explicit periodic or convolutional features help a transformer forecast weather and retail-sales sequences.",
       "tags": [
         "Time-Series Forecasting",
         "Transformers",
@@ -736,6 +1239,28 @@
         }
       ],
       "sections": [
+        {
+          "heading": "The question is where to combine two models",
+          "body": "Rather than averaging independent forecasts, the team placed a temporal feature extractor inside the forecasting model. TaXer detects dominant periods with FFT and models within-period and across-period variation. WaXer uses dilated causal convolutions as a different temporal prior."
+        },
+        {
+          "heading": "The interface is a learnable representation",
+          "body": "A linear projection matches the extracted features to the transformer’s embedding dimension. The original sequence is embedded into variable-wise patches, while the extracted features provide cross-attention context. Keeping shapes and normalization explicit lets the two representations interact and returns predictions at the original scale."
+        },
+        {
+          "heading": "Read the result with its experimental scope",
+          "body": "The supplied report evaluates weather and Sticker Sales data and includes model-size comparisons. Its main Sticker Sales table reports TaXer MSE of 0.1569 versus 0.1647 for TimeXer. These are results under the course-project setup. The report and slides provide the experimental context.",
+          "figure": {
+            "image": "taxer-forecast.webp",
+            "alt": "Team presentation comparing ground-truth and predicted time-series traces",
+            "caption": "Forecast traces from the course presentation provide a qualitative view alongside the reported error metrics.",
+            "width": 2304,
+            "height": 1296
+          }
+        }
+      ],
+      "gallery": [],
+      "technical_notes": [
         {
           "heading": "The design question",
           "body": "Can a transformer benefit from a feature extractor that explicitly captures temporal structure? The team compared TaXer, which uses TimesNet-style periodic features, with WaXer, which uses WaveNet-style dilated causal convolutions. Weather and Sticker Sales sequences provide different tests of the same integration idea.",
@@ -785,13 +1310,53 @@
           "body": "This SNU Introduction to Deep Learning project was completed by Donghwi Kim, Jinwoo Seo, Hyeonseop Shin, and Manyoung Han. The code, report, and presentation provide the implementation and experimental context; the work is presented as a course project."
         }
       ],
-      "gallery": [
+      "at_glance": [
         {
-          "image": "taxer-forecast.webp",
-          "alt": "Original presentation comparisons of ground-truth and predicted time series",
-          "caption": "Qualitative forecast comparisons from the course presentation."
+          "label": "The problem",
+          "text": "Forecast repeating temporal patterns while retaining the transformer’s ability to model longer relationships."
+        },
+        {
+          "label": "The approach",
+          "text": "Inject TimesNet periodic features or WaveNet convolutional features into a TimeXer-style model through cross-attention."
+        },
+        {
+          "label": "Outcome / status",
+          "text": "Course-project evaluation; reported Sticker Sales MSE: TaXer 0.1569 versus TimeXer 0.1647."
+        },
+        {
+          "label": "My contribution",
+          "text": "Team member with Jinwoo Seo, Hyeonseop Shin, and Manyoung Han on the hybrid forecasting project."
         }
-      ]
+      ],
+      "hero_caption": "The team presentation’s TaXer architecture. The added feature extractor supplies context inside the transformer, rather than a second forecast for output averaging.",
+      "flow_title": "Combine representations inside the model",
+      "flow": [
+        {
+          "title": "Read the history",
+          "body": "Input: multivariate weather or sales time series."
+        },
+        {
+          "title": "Extract temporal structure",
+          "body": "TaXer uses FFT-selected periods; WaXer uses dilated causal convolutions."
+        },
+        {
+          "title": "Fuse with the sequence",
+          "body": "Project the features into the transformer dimension and use them in cross-attention."
+        },
+        {
+          "title": "Forecast and compare",
+          "body": "Return forecasts at the original scale; evaluate against the reported baselines."
+        }
+      ],
+      "flow_caption": "TaXer and WaXer are alternative feature-extractor variants. The original sequence also reaches the transformer through variable-wise patch embeddings.",
+      "connection": "This project explored a general engineering question that also appears in my 3D work: how should two representations meet so that their strengths remain useful?",
+      "related": [
+        "wind-forecasting",
+        "scene-reordering"
+      ],
+      "technical_notes_title": "Implementation notes & source evidence",
+      "hero_width": 2304,
+      "hero_height": 1296
     }
   ],
   "experience": [
@@ -873,5 +1438,7 @@
     "service_experience": true,
     "service_recognition": true,
     "project_documents": true
-  }
+  },
+  "research_intro": "Two connected questions guide my current work: how can a robot build a useful 3D map, and how can a reconstructed scene help it learn from demonstrations?",
+  "projects_intro": "Projects in robotics, imaging, and forecasting taught me to connect learned models to physical constraints, usable interfaces, and measurable outcomes."
 }

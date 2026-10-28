@@ -24,3 +24,64 @@
 .work-copy .work-role{font-size:13px;line-height:1.5;margin-top:6px}
 .work-copy .item-links{margin-top:7px}
 .project-heading>.overline{margin:5px 0}
+
+/* Keep the academic page compact; put the explanation before implementation detail. */
+.research-approach{padding:10px 0 22px;border-bottom:1px solid var(--line);margin-bottom:12px}
+.research-approach h2{font-size:19px;margin-bottom:10px}
+.research-approach p{line-height:1.6}
+.project-glance{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0;margin-bottom:18px}
+.project-glance h2{font-size:20px;margin-bottom:14px}
+.project-glance dl{display:grid;grid-template-columns:1fr 1fr;gap:18px 28px}
+.project-glance dt{font-size:12px;font-weight:700;color:#555;margin-bottom:4px}
+.project-glance dd{margin:0;font-size:14px;line-height:1.6}
+.detail-contents{font-size:12px;line-height:1.7;margin:0 0 24px;color:#777}
+.project-hero{margin:0 0 30px}
+.project-hero figcaption{line-height:1.6;text-align:left}
+.workflow-section{margin:30px 0}
+.workflow-section h2{font-size:21px}
+.process-flow{list-style:none;counter-reset:stage;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc}
+.process-flow li{position:relative;min-width:0;padding:16px 18px 18px 0}
+.process-flow li+li{padding-left:18px;border-left:1px solid #ddd}
+.process-flow li:not(:last-child)::after{content:'→';position:absolute;right:-9px;top:18px;background:#fff;color:#777;z-index:1;padding:0 2px;font-size:17px;line-height:1}
+.step-index{display:block;font-size:12px;color:var(--accent);margin-bottom:8px;font-variant-numeric:tabular-nums}
+.process-flow h3{font-size:14px;line-height:1.35;margin-bottom:7px}
+.process-flow p{font-size:13px;line-height:1.55}
+.workflow figcaption{font-size:12px;line-height:1.6;color:#555;margin-top:10px}
+.project-body .section-marker{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#666;margin:36px 0 -8px}
+.project-figure{margin:20px 0 6px}
+.project-figure img{width:100%;height:auto}
+.project-figure.narrow>a{display:block;max-width:340px;margin:0 auto}
+.project-figure figcaption{font-size:12px;line-height:1.6;color:#555;margin-top:10px}
+.research-connection{margin:32px 0;padding:18px 0;border-top:1px solid #ddd;border-bottom:1px solid #ddd}
+.research-connection h2{font-size:18px}
+.research-connection .related-links{font-size:13px;margin-top:10px}
+.implementation{margin:30px 0;border-bottom:1px solid #ddd}
+.implementation summary{font-size:15px;color:var(--accent);cursor:pointer;padding:14px 0;border-top:1px solid #ddd;line-height:1.5}
+.implementation summary:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.implementation summary:hover{color:#a35b00}
+.implementation-body{padding:0 0 5px}
+.implementation-body h2{font-size:18px}
+.implementation-body section{margin:22px 0}
+.project-glance,.workflow-section,.research-connection,.implementation{scroll-margin-top:22px}
+@media(max-width:620px){
+ .process-flow{grid-template-columns:1fr 1fr}
+ .process-flow li:nth-child(3){border-left:0;padding-left:0;border-top:1px solid #ddd}
+ .process-flow li:nth-child(4){border-top:1px solid #ddd}
+ .process-flow li:nth-child(2)::after{display:none}
+ .project-glance dl{gap:16px 22px}
+}
+@media(max-width:440px){
+ .project-glance dl{grid-template-columns:1fr;gap:14px}
+ .process-flow{grid-template-columns:1fr}
+ .process-flow li,.process-flow li+li,.process-flow li:nth-child(3){padding:15px 0 17px 36px;border-left:0;border-top:1px solid #ddd}
+ .process-flow li:first-child{border-top:0}
+ .step-index{position:absolute;left:0;top:16px}
+ .process-flow li:not(:last-child)::after{display:block;content:'↓';right:auto;left:1px;top:auto;bottom:-8px}
+ .process-flow p{font-size:14px}
+ .research-approach{padding-top:0}
+}
+@media print{
+ .implementation-body{display:block!important}
+ .project-glance,.workflow,.project-figure{break-inside:avoid}
+ .detail-contents{display:none}
+}

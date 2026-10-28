@@ -13,6 +13,8 @@ The static site has no build dependencies beyond Python 3. The classic academic 
 
 The ongoing research entries can be updated with results, paper links, and publication details as work progresses. Their current status labels do not imply acceptance or publication.
 
+Each detail page has an at-a-glance overview, a responsive workflow figure, engineering decisions, and expandable implementation notes. Update these through `content/portfolio.json`; the editorial rationale and future figure guidance are in `content/editorial-notes.md`.
+
 ## Images and provenance
 
 See `content/image-sources.json` for official pages, image URLs, and selection decisions. Source links are also shown next to official competition images. Remote photographs fall back to a local project image if unavailable. Original Zephyr Analytics slides were supplied by the user. The course figures and Automated Filming Device imagery are team project materials. The SLAM and scene-ordering diagrams are conceptual explanations.

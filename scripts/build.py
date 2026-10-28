@@ -115,11 +115,12 @@ def home():
 <p>{esc(p['intro'])}</p><p>{bio}</p>
 <p class="profile-links">{anchor('Email', 'mailto:'+p['email'])} / {anchor('GitHub',p['github'])} / {anchor('LinkedIn',p['linkedin'])}</p>
 </div>{profile_portrait()}</section>
+<section class="research-approach" aria-labelledby="approach-title"><h2 id="approach-title">How I approach research</h2>{''.join('<p>'+esc(t)+'</p>' for t in p.get('approach', []))}</section>
 <section id="research" class="section" aria-labelledby="research-title"><h2 id="research-title">Research</h2>
-<p class="section-intro">Ongoing projects in 3D mapping and visual data augmentation for robot learning.</p>
+<p class="section-intro">{esc(DATA.get('research_intro', 'Ongoing projects in 3D mapping and visual data augmentation for robot learning.'))}</p>
 <div class="work-list">{''.join(row(x,True) for x in DATA['research'])}</div></section>
 <section id="projects" class="section" aria-labelledby="projects-title"><h2 id="projects-title">Selected Projects</h2>
-<p class="section-intro">Engineering and machine learning projects, with implementation details, design decisions, and results on each project page.</p>
+<p class="section-intro">{esc(DATA.get('projects_intro', 'Engineering and machine learning projects, with implementation details, design decisions, and results on each project page.'))}</p>
 <div class="work-list">{''.join(row(x) for x in DATA['projects'])}</div></section>
 <section id="experience" class="section" aria-labelledby="experience-title"><h2 id="experience-title">Experience &amp; Education</h2><div class="timeline">'''
     for x in DATA['experience']:
@@ -139,33 +140,70 @@ def home():
     return body + '</main>' + footer()
 
 
+def project_figure(g):
+    src = g.get('url') or '../../assets/' + g['image']
+    source = ' ' + anchor(g.get('source_label', 'Source'), g['source_url']) if g.get('source_url') else ''
+    dimensions = f' width="{int(g["width"])}" height="{int(g["height"])}"' if g.get('width') and g.get('height') else ''
+    fallback = f' data-fallback="../../assets/{esc(g["fallback"])}" data-fallback-alt="{esc(g["alt"])}"' if g.get('fallback') else ''
+    return f'''<figure class="project-figure {esc(g.get('layout',''))}"><a href="{esc(src)}" target="_blank" rel="noopener noreferrer" aria-label="{esc('Open full-size figure: '+g['alt'])}"><img src="{esc(src)}" alt="{esc(g['alt'])}"{dimensions} loading="lazy" referrerpolicy="no-referrer"{fallback}></a><figcaption>{esc(g['caption'])}{source} {anchor('Open full-size figure',src)}</figcaption></figure>'''
+
+
+def project_section(s, index=None):
+    section_id = f' id="decision-{index}"' if index is not None else ''
+    out = f'<section{section_id}><h2>{esc(s["heading"])}</h2><p>{esc(s["body"])}</p>'
+    if s.get('figure'):
+        out += project_figure(s['figure'])
+    if s.get('sources'):
+        out += '<p class="credit">Sources: ' + ' · '.join(anchor(r['label'], r['url']) for r in s['sources']) + '</p>'
+    return out + '</section>'
+
+
 def project(item, research=False):
     title = item['title']
     body = head(title+' | Dong Hwi Kim',item['summary'],f'projects/{item["id"]}/','../../')+header('../../')
     badge = item['status'] if research else item['badge']
     body += f'''<main id="main" class="detail-main"><a class="back-link" href="../../#{'research' if research else 'projects'}">← Back to {'research' if research else 'projects'}</a>
-<header class="project-heading"><p class="work-category">{esc(item['category'])}</p><h1>{esc(title)}</h1><p class="overline">{esc(item['eyebrow'])} · {esc(item['date'])}</p><span class="{'status' if research else 'badge'}">{esc(badge)}</span><p class="project-deck">{esc(item['summary'])}</p>{tags(item)}{item_links(item,True)}</header>
-<figure class="project-hero {esc(item['id'])}"><img src="../../assets/{esc(item['image'])}" alt="{esc(item['image_alt'])}" width="1100" height="640" fetchpriority="high">'''
-    if item.get('illustrative'):
+<header class="project-heading"><p class="work-category">{esc(item['category'])}</p><h1>{esc(title)}</h1><p class="overline">{esc(item['eyebrow'])} · {esc(item['date'])}</p><span class="{'status' if research else 'badge'}">{esc(badge)}</span><p class="project-deck">{esc(item['summary'])}</p>{tags(item)}{item_links(item,True)}</header>'''
+    if item.get('at_glance'):
+        body += '<section class="project-glance" aria-labelledby="glance-title"><h2 id="glance-title">At a glance</h2><dl>'
+        for fact in item['at_glance']:
+            body += f'<div><dt>{esc(fact["label"])}</dt><dd>{esc(fact["text"])}</dd></div>'
+        body += '</dl></section>'
+    body += '<nav class="detail-contents" aria-label="On this page"><a href="#how-it-works">How it works</a> / <a href="#engineering">Engineering decisions</a> / <a href="#implementation">Implementation &amp; evidence</a></nav>'
+    hero = item.get('hero_image', item['image'])
+    hero_alt = item.get('hero_alt', item['image_alt'])
+    dims = f'width="{item.get("hero_width",1100)}" height="{item.get("hero_height",640)}"'
+    body += f'<figure class="project-hero {esc(item["id"])}"><a href="../../assets/{esc(hero)}" target="_blank" rel="noopener noreferrer" aria-label="{esc("Open full-size figure: "+hero_alt)}"><img src="../../assets/{esc(hero)}" alt="{esc(hero_alt)}" {dims} fetchpriority="high"></a>'
+    if item.get('hero_caption'):
+        body += '<figcaption>'+esc(item['hero_caption'])+' '+anchor('Open full-size figure','../../assets/'+hero)+'</figcaption>'
+    elif item.get('illustrative'):
         body += '<figcaption>Research concept illustration.</figcaption>'
     body += '</figure>'
+    if item.get('flow'):
+        body += f'<section id="how-it-works" class="workflow-section" aria-labelledby="workflow-title"><h2 id="workflow-title">{esc(item["flow_title"])}</h2><figure class="workflow"><ol class="process-flow">'
+        for i, stage in enumerate(item['flow'],1):
+            body += f'<li><span class="step-index" aria-hidden="true">{i:02d}</span><h3>{esc(stage["title"])}</h3><p>{esc(stage["body"])}</p></li>'
+        body += '</ol><figcaption>'+esc(item['flow_caption'])+'</figcaption></figure></section>'
     if item.get('metrics'):
         body += '<dl class="metrics">'+''.join(f'<div><dt>{esc(m["label"])}</dt><dd>{esc(m["value"])}</dd></div>' for m in item['metrics'])+'</dl>'
-    if item.get('role'):
+    if item.get('role') and not item.get('at_glance'):
         body += f'<aside class="contribution"><span class="tiny-label">My role</span><p>{esc(item["role"])}</p></aside>'
-    body += '<div class="project-body">'
-    for s in item['sections']:
-        body += f'<section><h2>{esc(s["heading"])}</h2><p>{esc(s["body"])}</p>'
-        if s.get('sources'):
-            body += '<p class="credit">Implementation &amp; evidence: '+ ' · '.join(anchor(ref['label'], ref['url']) for ref in s['sources']) + '</p>'
-        body += '</section>'
+    body += '<div class="project-body"><h2 id="engineering" class="section-marker">Engineering decisions</h2>'
+    for i, s in enumerate(item['sections'],1):
+        body += project_section(s,i)
+    if item.get('connection'):
+        body += '<aside class="research-connection"><h2>How this connects to my current research</h2><p>'+esc(item['connection'])+'</p>'
+        related = {x['id']: x for x in DATA['research'] + DATA['projects']}
+        body += '<p class="related-links">' + ' / '.join(anchor(related[k]['title'], '../'+k+'/') for k in item.get('related', [])) + '</p></aside>'
+    if item.get('technical_notes'):
+        body += '<details class="implementation" id="implementation"><summary>'+esc(item.get('technical_notes_title','Implementation notes & source evidence'))+'</summary><div class="implementation-body">'
+        for s in item['technical_notes']:
+            body += project_section(s)
+        body += '</div></details>'
     if item.get('gallery'):
         body += '<section class="gallery"><h2>Inside the project</h2>'
         for g in item['gallery']:
-            src = g.get('url') or '../../assets/'+g['image']
-            source = ' '+anchor(g['source_label'],g['source_url']) if g.get('source_url') else ''
-            fallback = f' data-fallback="../../assets/{esc(g["fallback"])}" data-fallback-alt="{esc(item["image_alt"])}"' if g.get('fallback') else ''
-            body += f'<figure><img src="{esc(src)}" alt="{esc(g["alt"])}" loading="lazy" referrerpolicy="no-referrer"{fallback}><figcaption>{esc(g["caption"])}{source}</figcaption></figure>'
+            body += project_figure(g)
         body += '</section>'
     if item.get('credit'):
         body += f'<p class="credit">{esc(item["credit"])}</p>'

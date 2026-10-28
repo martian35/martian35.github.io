@@ -6,8 +6,8 @@
     "github": "https://github.com/martian35",
     "linkedin": "https://www.linkedin.com/in/martian35/",
     "updated": "October 2026",
-    "intro": "I am an undergraduate at Seoul National University, double majoring in Mechanical Engineering and Electrical and Computer Engineering. I work at the intersection of robotics, 3D vision, and machine learning.",
-    "bio": "I am an undergraduate researcher in the RPM Robotics Lab with Prof. Ayoung Kim and the AIDAS Lab with Prof. Jaeyoung Do. My current work focuses on 3D Gaussian Splatting for SLAM and visual data augmentation for robot learning.",
+    "intro": "I am an undergraduate at Seoul National University, double majoring in Mechanical Engineering and Electrical and Computer Engineering. My interests span robotics, 3D vision, and machine learning.",
+    "bio": "At the RPM Robotics Lab, I study 3D Gaussian Splatting for SLAM with Prof. Ayoung Kim. My collaboration with Prof. Jaeyoung Do at the AIDAS Lab focuses on visual data augmentation for robot learning.",
     "interests": [
       "3D scene representations",
       "Robot perception & SLAM",
@@ -67,7 +67,7 @@
       "sections": [
         {
           "heading": "My scope within the collaboration",
-          "body": "I am responsible for the 3D Gaussian Splatting augmentation module in a broader robotic dataset collaboration. The module turns workcell captures and demonstrations into reusable, reposable scene assets and synchronized training views. The broader collaboration and manuscript remain in progress.",
+          "body": "My contribution to the broader robotic dataset collaboration is the 3D Gaussian Splatting augmentation module. It turns workcell captures and demonstrations into reusable scene assets that can be reposed and rendered as synchronized training views. The collaboration and manuscript remain in progress.",
           "sources": [
             {
               "label": "Module overview",
@@ -76,7 +76,7 @@
           ]
         },
         {
-          "heading": "A good render is not enough",
+          "heading": "Metric scale and registration",
           "body": "A scene can look convincing and still have the wrong metric scale. The pipeline uses ChArUco calibration and pose-invariant lengths between rigid robot parts to check scale against the URDF. Registration is then refined using high-opacity Gaussian cores with scale held fixed. This avoids letting a diffuse reconstruction shell determine the robot’s dimensions.",
           "sources": [
             {
@@ -91,7 +91,7 @@
         },
         {
           "heading": "Connecting appearance to kinematics",
-          "body": "Gaussians are assigned to the nearest CAD link surface, and inverse forward kinematics converts posed robot geometry into reusable link assets. Forward kinematics then reposes them along a demonstration. Object attachment and release use an explicit kinematic contract, so appearance, joint motion, and object motion share a defined coordinate relationship.",
+          "body": "Gaussians are assigned to the nearest CAD link surface. Applying the inverse of each link’s forward-kinematics transform converts the posed robot geometry into canonical link assets, which can then be reposed along a demonstration. An explicit kinematic contract defines object attachment and release, keeping rendered appearance, joint motion, and object motion in a consistent coordinate system.",
           "sources": [
             {
               "label": "CAD-based link assignment",
@@ -248,7 +248,7 @@
         },
         {
           "heading": "Competition validation",
-          "body": "Team 7 finished second with 140/200 points across two final runs, collecting three shape targets and two fruit targets per run. These are team-level system results; my contribution was perception and model training. The repository also records calibration limits, rather than presenting the competition prototype as a fully general navigation system.",
+          "body": "Team 7 finished second with 140/200 points across two final runs, collecting three shape targets and two fruit targets per run. The repository includes run videos and documents the calibration limits of the competition prototype.",
           "sources": [
             {
               "label": "Final runs and team roles",
@@ -326,7 +326,7 @@
       ],
       "sections": [
         {
-          "heading": "Reconstructing measurements, not just sharpening images",
+          "heading": "Measurement-consistent reconstruction",
           "body": "The input is undersampled multi-coil k-space, so plausible appearance alone is insufficient: a reconstruction must remain tied to the acquired measurements. The Feature VarNet and FI VarNet implementations estimate coil sensitivities and combine learned updates with data-consistency operations. FI VarNet also includes image-domain cascades. The design couples a learned image prior to the MRI acquisition model.",
           "sources": [
             {
@@ -337,7 +337,7 @@
         },
         {
           "heading": "Specialization with explicit routing",
-          "body": "Brain and knee scans, and 4× and 8× sampling, present different reconstruction conditions. The team trained specialized experts instead of relying on one shared checkpoint for every input. In the inference code, routing is deterministic: coil count identifies the anatomy and the sampling mask determines acceleration. This is an explicit expert-selection pipeline, rather than a learned gating network.",
+          "body": "Brain and knee scans at 4× and 8× acceleration present different reconstruction conditions. The team trained specialized experts for these cases. At inference, coil count identifies the anatomy and the sampling mask determines acceleration, providing a deterministic route to the appropriate model.",
           "sources": [
             {
               "label": "Expert routing and inference",
@@ -375,7 +375,7 @@
         },
         {
           "heading": "Result and engineering takeaway",
-          "body": "Team 2rm1000, with Jinseok Choi, placed third and received a KRW 2,500,000 team prize. The project demonstrates a complete path from measurement-aware models to specialized inference and reusable checkpoints. Competition placement is the reported validation here.",
+          "body": "Team 2rm1000, with Jinseok Choi, placed third and received a KRW 2,500,000 team prize. The submission brought together measurement-aware models, anatomy-specific inference, and reusable checkpoints in a complete reconstruction pipeline.",
           "sources": [
             {
               "label": "Team submission",

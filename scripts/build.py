@@ -102,7 +102,7 @@ def home():
 <p class="profile-links">{anchor('Email', 'mailto:'+p['email'])} / {anchor('GitHub',p['github'])} / {anchor('LinkedIn',p['linkedin'])}</p>
 </div><figure class="portrait"><img src="assets/{PROFILE_IMAGE}" width="210" height="210" alt="Dong Hwi Kim" fetchpriority="high"></figure></section>
 <section id="research" class="section" aria-labelledby="research-title"><h2 id="research-title">Research</h2>
-<p class="section-intro">I am interested in 3D scene representations, robot perception and SLAM, and learning from visual data. The following projects are ongoing.</p>
+<p class="section-intro">Ongoing projects in 3D mapping and visual data augmentation for robot learning.</p>
 <div class="work-list">{''.join(row(x,True) for x in DATA['research'])}</div></section>
 <section id="projects" class="section" aria-labelledby="projects-title"><h2 id="projects-title">Selected Projects</h2>
 <p class="section-intro">Engineering and machine learning projects, with implementation details, design decisions, and results on each project page.</p>

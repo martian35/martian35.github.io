@@ -16,3 +16,11 @@
 .portrait.original-photo img{position:absolute;max-width:none;width:600%;height:800%;left:-280.555556%;top:-408.333333%;object-fit:fill;border-radius:0}
 @media(max-width:620px){.portrait.original-photo{--portrait-size:155px}}
 @media(max-width:440px){.portrait.original-photo{--portrait-size:150px}}
+
+/* Put the field before the title; keep the competition result secondary. */
+.work-copy .work-category,.project-heading>.work-category{font-size:12px;font-weight:400;color:#666;margin:0 0 4px;line-height:1.4}
+.work-copy .work-meta{margin:3px 0 6px;font-size:13px;color:#444}
+.work-copy .work-description{margin-top:7px}
+.work-copy .work-role{font-size:13px;line-height:1.5;margin-top:6px}
+.work-copy .item-links{margin-top:7px}
+.project-heading>.overline{margin:5px 0}

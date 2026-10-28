@@ -17,13 +17,13 @@
   "research": [
     {
       "id": "gaussian-slam",
-      "title": "3D Gaussian Splatting for SLAM",
-      "eyebrow": "3D vision · Mapping",
+      "title": "Gaussian Scene Representations for SLAM",
+      "eyebrow": "RPM Robotics Lab · SNU",
       "status": "Manuscript in preparation",
       "date": "Ongoing",
       "image": "slam-concept.svg",
       "image_alt": "Conceptual illustration of camera observations, Gaussian scene representation, and camera trajectory; not an experimental result",
-      "summary": "Investigating 3D Gaussian Splatting for simultaneous localization and mapping. A manuscript is currently in preparation.",
+      "summary": "Research on estimating camera motion and building 3D scene representations using Gaussian splatting.",
       "role": "Ongoing research on 3DGS-based SLAM; manuscript in preparation.",
       "tags": [
         "3D Gaussian Splatting",
@@ -41,17 +41,18 @@
           "body": "The manuscript is in preparation. Further method details, experimental results, and publication information will be shared as the work progresses."
         }
       ],
-      "illustrative": true
+      "illustrative": true,
+      "category": "3D Vision & SLAM"
     },
     {
       "id": "splataug-fr3",
-      "title": "3DGS Data Augmentation for Robot Learning",
-      "eyebrow": "Robot learning · Visual simulation",
+      "title": "Multi-View Demonstration Augmentation",
+      "eyebrow": "AIDAS Lab · SNU",
       "status": "Ongoing collaboration",
       "date": "Ongoing",
       "image": "splataug.jpg",
       "image_alt": "An FR3 manipulation episode rendered from three camera viewpoints using Gaussian scene assets",
-      "summary": "Building the 3DGS augmentation module for a larger robotic dataset effort: metric scene alignment, articulated robot rendering, and measurable quality gates for generated demonstrations.",
+      "summary": "Turning captured workcell imagery and robot demonstrations into metrically aligned 3D assets and synchronized training views for robot learning.",
       "role": "Responsible for the 3DGS data augmentation module within a larger collaborative dataset project.",
       "tags": [
         "3D Gaussian Splatting",
@@ -131,20 +132,22 @@
             }
           ]
         }
-      ]
+      ],
+      "category": "Robot Learning",
+      "card_role": "3DGS data augmentation module within a larger dataset collaboration."
     }
   ],
   "projects": [
     {
       "id": "robot-challenge",
-      "title": "Autonomous Perception for the SNU AI Robot Challenge",
-      "eyebrow": "Robotics · Team 7",
+      "title": "Autonomous Object-Collecting Robot",
+      "eyebrow": "SNU AI Robot Challenge · Team 7",
       "date": "2026",
       "category": "Robotics",
       "badge": "2nd Place",
       "image": "robot.jpg",
       "image_alt": "Team 7's autonomous mecanum-wheel robot in the competition arena",
-      "summary": "An autonomous mecanum robot built around the realities of collection, braking, and on-board perception. My work focused on perception and model training for the team’s second-place competition system.",
+      "summary": "A mecanum-wheel robot that identifies, collects, and delivers target objects within a 180-second match.",
       "role": "Perception and model training, together with Jinyong Jun.",
       "tags": [
         "Robot Perception",
@@ -270,18 +273,19 @@
           "source_label": "SNU Robotics Institute · event photo",
           "source_url": "https://robotics.snu.ac.kr/2026-ai%EB%A1%9C%EB%B4%87-%EC%B1%8C%EB%A6%B0%EC%A7%80-%EC%B0%BD%EA%B3%B5-1-2-3%EC%9D%84-%EC%99%84%EC%84%B1%ED%95%9C%EB%8B%A4/"
         }
-      ]
+      ],
+      "card_role": "Perception and model training, with Jinyong Jun."
     },
     {
       "id": "fastmri",
       "title": "Accelerated MRI Reconstruction",
       "eyebrow": "SNU FastMRI Challenge · Team 2rm1000",
       "date": "2025",
-      "category": "Machine Learning",
+      "category": "Medical Imaging",
       "badge": "3rd Place",
       "image": "mri-overview.jpg",
       "image_alt": "Team MRI reconstruction framework using brain and knee experts with Feature VarNet and FI VarNet",
-      "summary": "A reconstruction pipeline that combines MRI measurement consistency, anatomy-specific models, and practical GPU-memory and checkpoint management for 4×/8× accelerated scans.",
+      "summary": "Reconstructing brain and knee MRI from undersampled multi-coil measurements using anatomy-specific networks, data-consistency updates, and checkpoint averaging.",
       "role": "Team member, 2rm1000, with Jinseok Choi.",
       "tags": [
         "MRI Reconstruction",
@@ -401,14 +405,14 @@
     },
     {
       "id": "scene-reordering",
-      "title": "Structured Scene Reordering with Multimodal LLMs",
+      "title": "Chronological Ordering of Shuffled Images",
       "eyebrow": "SNU AI Challenge · GeekSeek",
       "date": "2026",
-      "category": "Machine Learning",
+      "category": "Multimodal AI",
       "badge": "8th Place",
       "image": "scene-ordering.svg",
       "image_alt": "Diagram of mapping frame-order views into a common coordinate system for Random4 inference",
-      "summary": "Turning multimodal reasoning into a constrained engineering pipeline: valid permutation decoding, consistent frame coordinates, and a single averaged LoRA adapter for the official submission.",
+      "summary": "Recovering the chronological order of four shuffled images from a text description using multimodal reasoning and a decoder over valid frame orders.",
       "tags": [
         "Multimodal LLMs",
         "Temporal Reasoning",
@@ -512,14 +516,14 @@
     },
     {
       "id": "wind-forecasting",
-      "title": "Physics-Guided Wind Power Forecasting",
+      "title": "Physics-Guided Wind Power Prediction",
       "eyebrow": "BDA × EWP × 60Hertz · Zephyr Analytics",
       "date": "2025",
-      "category": "Machine Learning",
+      "category": "Energy Forecasting",
       "badge": "3rd Place · Excellence Award",
       "image": "wind-team-cover.webp",
       "image_alt": "Zephyr Analytics team cover for the 2025 Wind Power Prediction Competition",
-      "summary": "Using turbine physics as a baseline, learning its residual errors, and optimizing an ensemble against both forecast accuracy and an economic settlement metric.",
+      "summary": "Forecasting hourly generation at three wind farms by combining a physical power curve with learned residual corrections and an optimized ensemble.",
       "role": "Model architecture design and hyperparameter optimization.",
       "tags": [
         "Physics-Guided ML",
@@ -588,18 +592,19 @@
           "caption": "Reported model evaluation and site-wise generation distributions, from the team presentation."
         }
       ],
-      "credit": "Cover, architecture, and evaluation images are from the original Zephyr Analytics team presentation, supplied by Dong Hwi Kim."
+      "credit": "Cover, architecture, and evaluation images are from the original Zephyr Analytics team presentation, supplied by Dong Hwi Kim.",
+      "card_role": "Model architecture design and hyperparameter optimization."
     },
     {
       "id": "automated-filming",
-      "title": "Automated Filming Device",
+      "title": "Face-Tracking Pan–Tilt Camera",
       "eyebrow": "HD Hyundai Mechatronics Competition",
       "date": "2024",
-      "category": "Robotics",
+      "category": "Mechatronics",
       "badge": "Grand Prize",
       "image": "filming-device.webp",
       "image_alt": "Sunflower-inspired face-tracking camera device with a yellow phone mount and white circular base",
-      "summary": "A Raspberry Pi pan–tilt filming prototype that turns face-position error into servo commands, with calibrated pulse widths, manual infrared control, and a load-supporting mechanical assembly.",
+      "summary": "A two-axis filming device that keeps a face in frame using Raspberry Pi vision, servo motion, and infrared remote control.",
       "tags": [
         "Mechatronics",
         "Face Tracking",
@@ -689,14 +694,14 @@
     },
     {
       "id": "taxer",
-      "title": "TaXer & WaXer: Forecasting Periodic Time Series",
+      "title": "Period-Aware Time-Series Forecasting",
       "eyebrow": "Introduction to Deep Learning · SNU",
       "date": "2025",
-      "category": "Coursework",
+      "category": "Time-Series Learning",
       "badge": "Course Project",
       "image": "taxer-method.webp",
       "image_alt": "Original presentation slide showing the TaXer periodic feature extraction and cross-attention architecture",
-      "summary": "Integrating periodic or dilated-convolution features into a transformer forecaster, with explicit tensor interfaces and evaluation across weather and retail time series.",
+      "summary": "Forecasting weather and retail sales by combining periodic or dilated-convolution features with transformer-based sequence modeling.",
       "tags": [
         "Time-Series Forecasting",
         "Transformers",

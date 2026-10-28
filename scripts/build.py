@@ -83,12 +83,13 @@ def row(item, research=False):
     thumbnail = item.get('thumbnail_url') or 'assets/' + item.get('thumbnail', item['image'])
     fallback = f' data-fallback="assets/{esc(item["image"])}" data-fallback-alt="{esc(item["image_alt"])}"' if item.get('thumbnail_url') else ''
     badge = item['status'] if research else item['badge']
+    role = '<p class="work-role"><strong>My role:</strong> '+esc(item['card_role'])+'</p>' if item.get('card_role') else ''
     credit = '<p class="thumbnail-credit">'+anchor(item['thumbnail_source_label'],item['thumbnail_source_url'])+'</p>' if item.get('thumbnail_source_url') else ''
     return f'''<article class="work-row">
 <div class="work-media"><a class="work-image {esc(item['id'])}" href="projects/{item['id']}/" tabindex="-1" aria-hidden="true"><img src="{esc(thumbnail)}" alt="{esc(item.get('thumbnail_alt',item['image_alt']))}" width="160" height="120" loading="lazy" referrerpolicy="no-referrer"{fallback}></a>{credit}</div>
-<div class="work-copy"><h3><a href="projects/{item['id']}/">{esc(item['title'])}</a></h3>
-<p class="work-meta">{esc(item['eyebrow'])} · {esc(item['date'])}<br><em>{esc(badge)}</em></p>
-{item_links(item)}<p class="work-description">{esc(item['summary'])}</p></div></article>'''
+<div class="work-copy"><p class="work-category">{esc(item['category'])}</p><h3><a href="projects/{item['id']}/">{esc(item['title'])}</a></h3>
+<p class="work-meta">{esc(item['eyebrow'])} · {esc(item['date'])} · <em>{esc(badge)}</em></p>
+<p class="work-description">{esc(item['summary'])}</p>{role}{item_links(item)}</div></article>'''
 
 
 def profile_portrait():
@@ -143,7 +144,7 @@ def project(item, research=False):
     body = head(title+' | Dong Hwi Kim',item['summary'],f'projects/{item["id"]}/','../../')+header('../../')
     badge = item['status'] if research else item['badge']
     body += f'''<main id="main" class="detail-main"><a class="back-link" href="../../#{'research' if research else 'projects'}">← Back to {'research' if research else 'projects'}</a>
-<header class="project-heading"><p class="overline">{esc(item['eyebrow'])} · {esc(item['date'])}</p><h1>{esc(title)}</h1><span class="{'status' if research else 'badge'}">{esc(badge)}</span><p class="project-deck">{esc(item['summary'])}</p>{tags(item)}{item_links(item,True)}</header>
+<header class="project-heading"><p class="work-category">{esc(item['category'])}</p><h1>{esc(title)}</h1><p class="overline">{esc(item['eyebrow'])} · {esc(item['date'])}</p><span class="{'status' if research else 'badge'}">{esc(badge)}</span><p class="project-deck">{esc(item['summary'])}</p>{tags(item)}{item_links(item,True)}</header>
 <figure class="project-hero {esc(item['id'])}"><img src="../../assets/{esc(item['image'])}" alt="{esc(item['image_alt'])}" width="1100" height="640" fetchpriority="high">'''
     if item.get('illustrative'):
         body += '<figcaption>Research concept illustration.</figcaption>'

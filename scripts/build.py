@@ -90,7 +90,9 @@ def row(item, research=False):
 
 def home():
     p = PERSON
-    bio = esc(p['bio']).replace('AIDAS Lab', anchor('AIDAS Lab', 'https://aidas.snu.ac.kr/'))
+    bio = esc(p['bio'])
+    for label, url in [('RPM Robotics Lab', 'https://rpm.snu.ac.kr/'), ('AIDAS Lab', 'https://aidas.snu.ac.kr/')]:
+        bio = bio.replace(label, anchor(label, url))
     body = head('Dong Hwi Kim | Robotics & 3D Vision', p['intro'])
     body += f'''<main id="main" class="home-main">
 <section class="intro" aria-labelledby="name"><div class="intro-copy">

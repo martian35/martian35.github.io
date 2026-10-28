@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Build the portfolio with Python's standard library; no web framework required."""
 import html
+import hashlib
 import json
 import sys
 import argparse
@@ -29,6 +30,8 @@ if OPTIONS.public:
 PERSON = DATA['person']
 PROFILE_IMAGE = 'portrait-original.jpg' if not OPTIONS.public or PUBLICATION.get('profile_photo', False) else 'profile-mark.svg'
 ORIGIN = 'https://martian35.github.io'
+STYLE_PATH = ROOT / 'style.css' if OPTIONS.github_root else ROOT / 'dist/style.css'
+STYLE_REVISION = hashlib.sha256(STYLE_PATH.read_bytes()).hexdigest()[:12]
 
 
 def esc(value):
@@ -48,7 +51,7 @@ def head(title, description, path='', prefix=''):
 <meta name="theme-color" content="#ffffff"><link rel="canonical" href="{ORIGIN}/{path}">
 <meta property="og:type" content="website"><meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(description)}">
 <meta property="og:url" content="{ORIGIN}/{path}"><meta property="og:image" content="{ORIGIN}/assets/{PROFILE_IMAGE}"><meta name="twitter:card" content="summary">
-<link rel="icon" href="{prefix}assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="{prefix}style.css">
+<link rel="icon" href="{prefix}assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="{prefix}style.css?v={STYLE_REVISION}">
 <script src="{prefix}site.js" defer></script></head><body>
 <a class="skip-link" href="#main">Skip to content</a>'''
 
@@ -88,6 +91,16 @@ def row(item, research=False):
 {item_links(item)}<p class="work-description">{esc(item['summary'])}</p></div></article>'''
 
 
+def profile_portrait():
+    if PROFILE_IMAGE == 'portrait-original.jpg':
+        # Keep the framing in the HTML as well as CSS so stale styles cannot
+        # expose the uncropped photograph while the new stylesheet loads.
+        frame_style = 'position:relative;width:var(--portrait-size,210px);max-width:100%;height:auto;aspect-ratio:1/1;border-radius:50%;overflow:hidden;flex:none'
+        image_style = 'position:absolute;width:600%;height:800%;max-width:none;left:-280.555556%;top:-408.333333%;object-fit:fill;border-radius:0'
+        return f'<figure class="portrait original-photo" style="{frame_style}"><img src="assets/{PROFILE_IMAGE}" width="1080" height="1440" alt="Dong Hwi Kim" fetchpriority="high" style="{image_style}"></figure>'
+    return f'<figure class="portrait"><img src="assets/{PROFILE_IMAGE}" width="210" height="210" alt="Dong Hwi Kim" fetchpriority="high"></figure>'
+
+
 def home():
     p = PERSON
     bio = esc(p['bio'])
@@ -100,7 +113,7 @@ def home():
 <p class="academic-program"><strong>SEOUL NATIONAL UNIVERSITY</strong><br>Mechanical Engineering<br>Electrical and Computer Engineering</p>
 <p>{esc(p['intro'])}</p><p>{bio}</p>
 <p class="profile-links">{anchor('Email', 'mailto:'+p['email'])} / {anchor('GitHub',p['github'])} / {anchor('LinkedIn',p['linkedin'])}</p>
-</div><figure class="portrait{' original-photo' if PROFILE_IMAGE == 'portrait-original.jpg' else ''}"><img src="assets/{PROFILE_IMAGE}" width="210" height="210" alt="Dong Hwi Kim" fetchpriority="high"></figure></section>
+</div>{profile_portrait()}</section>
 <section id="research" class="section" aria-labelledby="research-title"><h2 id="research-title">Research</h2>
 <p class="section-intro">Ongoing projects in 3D mapping and visual data augmentation for robot learning.</p>
 <div class="work-list">{''.join(row(x,True) for x in DATA['research'])}</div></section>

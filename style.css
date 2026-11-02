@@ -124,6 +124,23 @@
 .compact-project .implementation summary{font-size:14px}
 .source-links ul{padding-left:20px;line-height:1.8}
 @media(max-width:440px){.project-facts>div{grid-template-columns:1fr;gap:3px}.compact-project .project-hero img{max-height:240px}}
+
+/* Detailed project explanations use short sentences and figures beside the method. */
+.explained-project .project-heading{padding-bottom:18px}
+.explained-project .detail-contents{margin-bottom:25px}
+.project-overview{margin:0 0 22px}
+.project-overview h2{font-size:20px;margin-bottom:10px}
+.project-overview p{line-height:1.65}
+.explained-project .project-hero img{max-height:460px}
+.explained-project .project-hero{margin:0 0 32px}
+.method-bullets{padding-left:21px;margin:12px 0 18px;line-height:1.65}
+.method-bullets li{font-size:14px;margin:8px 0;padding-left:3px}
+.explained-project .method-section{padding-top:14px;border-top:1px solid #e5e5e5}
+.explained-project .method-section>h3{font-size:18px;line-height:1.4}
+.explained-project .project-figure{margin:22px 0 15px}
+.metrics-count-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.project-results>p+p{margin-top:10px}
+@media(max-width:440px){.explained-project .project-hero img{max-height:350px}.method-bullets{padding-left:18px}}
 @media(max-width:440px){
  .work-copy .method-highlights{font-size:12px;padding-left:15px}
  .method-points>div{grid-template-columns:1fr;gap:3px;padding:11px 0}

@@ -155,7 +155,7 @@ def project_section(s, index=None):
     number = f'<span class="method-number" aria-hidden="true">{index:02d}</span> ' if index is not None else ''
     out = f'<section{section_id} class="method-section"><h3>{number}{esc(s["heading"])}</h3><p>{esc(s["body"])}</p>'
     if s.get('points'):
-        out += '<dl class="method-points">' + ''.join('<div><dt>'+esc(p['term'])+'</dt><dd>'+esc(p['text'])+'</dd></div>' for p in s['points']) + '</dl>'
+        out += '<ul class="method-bullets">' + ''.join('<li><strong>'+esc(p['term'])+':</strong> '+esc(p['text'])+'</li>' for p in s['points']) + '</ul>'
     if s.get('formula'):
         out += '<p class="method-equation"><code>'+esc(s['formula'])+'</code></p>'
     if s.get('figure'):
@@ -170,35 +170,26 @@ def project(item, research=False):
     group = 'research' if research else 'projects'
     body = head(title+' | Dong Hwi Kim', item['summary'], f'projects/{item["id"]}/', '../../') + header('../../')
     badge = item['status'] if research else item['badge']
-    body += f'''<main id="main" class="detail-main compact-project"><a class="back-link" href="../../#{group}">← Back to {group}</a>
+    body += f'''<main id="main" class="detail-main explained-project"><a class="back-link" href="../../#{group}">← Back to {group}</a>
 <header class="project-heading"><p class="work-category">{esc(item['category'])}</p><h1>{esc(title)}</h1><p class="overline">{esc(item['eyebrow'])} · {esc(item['date'])} · <span class="badge">{esc(badge)}</span></p><p class="project-deck">{esc(item['summary'])}</p>{item_links(item,True)}</header>'''
+    body += '<nav class="detail-contents" aria-label="On this page"><a href="#overview">Overview</a> / <a href="#methodology">'+('Research focus' if not item.get('public_method',True) else 'Methodology')+'</a> / <a href="#results">Results</a> / <a href="#contribution">My contribution</a></nav>'
+    body += '<section id="overview" class="project-overview"><h2>Overview</h2><p>'+esc(item['overview'])+'</p></section>'
     hero = item.get('hero_image', item['image'])
     alt = item.get('hero_alt', item['image_alt'])
     dims = f'width="{item.get("hero_width",1100)}" height="{item.get("hero_height",640)}"'
     body += f'<figure class="project-hero"><a href="../../assets/{esc(hero)}" target="_blank" rel="noopener noreferrer" aria-label="{esc("Open full-size figure: "+alt)}"><img src="../../assets/{esc(hero)}" alt="{esc(alt)}" {dims} fetchpriority="high"></a><figcaption>{esc(item.get("hero_caption",""))}</figcaption></figure>'
-    body += '<div class="project-body"><section id="methodology" class="compact-methods"><h2>'+('Research focus' if not item.get('public_method',True) else 'Method')+'</h2><ul class="method-list">'
-    for section in item['sections']:
-        body += '<li><strong>'+esc(section['heading'])+'.</strong> '+esc(section['body'])+'</li>'
-    body += '</ul></section><dl class="project-facts">'
-    body += '<div id="results"><dt>Result / status</dt><dd>'+esc(item['result_summary'])+'</dd></div>'
-    body += '<div id="contribution"><dt>My contribution</dt><dd>'+esc(item['contribution_summary'])+'</dd></div></dl>'
-    if item.get('technical_notes') or item.get('gallery') or item.get('method_sources'):
-        body += '<details class="implementation" id="implementation"><summary>Technical details, figures &amp; code</summary><div class="implementation-body">'
-        if item.get('method_sources'):
-            body += '<nav class="source-links" aria-label="Implementation sources"><h2>Code &amp; sources</h2><ul>'
-            for source in item['method_sources']:
-                body += '<li>'+anchor(source['label'],source['url'])+'</li>'
-            body += '</ul></nav>'
-        for note in item.get('technical_notes', []):
-            body += project_section(note)
-        if item.get('gallery'):
-            body += '<section class="gallery"><h2>Additional figures &amp; demos</h2>'
-            for figure in item['gallery']:
-                body += project_figure(figure)
-            body += '</section>'
-        if item.get('credit'):
-            body += '<p class="credit">'+esc(item['credit'])+'</p>'
-        body += '</div></details>'
+    body += '<div class="project-body"><section id="methodology" class="methodology"><h2>'+('Research focus' if not item.get('public_method',True) else 'Methodology')+'</h2>'
+    for i, s in enumerate(item['sections'],1):
+        body += project_section(s,i)
+    body += '</section><section id="results" class="project-results"><h2>Results &amp; status</h2>'
+    metrics = item.get('metrics', [])
+    if metrics:
+        body += f'<dl class="metrics metrics-count-{len(metrics)}">'+''.join('<div><dt>'+esc(m['label'])+'</dt><dd>'+esc(m['value'])+'</dd></div>' for m in metrics)+'</dl>'
+    for note in item.get('result_notes',[]):
+        body += '<p>'+esc(note)+'</p>'
+    for g in item.get('result_figures',[]):
+        body += project_figure(g)
+    body += '</section><section id="contribution" class="project-contribution"><h2>My contribution</h2><p>'+esc(item['contribution_summary'])+'</p></section>'
     body += '</div><nav class="project-bottom" aria-label="Project navigation"><a href="../../#'+group+'">← All '+group+'</a><a href="mailto:'+esc(PERSON['email'])+'">Contact me ↗</a></nav></main>'
     return body + footer('../../')
 

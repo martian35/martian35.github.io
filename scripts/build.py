@@ -85,11 +85,12 @@ def row(item, research=False):
     badge = item['status'] if research else item['badge']
     role = '<p class="work-role"><strong>My role:</strong> '+esc(item['card_role'])+'</p>' if item.get('card_role') else ''
     credit = '<p class="thumbnail-credit">'+anchor(item['thumbnail_source_label'],item['thumbnail_source_url'])+'</p>' if item.get('thumbnail_source_url') else ''
+    methods = '<ul class="method-highlights">' + ''.join('<li>'+esc(t)+'</li>' for t in item.get('method_highlights', [])) + '</ul>' if item.get('method_highlights') else ''
     return f'''<article class="work-row">
 <div class="work-media"><a class="work-image {esc(item['id'])}" href="projects/{item['id']}/" tabindex="-1" aria-hidden="true"><img src="{esc(thumbnail)}" alt="{esc(item.get('thumbnail_alt',item['image_alt']))}" width="160" height="120" loading="lazy" referrerpolicy="no-referrer"{fallback}></a>{credit}</div>
 <div class="work-copy"><p class="work-category">{esc(item['category'])}</p><h3><a href="projects/{item['id']}/">{esc(item['title'])}</a></h3>
 <p class="work-meta">{esc(item['eyebrow'])} · {esc(item['date'])} · <em>{esc(badge)}</em></p>
-<p class="work-description">{esc(item['summary'])}</p>{role}{item_links(item)}</div></article>'''
+<p class="work-description">{esc(item['summary'])}</p>{methods}{role}{item_links(item)}</div></article>'''
 
 
 def profile_portrait():
@@ -151,7 +152,12 @@ def project_figure(g):
 
 def project_section(s, index=None):
     section_id = f' id="decision-{index}"' if index is not None else ''
-    out = f'<section{section_id}><h2>{esc(s["heading"])}</h2><p>{esc(s["body"])}</p>'
+    number = f'<span class="method-number" aria-hidden="true">{index:02d}</span> ' if index is not None else ''
+    out = f'<section{section_id} class="method-section"><h3>{number}{esc(s["heading"])}</h3><p>{esc(s["body"])}</p>'
+    if s.get('points'):
+        out += '<dl class="method-points">' + ''.join('<div><dt>'+esc(p['term'])+'</dt><dd>'+esc(p['text'])+'</dd></div>' for p in s['points']) + '</dl>'
+    if s.get('formula'):
+        out += '<p class="method-equation"><code>'+esc(s['formula'])+'</code></p>'
     if s.get('figure'):
         out += project_figure(s['figure'])
     if s.get('sources'):
@@ -165,12 +171,16 @@ def project(item, research=False):
     badge = item['status'] if research else item['badge']
     body += f'''<main id="main" class="detail-main"><a class="back-link" href="../../#{'research' if research else 'projects'}">← Back to {'research' if research else 'projects'}</a>
 <header class="project-heading"><p class="work-category">{esc(item['category'])}</p><h1>{esc(title)}</h1><p class="overline">{esc(item['eyebrow'])} · {esc(item['date'])}</p><span class="{'status' if research else 'badge'}">{esc(badge)}</span><p class="project-deck">{esc(item['summary'])}</p>{tags(item)}{item_links(item,True)}</header>'''
-    if item.get('at_glance'):
-        body += '<section class="project-glance" aria-labelledby="glance-title"><h2 id="glance-title">At a glance</h2><dl>'
-        for fact in item['at_glance']:
+    overview = item.get('io', item.get('at_glance', []))
+    if overview:
+        body += '<section id="overview" class="project-glance" aria-labelledby="glance-title"><h2 id="glance-title">Overview</h2>'
+        if item.get('method_summary'):
+            body += '<p class="method-summary">'+esc(item['method_summary'])+'</p>'
+        body += '<dl>'
+        for fact in overview:
             body += f'<div><dt>{esc(fact["label"])}</dt><dd>{esc(fact["text"])}</dd></div>'
         body += '</dl></section>'
-    contents = ['<a href="#how-it-works">How it works</a>', '<a href="#engineering">Engineering decisions</a>']
+    contents = ['<a href="#overview">Overview</a>', '<a href="#methodology">'+esc(item.get('method_heading','Methodology'))+'</a>', '<a href="#results">Results &amp; status</a>', '<a href="#contribution">My contribution</a>']
     if item.get('technical_notes'):
         contents.append('<a href="#implementation">Implementation &amp; evidence</a>')
     body += '<nav class="detail-contents" aria-label="On this page">' + ' / '.join(contents) + '</nav>'
@@ -183,22 +193,19 @@ def project(item, research=False):
     elif item.get('illustrative'):
         body += '<figcaption>Research concept illustration.</figcaption>'
     body += '</figure>'
-    if item.get('flow'):
+    if item.get('flow') and item.get('public_method', True):
         body += f'<section id="how-it-works" class="workflow-section" aria-labelledby="workflow-title"><h2 id="workflow-title">{esc(item["flow_title"])}</h2><figure class="workflow"><ol class="process-flow">'
         for i, stage in enumerate(item['flow'],1):
             body += f'<li><span class="step-index" aria-hidden="true">{i:02d}</span><h3>{esc(stage["title"])}</h3><p>{esc(stage["body"])}</p></li>'
         body += '</ol><figcaption>'+esc(item['flow_caption'])+'</figcaption></figure></section>'
-    if item.get('metrics'):
-        body += '<dl class="metrics">'+''.join(f'<div><dt>{esc(m["label"])}</dt><dd>{esc(m["value"])}</dd></div>' for m in item['metrics'])+'</dl>'
-    if item.get('role') and not item.get('at_glance'):
-        body += f'<aside class="contribution"><span class="tiny-label">My role</span><p>{esc(item["role"])}</p></aside>'
-    body += '<div class="project-body"><h2 id="engineering" class="section-marker">Engineering decisions</h2>'
+    body += '<div class="project-body"><section id="methodology" class="methodology"><h2>'+esc(item.get('method_heading','Methodology'))+'</h2>'
     for i, s in enumerate(item['sections'],1):
         body += project_section(s,i)
-    if item.get('connection'):
-        body += '<aside class="research-connection"><h2>How this connects to my current research</h2><p>'+esc(item['connection'])+'</p>'
-        related = {x['id']: x for x in DATA['research'] + DATA['projects']}
-        body += '<p class="related-links">' + ' / '.join(anchor(related[k]['title'], '../'+k+'/') for k in item.get('related', [])) + '</p></aside>'
+    body += '</section><section id="results" class="project-results"><h2>Results &amp; status</h2>'
+    if item.get('metrics'):
+        body += '<dl class="metrics">'+''.join(f'<div><dt>{esc(m["label"])}</dt><dd>{esc(m["value"])}</dd></div>' for m in item['metrics'])+'</dl>'
+    body += '<p>'+esc(item['result_summary'])+'</p></section>'
+    body += '<section id="contribution" class="project-contribution"><h2>My contribution</h2><p>'+esc(item['contribution_summary'])+'</p></section>'
     if item.get('technical_notes'):
         body += '<details class="implementation" id="implementation"><summary>'+esc(item.get('technical_notes_title','Implementation notes & source evidence'))+'</summary><div class="implementation-body">'
         for s in item['technical_notes']:
@@ -211,6 +218,9 @@ def project(item, research=False):
         body += '</section>'
     if item.get('credit'):
         body += f'<p class="credit">{esc(item["credit"])}</p>'
+    if item.get('related'):
+        related = {x['id']: x for x in DATA['research'] + DATA['projects']}
+        body += '<nav class="related-projects" aria-label="Related projects"><h2>Related projects</h2><p>' + ' / '.join(anchor(related[k]['title'], '../'+k+'/') for k in item['related']) + '</p></nav>'
     body += '</div><nav class="project-bottom" aria-label="Project navigation"><a href="../../#'+('research' if research else 'projects')+'">← All '+('research' if research else 'projects')+'</a><a href="mailto:'+esc(PERSON['email'])+'">Contact me ↗</a></nav></main>'
     return body + footer('../../')
 

@@ -83,3 +83,31 @@
  .project-glance,.workflow,.project-figure{break-inside:avoid}
  .detail-contents{display:none}
 }
+
+/* Method descriptions follow the same compact academic hierarchy as the list. */
+.work-copy .method-highlights{margin:8px 0 9px;padding-left:17px;font-size:13px;line-height:1.5}
+.method-highlights li{margin:3px 0;padding-left:1px}
+.work-row{align-items:start}
+.work-media{padding-top:3px}
+.method-summary{font-size:14px;line-height:1.65;margin:0 0 16px}
+.project-body .methodology{margin-top:36px}
+.project-body .method-section{margin:24px 0 30px}
+.project-body .method-section>h3{font-size:18px;font-weight:700;line-height:1.4;margin-bottom:10px}
+.method-number{font-size:13px;font-weight:400;color:var(--accent);margin-right:7px;font-variant-numeric:tabular-nums}
+.method-points{margin:14px 0 0}
+.method-points>div{display:grid;grid-template-columns:155px minmax(0,1fr);gap:18px;padding:8px 0;border-top:1px solid #eee}
+.method-points dt{font-size:13px;font-weight:700;line-height:1.6}
+.method-points dd{margin:0;font-size:14px;line-height:1.6}
+.method-equation{padding:11px 13px;background:#f6f7f8;border-left:2px solid #c7d6e6;overflow-wrap:anywhere}
+.method-equation code{font-size:12px;line-height:1.7}
+.project-results,.project-contribution{padding-top:20px;border-top:1px solid var(--line)}
+.project-results .metrics{margin:18px 0}
+.related-projects{border-top:1px solid var(--line);padding:18px 0;margin-top:25px}
+.related-projects h2{font-size:16px}
+#overview,#methodology,#results,#contribution{scroll-margin-top:22px}
+@media(max-width:440px){
+ .work-copy .method-highlights{font-size:12px;padding-left:15px}
+ .method-points>div{grid-template-columns:1fr;gap:3px;padding:11px 0}
+ .project-body .method-section>h3{font-size:17px}
+ .detail-contents{line-height:1.9}
+}

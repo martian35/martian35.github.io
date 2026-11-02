@@ -127,11 +127,13 @@ def home():
         body += f'<article class="timeline-row"><p class="timeline-date">{esc(x["date"])}</p><div><h3>{esc(x["title"])}</h3><p>{org}</p><p class="muted">{esc(x["detail"])}</p></div></article>'
     body += '<article class="timeline-row"><p class="timeline-date">Education</p><div><h3>Seoul National University</h3><p>Mechanical Engineering<br>Electrical and Computer Engineering</p></div></article></div></section>'
     body += '<section id="honors" class="section" aria-labelledby="honors-title"><h2 id="honors-title">Selected Honors</h2>'
-    for label, group in [('Engineering competitions', [a for a in DATA['awards'] if not a['type'].startswith('Military')]), ('Military recognition', [a for a in DATA['awards'] if a['type'].startswith('Military')])]:
+    for label, group in [('Engineering competitions', [a for a in DATA['awards'] if a['type'] == 'Team award']), ('Academic distinctions', [a for a in DATA['awards'] if a['type'] == 'Academic distinction']), ('Military recognition', [a for a in DATA['awards'] if a['type'].startswith('Military')])]:
         if not group: continue
         body += f'<h3 class="honors-heading">{esc(label)}</h3><ul class="honors-list">'
         for a in group:
-            body += f'<li><span class="honor-year">{esc(a["year"])}</span> <strong>{esc(a["title"])}</strong> — {esc(a["event"])}</li>'
+            details = ' · ' + esc(a['detail']) if a.get('detail') else ''
+            links = ' · ' + ' / '.join(anchor(link['label'], link['url']) for link in a['links']) if a.get('links') else ''
+            body += f'<li><span class="honor-year">{esc(a["year"])}</span> <strong>{esc(a["title"])}</strong> — {esc(a["event"])}{details}{links}</li>'
         body += '</ul>'
     body += '</section>'
     if DATA.get('service'):

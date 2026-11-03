@@ -19,13 +19,13 @@
   "research": [
     {
       "id": "gaussian-slam",
-      "title": "Gaussian Scene Representations for SLAM",
+      "title": "3D Gaussian Splatting for SLAM",
       "eyebrow": "RPM Robotics Lab · SNU",
       "status": "Manuscript in preparation",
       "date": "Ongoing",
       "image": "slam-concept.svg",
       "image_alt": "Conceptual illustration of camera observations, Gaussian scene representation, and camera trajectory; not an experimental result",
-      "summary": "Ongoing research on 3D Gaussian Splatting for SLAM and geometrically consistent scene mapping.",
+      "summary": "Ongoing research on Gaussian scene representations for camera tracking and 3D mapping.",
       "role": "Research on 3D Gaussian Splatting-based SLAM at RPM Robotics Lab.",
       "tags": [
         "3D Gaussian Splatting",
@@ -35,9 +35,10 @@
       "links": [],
       "sections": [
         {
-          "heading": "Research focus",
-          "body": "Investigate 3D Gaussian Splatting for SLAM and geometrically consistent mapping.",
-          "sources": []
+          "heading": "Gaussian scene mapping",
+          "body": "Investigating 3D Gaussian Splatting for SLAM and geometrically consistent mapping.",
+          "sources": [],
+          "points": []
         }
       ],
       "illustrative": true,
@@ -48,25 +49,28 @@
         "splataug-fr3",
         "robot-challenge"
       ],
-      "method_heading": "Research scope",
+      "method_heading": "Research focus",
       "public_method": false,
       "result_summary": "First-author manuscript in preparation.",
-      "contribution_summary": "Research with Prof. Ayoung Kim at RPM Robotics Lab.",
+      "contribution_summary": "Undergraduate research with Prof. Ayoung Kim at RPM Robotics Lab, Seoul National University.",
       "gallery": [],
       "overview": "Research on camera motion estimation and Gaussian scene representations. A first-author manuscript is in preparation.",
-      "result_notes": [
-        "First-author manuscript in preparation."
-      ]
+      "result_notes": [],
+      "motivation_heading": "Research background",
+      "motivation": "SLAM estimates camera motion while building a map of the environment. This research studies 3D Gaussian Splatting as the map representation.",
+      "motivation_points": [],
+      "result_heading": "Current status",
+      "result_intro": "First-author manuscript in preparation."
     },
     {
       "id": "splataug-fr3",
-      "title": "Multi-View Demonstration Augmentation",
+      "title": "3D Gaussian Splatting for Robot Demonstration Augmentation",
       "eyebrow": "AIDAS Lab · SNU",
       "status": "Ongoing collaboration",
       "date": "Ongoing",
       "image": "splataug.jpg",
       "image_alt": "An FR3 manipulation episode rendered from three camera viewpoints using Gaussian scene assets",
-      "summary": "Multi-view robot demonstrations rendered from reconstructed Gaussian assets, calibrated cameras, and robot kinematics.",
+      "summary": "Render multi-view robot demonstrations from reconstructed scenes and robot kinematics.",
       "role": "Responsible for the 3DGS data augmentation module within a larger collaborative dataset project.",
       "tags": [
         "3D Gaussian Splatting",
@@ -81,20 +85,20 @@
       ],
       "sections": [
         {
-          "heading": "Metric alignment",
-          "body": "Check reconstruction scale against ChArUco calibration and robot CAD.",
+          "heading": "Scene alignment",
+          "body": "Align the reconstructed workcell with the robot and calibrated cameras before replaying motion.",
           "points": [
             {
-              "term": "Physical rulers",
-              "text": "Compare distances between rigid robot parts against the URDF."
+              "term": "Metric scale",
+              "text": "Compare rigid-part distances with the robot URDF and ChArUco calibration."
             },
             {
-              "term": "Registration",
-              "text": "Hold scale fixed. Refine pose with iterative closest point (ICP) on high-opacity Gaussian cores."
+              "term": "Pose refinement",
+              "text": "Hold scale fixed and apply ICP to high-opacity Gaussian cores."
             },
             {
               "term": "Verification",
-              "text": "Check robot and scene dimensions in the same coordinate system."
+              "text": "Check scene and robot dimensions in the same coordinate frame."
             }
           ],
           "sources": [
@@ -118,16 +122,20 @@
           }
         },
         {
-          "heading": "Robot-link assets",
-          "body": "Assign each Gaussian to its nearest CAD link. Convert the captured robot into reusable link assets.",
+          "heading": "Reusable robot-link assets",
+          "body": "Separate the captured robot into articulated link assets.",
           "points": [
             {
-              "term": "Canonicalization",
+              "term": "Link assignment",
+              "text": "Assign each Gaussian to the nearest CAD link."
+            },
+            {
+              "term": "Canonical pose",
               "text": "Apply inverse forward kinematics at the capture pose."
             },
             {
               "term": "Round-trip check",
-              "text": "Reapply the capture pose. Compare the reconstructed and original posed geometry."
+              "text": "Reapply the captured pose and compare it with the original geometry."
             }
           ],
           "sources": [
@@ -142,20 +150,20 @@
           ]
         },
         {
-          "heading": "Kinematic replay and rendering",
-          "body": "Repose the link assets along a demonstration trajectory. Render all cameras from the same episode state.",
+          "heading": "Demonstration replay",
+          "body": "Replay a demonstration through the link assets. Render each camera from the same episode state.",
           "points": [
             {
               "term": "Robot motion",
-              "text": "Forward kinematics drives each articulated link."
+              "text": "Forward kinematics updates each link along the recorded trajectory."
             },
             {
-              "term": "Object state",
-              "text": "Explicit attachment and release rules control grasped objects."
+              "term": "Object motion",
+              "text": "Attachment and release rules update grasped objects."
             },
             {
-              "term": "Camera motion",
-              "text": "Update the wrist-camera pose with the robot. Keep standing cameras calibrated."
+              "term": "Camera poses",
+              "text": "Move the wrist camera with the robot and retain calibrated standing views."
             }
           ],
           "sources": [
@@ -187,16 +195,16 @@
           }
         },
         {
-          "heading": "Capture-specific repairs",
-          "body": "Repair incomplete geometry before generating demonstrations.",
+          "heading": "Incomplete-surface repair",
+          "body": "Repair missing geometry before generating the augmented episodes.",
           "points": [
             {
-              "term": "Cube surfaces",
-              "text": "Reconstruct a rolled capture separately. Merge only the surfaces missing from the static capture."
+              "term": "Objects",
+              "text": "Merge missing cube faces from a separately reconstructed rolled capture."
             },
             {
               "term": "Tabletop",
-              "text": "Replace reconstruction haze with a surface on the calibrated plane. Bound it by the measured table footprint."
+              "text": "Replace reconstruction haze with a calibrated plane bounded by the measured table footprint."
             }
           ],
           "sources": [
@@ -212,19 +220,19 @@
         },
         {
           "heading": "Episode validation",
-          "body": "Apply acceptance checks before exporting an episode.",
+          "body": "Check each generated episode before export.",
           "points": [
             {
               "term": "Geometry",
-              "text": "Check scale, FK round trips, grasp spacing, and object-pose continuity."
+              "text": "Check metric scale, forward-kinematics round trips, grasp spacing, and object-pose continuity."
             },
             {
               "term": "Visibility",
-              "text": "Check black frames and carried-object visibility in the wrist view."
+              "text": "Reject black frames and check carried-object visibility in the wrist view."
             },
             {
-              "term": "Evaluation scope",
-              "text": "Generation checks validate the rendered episode. Downstream robot-policy performance needs separate evaluation."
+              "term": "Evaluation",
+              "text": "Assess downstream robot learning separately from rendering and geometry checks."
             }
           ],
           "sources": [
@@ -250,13 +258,27 @@
       "hero_width": 1400,
       "hero_height": 262,
       "result_summary": "Working generation and validation module; broader dataset collaboration and downstream policy evaluation are ongoing.",
-      "contribution_summary": "Developing reconstruction, alignment, rendering, and validation for the 3DGS augmentation module, building on RoboSplat and SplatSim.",
-      "method_heading": "Methodology",
+      "contribution_summary": "I develop the 3DGS augmentation module within a larger dataset collaboration at AIDAS Lab. My work covers reconstruction, alignment, rendering, and validation, building on RoboSplat and SplatSim.",
+      "method_heading": "Asset preparation and rendering",
       "gallery": [],
       "overview": "Turn workcell captures into reusable robot-learning assets. Replay a demonstration and render it from calibrated viewpoints.",
       "result_notes": [
-        "The module generates validated scene episodes. The broader dataset collaboration remains ongoing."
-      ]
+        "The broader dataset project is ongoing. Robot-policy performance has not yet been established by these generation checks."
+      ],
+      "motivation_heading": "Motivation",
+      "motivation": "Recorded demonstrations capture a task from a fixed set of cameras. A reconstructed scene lets us replay robot motion and render additional viewpoints.",
+      "motivation_points": [
+        {
+          "term": "Goal",
+          "text": "Build reusable scene assets for visual data augmentation in robot learning."
+        },
+        {
+          "term": "Constraint",
+          "text": "Keep robot motion, object poses, and camera geometry consistent across views."
+        }
+      ],
+      "result_heading": "Current progress",
+      "result_intro": "The module generates rendered manipulation episodes and checks their geometry and visibility."
     }
   ],
   "projects": [
@@ -269,7 +291,7 @@
       "badge": "2nd Place",
       "image": "robot.jpg",
       "image_alt": "Team 7's autonomous mecanum-wheel robot in the competition arena",
-      "summary": "An autonomous collection robot combining dual-camera segmentation, geometric target selection, and LiDAR/IMU-informed motion.",
+      "summary": "An autonomous robot that detects, collects, and delivers objects within a three-minute match.",
       "role": "Contributed across perception and model training, planning, data collection, hardware, and system integration with Team 7.",
       "tags": [
         "Robot Perception",
@@ -311,16 +333,16 @@
       ],
       "sections": [
         {
-          "heading": "Robot platform and interfaces",
-          "body": "A Jetson Orin Nano runs perception and navigation. An ESP32 controls the four mecanum-wheel motors.",
+          "heading": "Hardware and motor interface",
+          "body": "A Jetson Orin Nano runs perception and navigation. An ESP32 drives the four mecanum-wheel motors.",
           "points": [
             {
-              "term": "Command interface",
-              "text": "Body-velocity commands travel over USB serial. The controller converts them into wheel motion."
+              "term": "Velocity commands",
+              "text": "Send body-frame motion commands over USB serial and convert them into wheel motion."
             },
             {
               "term": "Calibration",
-              "text": "Wheel direction and feed-forward gains are calibrated. Motion commands include a duration and auto-stop."
+              "text": "Calibrate wheel direction and feed-forward gains. Include a duration and auto-stop in motion commands."
             }
           ],
           "sources": [
@@ -332,15 +354,19 @@
         },
         {
           "heading": "Dual-camera perception",
-          "body": "YOLO segmentation processes both angled cameras. Their detections are merged into one UDP message.",
+          "body": "Run YOLO instance segmentation on both cameras and combine the detections for navigation.",
           "points": [
             {
               "term": "Shared bearings",
-              "text": "Camera intrinsics and toe angles map detections into a common forward-facing view."
+              "text": "Use camera intrinsics and toe angles to express detections in a common forward-facing view."
             },
             {
-              "term": "Target selection",
-              "text": "Confidence, range-normalized mask area, bearing, and arena-cell ownership filter candidate objects."
+              "term": "Target filtering",
+              "text": "Combine confidence, range-normalized mask area, bearing, and arena-cell ownership."
+            },
+            {
+              "term": "Navigation input",
+              "text": "Send the merged detections through a UDP interface."
             }
           ],
           "sources": [
@@ -356,20 +382,20 @@
           "formula": "normalized area = mask area × (range / reference range)²"
         },
         {
-          "heading": "Collection and route planning",
-          "body": "The robot follows a fixed sweep route. Live detections determine when it collects an object.",
+          "heading": "Collection and delivery planning",
+          "body": "Follow a fixed sweep route and use live detections to trigger object collection.",
           "points": [
             {
-              "term": "Basket constraint",
-              "text": "The passive basket holds three objects. Forward motion captures; reverse motion can release the load."
+              "term": "Collection",
+              "text": "Approach a selected target with forward motion to load the passive basket."
             },
             {
-              "term": "Delivery behavior",
-              "text": "A full basket interrupts the sweep. The robot returns to deposit its objects."
+              "term": "Delivery",
+              "text": "Interrupt the sweep when the basket is full and return to the delivery zone."
             },
             {
-              "term": "Motion constraints",
-              "text": "Alignment and return maneuvers must account for the loaded basket."
+              "term": "Loaded motion",
+              "text": "Account for object retention during alignment, braking, and return maneuvers."
             }
           ],
           "sources": [
@@ -391,15 +417,15 @@
         },
         {
           "heading": "Localization and motion control",
-          "body": "LiDAR wall fitting estimates pose. Integrated IMU yaw terminates calibrated turn pulses.",
+          "body": "Fit arena walls in LiDAR scans to estimate pose. Use integrated IMU yaw to stop calibrated turn pulses.",
           "points": [
             {
               "term": "Lateral motion",
-              "text": "LiDAR feedback corrects strafe motion. The timed alternative was disabled after calibration errors."
+              "text": "Use LiDAR feedback for strafing after the timed alternative proved unreliable during calibration."
             },
             {
               "term": "Braking",
-              "text": "Stops use calibrated reverse-braking pulses. Cruise speed stays within the measured braking range."
+              "text": "Apply calibrated reverse pulses and keep cruise speed within the measured braking range."
             }
           ],
           "sources": [
@@ -414,16 +440,16 @@
           ]
         },
         {
-          "heading": "On-device checks",
-          "body": "Inference speed and robot speed determine the observation window for each target.",
+          "heading": "On-device and field validation",
+          "body": "Tune perception and motion together on the competition hardware.",
           "points": [
             {
-              "term": "Latency",
-              "text": "Benchmark candidate models on the Jetson. Set detection gates for the available inference frames."
+              "term": "Inference latency",
+              "text": "Benchmark models on the Jetson and set detection gates for the available observation window."
             },
             {
               "term": "Camera reliability",
-              "text": "Check for frozen streams. Compare raw camera frames with motion logs during tuning."
+              "text": "Check frozen streams and compare raw frames with motion logs during tuning."
             }
           ],
           "sources": [
@@ -453,12 +479,24 @@
       "hero_width": 1800,
       "hero_height": 1013,
       "result_summary": "2nd place; 140/200 points across two final runs in the 180-second competition.",
-      "contribution_summary": "I contributed to perception, model training, planning, and data collection. I also worked on hardware and system integration.",
-      "method_heading": "Methodology",
+      "contribution_summary": "I contributed across perception and model training, planning, data collection, hardware, and system integration. The robot and competition result were developed with Team 7.",
+      "method_heading": "Robot system",
       "overview": "The target classes are announced at match time. The robot has 180 seconds to collect and deliver them.",
-      "result_notes": [
-        "The final score combines two competition runs."
-      ]
+      "result_notes": [],
+      "motivation_heading": "Task and design constraints",
+      "motivation": "The target object classes are announced at match time. The robot must identify them, collect them, and return them to the delivery zone.",
+      "motivation_points": [
+        {
+          "term": "Perception",
+          "text": "Recognize targets from two angled cameras while the robot moves."
+        },
+        {
+          "term": "Mechanism",
+          "text": "Plan around a passive basket that holds three objects and can release them during reverse motion."
+        }
+      ],
+      "result_heading": "Competition result",
+      "result_intro": "2026 SNU AI Robot Challenge. The final score combines two competition runs."
     },
     {
       "id": "fastmri",
@@ -469,7 +507,7 @@
       "badge": "3rd Place",
       "image": "mri-overview.jpg",
       "image_alt": "Team MRI reconstruction framework using brain and knee experts with Feature VarNet and FI VarNet",
-      "summary": "MRI reconstruction from undersampled k-space using Feature/FI VarNet, acquisition-specific experts, and model averaging.",
+      "summary": "Reconstruct brain and knee MRI images from undersampled multi-coil frequency measurements.",
       "role": "Team member, 2rm1000, with Jinseok Choi.",
       "tags": [
         "MRI Reconstruction",
@@ -514,20 +552,20 @@
       ],
       "sections": [
         {
-          "heading": "Measurement-consistent reconstruction",
-          "body": "Feature VarNet and FI VarNet alternate learned updates with data-consistency operations.",
+          "heading": "Reconstruction with data consistency",
+          "body": "Use Feature VarNet and FI VarNet to alternate learned reconstruction updates with the MRI measurement model.",
           "points": [
             {
               "term": "Coil sensitivities",
-              "text": "Estimate sensitivity maps from multi-coil measurements."
+              "text": "Estimate sensitivity maps from the multi-coil measurements."
             },
             {
-              "term": "Reconstruction cascades",
-              "text": "Feature VarNet refines feature representations. FI VarNet also includes image-domain cascades."
+              "term": "Learned updates",
+              "text": "Refine feature representations with Feature VarNet and include image-domain cascades in FI VarNet."
             },
             {
               "term": "Data consistency",
-              "text": "Use the MRI encoding model to keep updates connected to acquired k-space samples."
+              "text": "Connect each update to the acquired k-space samples through the MRI encoding model."
             }
           ],
           "sources": [
@@ -538,8 +576,8 @@
           ]
         },
         {
-          "heading": "Condition-specific experts",
-          "body": "Train separate experts for anatomy and acceleration. Use explicit rules to select them at inference.",
+          "heading": "Anatomy- and acceleration-specific models",
+          "body": "Train separate experts for each acquisition condition and select them with explicit inference rules.",
           "points": [
             {
               "term": "Anatomy",
@@ -547,7 +585,7 @@
             },
             {
               "term": "Acceleration",
-              "text": "Read the sampling mask to select a 4× or 8× model."
+              "text": "Read the sampling mask to choose the 4× or 8× expert."
             }
           ],
           "sources": [
@@ -558,20 +596,20 @@
           ]
         },
         {
-          "heading": "Training pipeline",
-          "body": "MRI-aware augmentation increases training diversity. AdamW and warmup/cosine scheduling support optimization.",
+          "heading": "MRI-aware training",
+          "body": "Train with acquisition-aware augmentation, AdamW, and warmup followed by cosine scheduling.",
           "points": [
             {
               "term": "Augmentation",
-              "text": "Use small rotations, shearing, and horizontal flips. Increase augmentation strength during training."
+              "text": "Apply small rotations, shearing, and horizontal flips. Increase their strength during training."
             },
             {
               "term": "Memory",
-              "text": "Use DeepSpeed and activation checkpointing for the reconstruction models."
+              "text": "Use DeepSpeed and activation checkpointing for the reconstruction networks."
             },
             {
               "term": "Checkpoints",
-              "text": "Resume interrupted runs. Convert distributed checkpoint state into inference weights."
+              "text": "Resume interrupted runs and convert distributed checkpoints into inference weights."
             }
           ],
           "sources": [
@@ -586,16 +624,16 @@
           ]
         },
         {
-          "heading": "Averaging and ensembling",
-          "body": "The submission uses both weight averaging and output ensembling.",
+          "heading": "Weight averaging and output ensembling",
+          "body": "Combine compatible checkpoints and complementary reconstruction models.",
           "points": [
             {
-              "term": "Checkpoint averaging",
-              "text": "Average compatible model weights into one checkpoint. This adds no extra model forward pass."
+              "term": "Weight averaging",
+              "text": "Average model parameters into one checkpoint without adding inference passes."
             },
             {
-              "term": "Prediction ensemble",
-              "text": "Run configured Feature VarNet and FI VarNet pairs. Average their reconstructed images."
+              "term": "Output ensembling",
+              "text": "Average reconstructed images from configured Feature VarNet and FI VarNet pairs."
             }
           ],
           "sources": [
@@ -624,21 +662,35 @@
       "hero_width": 1837,
       "hero_height": 919,
       "result_summary": "3rd place, 2025 SNU FastMRI Challenge; KRW 2,500,000 team prize.",
-      "contribution_summary": "I worked on Fourier-domain modeling with Jinseok Choi in Team 2rm1000. The reconstruction pipeline and submission are team work.",
-      "method_heading": "Methodology",
+      "contribution_summary": "I worked on Fourier-domain modeling with Jinseok Choi in Team 2rm1000. The model pipeline and competition submission were team work.",
+      "method_heading": "Reconstruction method",
       "overview": "Recover brain and knee MRI images from undersampled multi-coil k-space. K-space contains the frequency-domain measurements. The challenge uses 4× and 8× acceleration.",
-      "result_notes": []
+      "result_notes": [],
+      "motivation_heading": "Problem",
+      "motivation": "Acquiring fewer k-space samples accelerates MRI scans but leaves incomplete measurements. The task is to reconstruct an image while respecting the samples that were acquired.",
+      "motivation_points": [
+        {
+          "term": "Input",
+          "text": "Multi-coil k-space data with 4× or 8× acceleration."
+        },
+        {
+          "term": "Output",
+          "text": "Reconstructed brain or knee images."
+        }
+      ],
+      "result_heading": "Competition result",
+      "result_intro": "2025 SNU FastMRI Challenge."
     },
     {
       "id": "scene-reordering",
-      "title": "Chronological Ordering of Shuffled Images",
+      "title": "Multimodal Scene Reordering",
       "eyebrow": "SNU AI Challenge · GeekSeek",
       "date": "2026",
       "category": "Multimodal AI",
       "badge": "8th Place",
       "image": "scene-ordering.svg",
       "image_alt": "Diagram of mapping frame-order views into a common coordinate system for Random4 inference",
-      "summary": "Chronological ordering of four shuffled frames using a LoRA-adapted vision-language model and constrained permutation decoding.",
+      "summary": "Recover the chronological order of four shuffled images using a vision-language model.",
       "tags": [
         "Multimodal LLMs",
         "Temporal Reasoning",
@@ -666,20 +718,20 @@
       ],
       "sections": [
         {
-          "heading": "Vision-language adaptation",
-          "body": "Adapt Qwen3.5-27B with LoRA. Replace free-form answers with structured readouts.",
+          "heading": "Vision-language model adaptation",
+          "body": "Adapt Qwen3.5-27B with LoRA and structured readouts for temporal ordering.",
           "points": [
             {
               "term": "Pairwise evidence",
-              "text": "Six readouts compare the temporal order of frame pairs."
+              "text": "Six readouts compare the temporal order of image pairs."
             },
             {
-              "term": "Slot evidence",
-              "text": "Four readouts score the chronological positions."
+              "term": "Position evidence",
+              "text": "Four readouts score chronological positions."
             },
             {
-              "term": "Training signals",
-              "text": "Temporal-gap supervision and hard-negative ranking support the final training stage."
+              "term": "Training",
+              "text": "Use temporal-gap supervision and hard-negative ranking in the final training stage."
             }
           ],
           "sources": [
@@ -691,15 +743,15 @@
         },
         {
           "heading": "Constrained permutation decoding",
-          "body": "Combine pair and slot evidence. Score all 24 valid chronological orders.",
+          "body": "Combine pairwise and position evidence to score all 24 valid image orderings.",
           "points": [
             {
-              "term": "Decoding",
-              "text": "Select the highest-scoring permutation. Each frame appears exactly once."
+              "term": "Sequence selection",
+              "text": "Choose the highest-scoring permutation so every image appears once."
             },
             {
-              "term": "Output conversion",
-              "text": "Convert the ordered sequence into per-input ranks. These are inverse permutations."
+              "term": "Submission format",
+              "text": "Convert the ordered image sequence into per-input ranks using the inverse permutation."
             }
           ],
           "sources": [
@@ -714,20 +766,20 @@
           ]
         },
         {
-          "heading": "Random4 inference",
-          "body": "Evaluate four input-image orderings. Align their outputs before aggregation.",
+          "heading": "Aggregation across input orderings",
+          "body": "Evaluate four image arrangements to reduce sensitivity to presentation order.",
           "points": [
             {
-              "term": "Frame identity",
-              "text": "Map each view’s logits back to the original image identities."
+              "term": "Alignment",
+              "text": "Map each arrangement’s logits back to the original image identities."
             },
             {
               "term": "Aggregation",
-              "text": "Average the aligned logits. Apply the decoder to the combined evidence."
+              "text": "Average the aligned logits and decode the combined evidence."
             },
             {
               "term": "Validation",
-              "text": "Test permutation mappings and the final submission format."
+              "text": "Test the permutation mappings and final submission format."
             }
           ],
           "sources": [
@@ -743,15 +795,15 @@
         },
         {
           "heading": "Snapshot averaging",
-          "body": "Average nine language-LoRA snapshots from one training trajectory. Accumulate parameters in CPU float32.",
+          "body": "Average nine language-LoRA snapshots from one training trajectory in CPU float32.",
           "points": [
             {
-              "term": "Inference artifact",
-              "text": "The result is one adapter. Parameter averaging adds no forward passes."
+              "term": "Single adapter",
+              "text": "Merge the snapshots into one adapter without extra model passes."
             },
             {
               "term": "Inference cost",
-              "text": "Random4 still requires four input-order evaluations."
+              "text": "The four input-order evaluations remain part of the final pipeline."
             }
           ],
           "sources": [
@@ -778,23 +830,37 @@
       ],
       "technical_notes_title": "Implementation notes & source evidence",
       "result_summary": "8th overall; official final-selected private score 0.91463.",
-      "contribution_summary": "Team GeekSeek member; methods and results describe the team submission.",
-      "method_heading": "Methodology",
+      "contribution_summary": "Member of Team GeekSeek in the 2026 SNU AI Challenge. The method and results below describe our team submission.",
+      "method_heading": "Temporal ordering method",
       "overview": "Input: a sentence and four shuffled frames. Output: the chronological rank of each input frame.",
       "result_notes": [
-        "The score belongs to the official final-selected submission. Later Crop-TTA experiments are documented separately."
-      ]
+        "Later Crop-TTA experiments are recorded separately in the repository."
+      ],
+      "motivation_heading": "Task",
+      "motivation": "Given a sentence and four shuffled frames, predict the chronological rank of each input image.",
+      "motivation_points": [
+        {
+          "term": "Valid ordering",
+          "text": "Use each image exactly once in the predicted sequence."
+        },
+        {
+          "term": "Input-order sensitivity",
+          "text": "Align predictions from different image arrangements before combining them."
+        }
+      ],
+      "result_heading": "Competition result",
+      "result_intro": "2026 SNU AI Challenge. Results refer to the official final-selected submission."
     },
     {
       "id": "wind-forecasting",
-      "title": "Physics-Guided Wind Power Prediction",
+      "title": "Physics-Guided Wind Power Forecasting",
       "eyebrow": "BDA × EWP × 60Hertz · Zephyr Analytics",
       "date": "2025",
       "category": "Energy Forecasting",
       "badge": "3rd Place · Excellence Award",
       "image": "wind-team-cover.webp",
       "image_alt": "Zephyr Analytics team cover for the 2025 Wind Power Prediction Competition",
-      "summary": "Hourly wind-power forecasting with a physical power curve, LightGBM residual correction, and an optimized ensemble.",
+      "summary": "Forecast hourly wind generation by correcting a physical power curve with learned residuals.",
       "role": "Model architecture design and hyperparameter optimization.",
       "tags": [
         "Physics-Guided ML",
@@ -824,15 +890,15 @@
       "sections": [
         {
           "heading": "Physical baseline",
-          "body": "Start with a turbine power curve. Estimate expected generation from the weather conditions.",
+          "body": "Estimate generation from weather conditions and the turbine power curve.",
           "points": [
             {
               "term": "Atmospheric features",
-              "text": "Include air-density estimates. The team used the Arden–Buck equation in feature construction."
+              "text": "Include air-density estimates, using the Arden–Buck equation in feature construction."
             },
             {
-              "term": "Baseline role",
-              "text": "Use the physical relationship as the starting forecast."
+              "term": "Physical structure",
+              "text": "Use the power curve as the initial forecast before learning a correction."
             }
           ],
           "sources": [
@@ -844,15 +910,15 @@
         },
         {
           "heading": "Residual learning",
-          "body": "Compute the error between observed generation and the physical baseline. Train LightGBM to predict that residual.",
+          "body": "Train LightGBM to predict the difference between observed generation and the physical baseline.",
           "points": [
             {
-              "term": "Correction",
-              "text": "Add the predicted residual to the baseline."
+              "term": "Training target",
+              "text": "Subtract the baseline forecast from the observed generation."
             },
             {
-              "term": "Model structure",
-              "text": "The learned component corrects the physical forecast’s remaining error."
+              "term": "Hybrid prediction",
+              "text": "Add the learned correction back to the physical estimate."
             }
           ],
           "sources": [
@@ -864,16 +930,16 @@
           "formula": "hybrid forecast = physical baseline + learned residual"
         },
         {
-          "heading": "Ensemble optimization",
-          "body": "Combine the hybrid forecast with Ridge Regression and Random Forest predictions.",
+          "heading": "Ensemble and hyperparameter optimization",
+          "body": "Combine the hybrid model with Ridge Regression and Random Forest forecasts.",
           "points": [
             {
-              "term": "Search",
+              "term": "Optimization",
               "text": "Use Optuna to tune model hyperparameters and ensemble weights."
             },
             {
               "term": "Evaluation",
-              "text": "Report NMAE and the competition’s settlement revenue rate. Inspect site-wise distributions alongside the aggregate scores."
+              "text": "Inspect site-wise generation distributions alongside NMAE and settlement revenue."
             }
           ],
           "sources": [
@@ -898,8 +964,8 @@
       "hero_height": 608,
       "hero_alt": "Original team architecture diagram showing the physical power curve, residual correction, ensemble, and Optuna optimization",
       "result_summary": "3rd among 270 teams; reported NMAE 19.34% and settlement revenue rate 22.09% under the competition rule.",
-      "contribution_summary": "Model architecture design and hyperparameter optimization in Team Zephyr Analytics.",
-      "method_heading": "Methodology",
+      "contribution_summary": "I designed the model architecture and optimized hyperparameters in Team Zephyr Analytics.",
+      "method_heading": "Forecasting model",
       "overview": "Forecast hourly generation for Gyeongju, Yangyang, and Yeongdeok. Evaluate both prediction error and settlement revenue.",
       "result_figures": [
         {
@@ -911,19 +977,33 @@
         }
       ],
       "result_notes": [
-        "Scores follow the competition’s evaluation rule."
-      ]
+        "Metrics follow the competition’s evaluation rule."
+      ],
+      "motivation_heading": "Problem and approach",
+      "motivation": "A turbine power curve gives a physical estimate of wind generation. The model learns the error that remains between this estimate and observed production.",
+      "motivation_points": [
+        {
+          "term": "Task",
+          "text": "Predict hourly generation for Gyeongju, Yangyang, and Yeongdeok."
+        },
+        {
+          "term": "Evaluation",
+          "text": "Measure forecast error and settlement revenue under the competition rules."
+        }
+      ],
+      "result_heading": "Competition result",
+      "result_intro": "2025 BDA × EWP × 60Hertz Wind Power Forecasting Competition."
     },
     {
       "id": "automated-filming",
-      "title": "Face-Tracking Pan–Tilt Camera",
+      "title": "Automated Filming Device",
       "eyebrow": "HD Hyundai Mechatronics Competition",
       "date": "2024",
       "category": "Mechatronics",
       "badge": "Grand Prize",
       "image": "filming-device.webp",
       "image_alt": "Sunflower-inspired face-tracking camera device with a yellow phone mount and white circular base",
-      "summary": "A Raspberry Pi pan–tilt camera that follows a face with proportional visual feedback and infrared manual control.",
+      "summary": "A Raspberry Pi camera mount with automatic face tracking and infrared remote control.",
       "tags": [
         "Mechatronics",
         "Face Tracking",
@@ -960,15 +1040,15 @@
       "sections": [
         {
           "heading": "Hardware",
-          "body": "A Raspberry Pi connects the camera, servos, and infrared receiver.",
+          "body": "A Raspberry Pi connects the camera, two servos, and infrared receiver.",
           "points": [
             {
-              "term": "Pan–tilt axes",
-              "text": "Two servos rotate the camera horizontally and vertically."
+              "term": "Pan–tilt mount",
+              "text": "Rotate the camera horizontally and vertically with separate servo axes."
             },
             {
               "term": "Mechanical support",
-              "text": "A ball-transfer unit distributes load and reduces friction."
+              "text": "Use a ball-transfer unit to distribute weight and reduce friction."
             }
           ],
           "figure": {
@@ -981,24 +1061,20 @@
           "sources": []
         },
         {
-          "heading": "Face tracking and visual control",
-          "body": "Picamera2 supplies frames. OpenCV’s Haar-cascade detector finds faces; the largest detection becomes the target.",
+          "heading": "Face tracking and servo control",
+          "body": "Read frames with Picamera2. Detect faces with OpenCV’s Haar cascade and track the largest face.",
           "points": [
             {
               "term": "Image error",
-              "text": "Normalize the face center’s offset from the image center."
+              "text": "Normalize the face center’s horizontal and vertical offsets from the image center."
             },
             {
-              "term": "Feedback",
-              "text": "Convert image error into incremental pan and tilt commands."
+              "term": "Feedback control",
+              "text": "Convert these errors into incremental pan and tilt commands. The final implementation uses proportional feedback with zero derivative gain."
             },
             {
-              "term": "Implemented controller",
-              "text": "The final code sets derivative gains to zero. Visual feedback is proportional."
-            },
-            {
-              "term": "Actuation",
-              "text": "Clamp the commanded angles. Map them to calibrated pigpio pulse widths."
+              "term": "Servo output",
+              "text": "Clamp the requested angles and convert them into calibrated pigpio pulse widths."
             }
           ],
           "sources": [
@@ -1007,23 +1083,28 @@
               "url": "https://github.com/alvin0808/face-traker/blob/a0bd5d2e9e8cc208e3ed826f7da3a1a22d7963e1/final.py"
             }
           ],
-          "formula": "e_x = (W/2 − c_x) / W;  e_y = (H/2 − c_y) / H"
+          "formula": "e_x = (W/2 − c_x) / W;  e_y = (H/2 − c_y) / H",
+          "figure": {
+            "image": "filming-software.webp",
+            "alt": "Team diagram of the filming device software and control flow",
+            "caption": "Team software design. The controller description here follows the final implementation."
+          }
         },
         {
           "heading": "Remote control and device state",
-          "body": "A separate thread reads LIRC commands while tracking runs.",
+          "body": "Read LIRC remote commands in a separate thread while face tracking runs.",
           "points": [
             {
               "term": "Modes",
               "text": "Switch between automatic tracking and manual operation."
             },
             {
-              "term": "Manual commands",
-              "text": "Move either axis, stop motion, or exit."
+              "term": "Manual input",
+              "text": "Move either servo axis, stop motion, or exit."
             },
             {
-              "term": "Feedback and cleanup",
-              "text": "An LED indicates face detection. Shutdown stops the camera and disables servo pulses."
+              "term": "Status and shutdown",
+              "text": "Indicate face detection with an LED. Stop the camera and disable servo pulses on exit."
             }
           ],
           "sources": [
@@ -1045,11 +1126,11 @@
       "hero_width": 808,
       "hero_height": 685,
       "result_summary": "Grand Prize, 2024 HD Hyundai Mechatronics Competition; KRW 3,000,000 team prize.",
-      "contribution_summary": "Team member on the automated filming prototype.",
-      "method_heading": "Methodology",
+      "contribution_summary": "Team member on the filming-device prototype. The hardware, software, and demos below describe the shared team project.",
+      "method_heading": "Hardware and software",
       "overview": "Keep a solo creator in frame during hands-free filming. Provide manual control through an infrared remote.",
       "result_notes": [
-        "The demos show device operation and recorded footage. Quantitative tracking-error measurements were not supplied."
+        "The videos show device operation and recorded footage. Quantitative tracking-error measurements were not supplied."
       ],
       "result_figures": [
         {
@@ -1066,18 +1147,23 @@
           "source_url": "https://alvin0808.github.io/assets/img/device_film_result.gif",
           "source_label": "Original filming result"
         }
-      ]
+      ],
+      "motivation_heading": "Background and product idea",
+      "motivation": "A solo creator needs to move without continually adjusting the camera. Our prototype keeps the subject in frame with two-axis rotation and provides manual control through an infrared remote.",
+      "motivation_points": [],
+      "result_heading": "Award and demonstration",
+      "result_intro": "2024 HD Hyundai Mechatronics Competition."
     },
     {
       "id": "taxer",
-      "title": "Period-Aware Time-Series Forecasting",
+      "title": "TaXer and WaXer: Time-Series Forecasting",
       "eyebrow": "Introduction to Deep Learning · SNU",
       "date": "2025",
       "category": "Time-Series Learning",
       "badge": "Course Project",
       "image": "taxer-method.webp",
       "image_alt": "Original presentation slide showing the TaXer periodic feature extraction and cross-attention architecture",
-      "summary": "Time-series forecasting through transformer cross-attention to FFT-based periodic features or dilated causal convolutional features.",
+      "summary": "Combine a transformer forecaster with periodic or dilated-convolution temporal features.",
       "tags": [
         "Time-Series Forecasting",
         "Transformers",
@@ -1109,16 +1195,16 @@
       ],
       "sections": [
         {
-          "heading": "TaXer: periodic features",
-          "body": "Use TimesNet-style FFT analysis to select dominant periods.",
+          "heading": "TaXer: period-aware features",
+          "body": "Use TimesNet-style FFT analysis to identify dominant periods in the input sequence.",
           "points": [
             {
               "term": "Period alignment",
-              "text": "Reshape each sequence according to the selected periods."
+              "text": "Reshape the sequence according to each selected period."
             },
             {
               "term": "Feature extraction",
-              "text": "Apply 2D convolution to model variation within and across periods."
+              "text": "Apply 2D convolution to capture variation within and across periods."
             }
           ],
           "sources": [
@@ -1134,23 +1220,23 @@
         },
         {
           "heading": "Transformer integration",
-          "body": "Project extracted features into the transformer embedding dimension.",
+          "body": "Project the extracted temporal features into the transformer embedding dimension.",
           "points": [
             {
               "term": "Sequence branch",
-              "text": "Use variable-wise patch embeddings and a global token."
+              "text": "Create variable-wise patch embeddings and a global token."
             },
             {
               "term": "Feature branch",
-              "text": "Broadcast projected temporal features across variables."
+              "text": "Broadcast the projected temporal context across variables."
             },
             {
               "term": "Cross-attention",
-              "text": "Let the sequence representation query the feature context."
+              "text": "Let the sequence representation query this temporal context."
             },
             {
-              "term": "Prediction",
-              "text": "Apply the forecast head. Restore each variable’s original scale."
+              "term": "Forecast head",
+              "text": "Produce predictions and restore each variable’s original scale."
             }
           ],
           "sources": [
@@ -1167,15 +1253,15 @@
         },
         {
           "heading": "WaXer: convolutional alternative",
-          "body": "Replace periodic extraction with WaveNet-style dilated causal convolutions.",
+          "body": "Replace the periodic extractor with WaveNet-style dilated causal convolutions.",
           "points": [
             {
               "term": "Shared interface",
-              "text": "Keep the projection and transformer integration pattern."
+              "text": "Retain the projection and transformer integration pattern."
             },
             {
               "term": "Comparison",
-              "text": "Evaluate the alternative temporal prior. Compare forecast errors and model sizes."
+              "text": "Evaluate forecast error and model size for the alternative temporal prior."
             }
           ],
           "sources": [
@@ -1200,11 +1286,11 @@
       "hero_width": 2304,
       "hero_height": 1296,
       "result_summary": "Course-project Sticker Sales MSE: TaXer 0.1569, TimeXer 0.1647; additional weather and model-size comparisons in the report.",
-      "contribution_summary": "Team project with Jinwoo Seo, Hyeonseop Shin, and Manyoung Han.",
-      "method_heading": "Methodology",
+      "contribution_summary": "Team project with Jinwoo Seo, Hyeonseop Shin, and Manyoung Han. The architectures and reported experiments were developed by the team.",
+      "method_heading": "Model architecture",
       "overview": "Test temporal feature extractors inside a transformer forecaster. Compare periodic and convolutional representations on weather and sales data.",
       "result_notes": [
-        "Course-project results under the reported setup. The report also covers weather data and model-size comparisons."
+        "The report also compares weather forecasts and model sizes under the project’s experimental setup."
       ],
       "result_figures": [
         {
@@ -1214,7 +1300,37 @@
           "width": 2304,
           "height": 1296
         }
-      ]
+      ],
+      "motivation_heading": "Motivation",
+      "motivation": "Temporal feature extractors encode different assumptions about a sequence. This course project compares periodic and convolutional features within a transformer forecasting pipeline.",
+      "motivation_points": [
+        {
+          "term": "TaXer",
+          "text": "Use FFT-selected periods and two-dimensional convolution."
+        },
+        {
+          "term": "WaXer",
+          "text": "Use dilated causal convolutions as an alternative temporal prior."
+        }
+      ],
+      "result_heading": "Experiments",
+      "result_intro": "Sticker Sales results from the course-project report. Lower MSE is better.",
+      "result_table": {
+        "columns": [
+          "Model",
+          "MSE"
+        ],
+        "rows": [
+          [
+            "TimeXer",
+            "0.1647"
+          ],
+          [
+            "TaXer",
+            "0.1569"
+          ]
+        ]
+      }
     }
   ],
   "experience": [
@@ -1309,6 +1425,6 @@
     "service_recognition": true,
     "project_documents": true
   },
-  "research_intro": "Ongoing work in 3D mapping and robot learning.",
-  "projects_intro": "Engineering and machine learning projects."
+  "research_intro": "Current work on 3D Gaussian mapping and robot-learning data augmentation.",
+  "projects_intro": "Projects in robotics, control, and machine learning. Each page explains the task, method, and results."
 }

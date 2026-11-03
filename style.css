@@ -147,3 +147,33 @@
  .project-body .method-section>h3{font-size:17px}
  .detail-contents{line-height:1.9}
 }
+
+/* Project articles: short introduction, topic-specific methods, figures and results. */
+.editorial-project .project-heading{padding:26px 0 20px}
+.editorial-project .project-deck{font-size:16px;line-height:1.55;margin:14px 0}
+.editorial-project .project-hero{margin:0 0 30px}
+.editorial-project .project-body>.article-section,
+.editorial-project .project-body>.methodology,
+.editorial-project .project-body>.project-results{margin:30px 0;padding-top:24px;border-top:1px solid var(--line)}
+.editorial-project .project-body h2{font-size:22px;margin-bottom:13px}
+.editorial-project .project-body p{line-height:1.7}
+.editorial-project .method-section{border:0;padding-top:0;margin:26px 0 32px}
+.editorial-project .method-section>h3{font-size:18px;margin-bottom:11px}
+.editorial-project .method-bullets{margin:12px 0 18px;line-height:1.7}
+.editorial-project .method-bullets li{margin:8px 0}
+.editorial-project .method-equation{margin-top:16px}
+.result-table-wrap{overflow-x:auto;margin:18px 0}
+.result-table{border-collapse:collapse;width:100%;font-size:14px;text-align:left}
+.result-table th,.result-table td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.result-table thead th{border-top:1px solid var(--line);font-weight:700;background:#fafafa}
+.result-table tbody th{font-weight:400}
+.result-table th:last-child,.result-table td:last-child{width:35%;font-variant-numeric:tabular-nums}
+.article-references ul{padding:0 0 15px 20px;line-height:1.8}
+.article-references li{margin:5px 0}
+.project-body .project-credit{font-size:12px;line-height:1.6;color:var(--muted);margin-top:18px}
+@media(max-width:440px){
+ .editorial-project .project-deck{font-size:15px}
+ .editorial-project .project-heading h1{font-size:25px;line-height:1.3}
+ .editorial-project .project-body h2{font-size:21px}
+ .result-table th,.result-table td{padding:9px 8px}
+}

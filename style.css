@@ -167,6 +167,9 @@
 .result-table th,.result-table td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
 .result-table thead th{border-top:1px solid var(--line);font-weight:700;background:#fafafa}
 .result-table tbody th{font-weight:400}
+.method-equation code{white-space:pre-line}
+.method-section .result-table th:first-child{width:26%}
+.method-section .result-table th:last-child,.method-section .result-table td:last-child{width:auto}
 .result-table th:last-child,.result-table td:last-child{width:35%;font-variant-numeric:tabular-nums}
 .article-references ul{padding:0 0 15px 20px;line-height:1.8}
 .article-references li{margin:5px 0}

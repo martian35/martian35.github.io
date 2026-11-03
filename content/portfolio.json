@@ -85,30 +85,30 @@
       ],
       "sections": [
         {
-          "heading": "Scene alignment",
-          "body": "Align the reconstructed workcell with the robot and calibrated cameras before replaying motion.",
+          "heading": "Metric alignment without absorbing reconstruction errors",
+          "body": "Use calibrated geometry and rigid-part distances to set reconstruction scale before refining pose.",
           "points": [
             {
-              "term": "Metric scale",
-              "text": "Compare rigid-part distances with the robot URDF and ChArUco calibration."
+              "term": "Scale rulers",
+              "text": "Compare distances between rigid robot parts with URDF dimensions. A Gaussian shell can bias nearest-surface or silhouette measurements."
             },
             {
-              "term": "Pose refinement",
-              "text": "Hold scale fixed and apply ICP to high-opacity Gaussian cores."
+              "term": "Rigid refinement",
+              "text": "Keep scale fixed and run point-to-point ICP on robot Gaussians with opacity at least 0.8."
             },
             {
-              "term": "Verification",
-              "text": "Check scene and robot dimensions in the same coordinate frame."
+              "term": "Independent checks",
+              "text": "Check the table footprint, cube dimensions, and robot rulers in the same metric frame."
             }
           ],
           "sources": [
             {
-              "label": "Fixed-scale core ICP",
-              "url": "https://github.com/martian35/splataug-fr3/blob/74464cbe4040e98944670e8718a85d7164e9cc8d/scripts/refine_registration_icp_core.py"
+              "label": "Scale rationale and asset pipeline",
+              "url": "https://github.com/martian35/splataug-fr3/blob/74464cbe4040e98944670e8718a85d7164e9cc8d/docs/PIPELINE.md"
             },
             {
-              "label": "Alignment measurements",
-              "url": "https://github.com/martian35/splataug-fr3/blob/74464cbe4040e98944670e8718a85d7164e9cc8d/docs/ROBOT_ALIGNMENT_METHOD.md"
+              "label": "Opaque-core rigid ICP",
+              "url": "https://github.com/martian35/splataug-fr3/blob/74464cbe4040e98944670e8718a85d7164e9cc8d/scripts/refine_registration_icp_core.py"
             }
           ],
           "figure": {
@@ -122,66 +122,66 @@
           }
         },
         {
-          "heading": "Reusable robot-link assets",
-          "body": "Separate the captured robot into articulated link assets.",
+          "heading": "CAD-based link assignment and canonical assets",
+          "body": "Transform Gaussian centers into the robot base frame and query their distance to each sampled CAD link surface.",
           "points": [
             {
-              "term": "Link assignment",
-              "text": "Assign each Gaussian to the nearest CAD link."
+              "term": "Link labels",
+              "text": "Assign each candidate to the nearest link. Mark candidates beyond the distance cap as background."
             },
             {
               "term": "Canonical pose",
-              "text": "Apply inverse forward kinematics at the capture pose."
+              "text": "Apply inverse forward kinematics at the capture pose to create reusable articulated assets."
             },
             {
-              "term": "Round-trip check",
-              "text": "Reapply the captured pose and compare it with the original geometry."
+              "term": "Round trip",
+              "text": "Reapply the capture pose and check that the original posed geometry is recovered."
             }
           ],
           "sources": [
             {
-              "label": "CAD-based link assignment",
+              "label": "Nearest-link distance queries",
               "url": "https://github.com/martian35/splataug-fr3/blob/74464cbe4040e98944670e8718a85d7164e9cc8d/scripts/label_links_nearest_cad.py"
             },
             {
-              "label": "Asset and rendering pipeline",
+              "label": "Canonical assets and checks",
               "url": "https://github.com/martian35/splataug-fr3/blob/74464cbe4040e98944670e8718a85d7164e9cc8d/docs/PIPELINE.md"
+            },
+            {
+              "label": "Inverse-FK export and geometry round trip",
+              "url": "https://github.com/martian35/splataug-fr3/blob/74464cbe4040e98944670e8718a85d7164e9cc8d/scripts/export_campaign_robosplat_assets.py"
             }
           ]
         },
         {
-          "heading": "Demonstration replay",
-          "body": "Replay a demonstration through the link assets. Render each camera from the same episode state.",
+          "heading": "Separate trajectory planning from Gaussian rendering",
+          "body": "Replay joint and object states from a planned episode through the Gaussian scene.",
           "points": [
             {
-              "term": "Robot motion",
-              "text": "Forward kinematics updates each link along the recorded trajectory."
+              "term": "Articulated robot",
+              "text": "Use forward kinematics to pose every robot-link asset at each timestep."
             },
             {
-              "term": "Object motion",
-              "text": "Attachment and release rules update grasped objects."
+              "term": "Manipulated objects",
+              "text": "Replay object positions and orientations with explicit grasp attachment and release states."
             },
             {
-              "term": "Camera poses",
-              "text": "Move the wrist camera with the robot and retain calibrated standing views."
+              "term": "Synchronized cameras",
+              "text": "Render two standing cameras and an FK-updated wrist camera from the same timestep."
+            },
+            {
+              "term": "Episode output",
+              "text": "Write camera images and robot/object state together for the dataset pipeline."
             }
           ],
           "sources": [
             {
-              "label": "CAD-based link assignment",
-              "url": "https://github.com/martian35/splataug-fr3/blob/74464cbe4040e98944670e8718a85d7164e9cc8d/scripts/label_links_nearest_cad.py"
+              "label": "Per-frame state replay and camera updates",
+              "url": "https://github.com/martian35/splataug-fr3/blob/74464cbe4040e98944670e8718a85d7164e9cc8d/scripts/render_bline_replay_from_h5.py"
             },
             {
-              "label": "Asset and rendering pipeline",
-              "url": "https://github.com/martian35/splataug-fr3/blob/74464cbe4040e98944670e8718a85d7164e9cc8d/docs/PIPELINE.md"
-            },
-            {
-              "label": "Generation and release gates",
+              "label": "Planning, replay, and LeRobot export",
               "url": "https://github.com/martian35/splataug-fr3/blob/74464cbe4040e98944670e8718a85d7164e9cc8d/docs/PRODUCTION_DATASETS.md"
-            },
-            {
-              "label": "Validation scope",
-              "url": "https://github.com/martian35/splataug-fr3/blob/74464cbe4040e98944670e8718a85d7164e9cc8d/README.md"
             }
           ],
           "figure": {
@@ -195,19 +195,23 @@
           }
         },
         {
-          "heading": "Incomplete-surface repair",
-          "body": "Repair missing geometry before generating the augmented episodes.",
+          "heading": "Repair the geometry novel views expose",
+          "body": "Complete surfaces that were hidden or poorly reconstructed in the static capture.",
           "points": [
             {
-              "term": "Objects",
-              "text": "Merge missing cube faces from a separately reconstructed rolled capture."
+              "term": "Cube faces",
+              "text": "Reconstruct a rolled capture separately and align matching cubes. Transplant the missing surface band with colors from the static capture."
             },
             {
-              "term": "Tabletop",
-              "text": "Replace reconstruction haze with a calibrated plane bounded by the measured table footprint."
+              "term": "Table surface",
+              "text": "Replace haze with a Gaussian sheet on the calibrated plane, bounded by the measured tabletop rectangle."
             }
           ],
           "sources": [
+            {
+              "label": "Capture separation, surface transplant, and color transfer",
+              "url": "https://github.com/martian35/splataug-fr3/blob/74464cbe4040e98944670e8718a85d7164e9cc8d/docs/PIPELINE.md"
+            },
             {
               "label": "Missing-surface reconstruction",
               "url": "https://github.com/martian35/splataug-fr3/blob/74464cbe4040e98944670e8718a85d7164e9cc8d/scripts/merge_cube_faces_from_rolled.py"
@@ -219,30 +223,30 @@
           ]
         },
         {
-          "heading": "Episode validation",
-          "body": "Check each generated episode before export.",
+          "heading": "Gate episodes before dataset export",
+          "body": "Validate geometry and rendered observations before accepting an episode.",
           "points": [
             {
-              "term": "Geometry",
-              "text": "Check metric scale, forward-kinematics round trips, grasp spacing, and object-pose continuity."
+              "term": "Grasp geometry",
+              "text": "Check finger spacing, object continuity, and the canonical-to-posed robot round trip."
             },
             {
-              "term": "Visibility",
-              "text": "Reject black frames and check carried-object visibility in the wrist view."
+              "term": "Rendered views",
+              "text": "Check black frames and per-object wrist visibility while an object is carried."
             },
             {
-              "term": "Evaluation",
-              "text": "Assess downstream robot learning separately from rendering and geometry checks."
+              "term": "Dataset boundary",
+              "text": "Rendering checks establish episode consistency. Evaluate robot-policy performance separately."
             }
           ],
           "sources": [
             {
-              "label": "Generation and release gates",
+              "label": "Episode acceptance and release boundary",
               "url": "https://github.com/martian35/splataug-fr3/blob/74464cbe4040e98944670e8718a85d7164e9cc8d/docs/PRODUCTION_DATASETS.md"
             },
             {
-              "label": "Validation scope",
-              "url": "https://github.com/martian35/splataug-fr3/blob/74464cbe4040e98944670e8718a85d7164e9cc8d/README.md"
+              "label": "Wrist visibility and continuity checks",
+              "url": "https://github.com/martian35/splataug-fr3/blob/74464cbe4040e98944670e8718a85d7164e9cc8d/scripts/render_bline_replay_from_h5.py"
             }
           ]
         }
@@ -291,7 +295,7 @@
       "badge": "2nd Place",
       "image": "robot.jpg",
       "image_alt": "Team 7's autonomous mecanum-wheel robot in the competition arena",
-      "summary": "An autonomous robot that detects, collects, and delivers objects within a three-minute match.",
+      "summary": "A mecanum-wheel robot that converts dual-camera detections into object collection and return maneuvers.",
       "role": "Contributed across perception and model training, planning, data collection, hardware, and system integration with Team 7.",
       "tags": [
         "Robot Perception",
@@ -333,75 +337,92 @@
       ],
       "sections": [
         {
-          "heading": "Hardware and motor interface",
-          "body": "A Jetson Orin Nano runs perception and navigation. An ESP32 drives the four mecanum-wheel motors.",
+          "heading": "Hardware and motion commands",
+          "body": "A Jetson Orin Nano handles perception and navigation. An ESP32 converts serial body-velocity commands into four wheel commands.",
           "points": [
             {
-              "term": "Velocity commands",
-              "text": "Send body-frame motion commands over USB serial and convert them into wheel motion."
+              "term": "Motor calibration",
+              "text": "Calibrate wheel direction and feed-forward gains before combining forward, lateral, and rotational motion."
             },
             {
-              "term": "Calibration",
-              "text": "Calibrate wheel direction and feed-forward gains. Include a duration and auto-stop in motion commands."
+              "term": "Command duration",
+              "text": "Attach a duration and auto-stop to motion commands."
             }
           ],
           "sources": [
             {
-              "label": "Motor interface and calibration",
+              "label": "Serial motor interface",
               "url": "https://github.com/junjinyong/snu-ai-robot-challenge-2026-team7/blob/a1ee6825b8520c3f9ae39a45872f4587d7bb493d/nav/arena/car.py"
             }
           ]
         },
         {
-          "heading": "Dual-camera perception",
-          "body": "Run YOLO instance segmentation on both cameras and combine the detections for navigation.",
+          "heading": "Two cameras, one geometric view",
+          "body": "Run YOLO segmentation on both angled cameras and merge each camera cycle into one UDP message.",
           "points": [
             {
-              "term": "Shared bearings",
-              "text": "Use camera intrinsics and toe angles to express detections in a common forward-facing view."
+              "term": "Bearing conversion",
+              "text": "Use each camera’s focal length and mounting angle to express a detection in the robot’s forward-facing view."
             },
             {
-              "term": "Target filtering",
-              "text": "Combine confidence, range-normalized mask area, bearing, and arena-cell ownership."
+              "term": "Decision gates",
+              "text": "Check confidence, predicted bearing, distance-normalized mask area, and arena-cell ownership before selecting an object."
             },
             {
-              "term": "Navigation input",
-              "text": "Send the merged detections through a UDP interface."
+              "term": "Distance normalization",
+              "text": "Multiply mask area by squared relative range so the area gate accounts for apparent size changes."
+            },
+            {
+              "term": "Frame-group voting",
+              "text": "Deduplicate same-class votes within each captured-frame group so overlapping camera views do not count twice."
             }
           ],
           "sources": [
             {
-              "label": "Dual-camera inference",
+              "label": "Dual-camera projection and message construction",
               "url": "https://github.com/junjinyong/snu-ai-robot-challenge-2026-team7/blob/a1ee6825b8520c3f9ae39a45872f4587d7bb493d/vision_bench/vision_node_dual.py"
             },
             {
-              "label": "Detection-to-decision interface",
+              "label": "Detection-to-decision policy",
               "url": "https://github.com/junjinyong/snu-ai-robot-challenge-2026-team7/blob/a1ee6825b8520c3f9ae39a45872f4587d7bb493d/docs/ARCHITECTURE.md"
+            },
+            {
+              "label": "Windowed evidence filtering and frame-group voting",
+              "url": "https://github.com/junjinyong/snu-ai-robot-challenge-2026-team7/blob/a1ee6825b8520c3f9ae39a45872f4587d7bb493d/nav/arena/verdict.py"
             }
           ],
-          "formula": "normalized area = mask area × (range / reference range)²"
+          "formula": "bearing = camera toe angle + atan((c_x − W/2) / f_x)\nnormalized area = mask area × (range / reference range)²",
+          "formula_note": "c_x is the detection center, W is image width, and f_x is horizontal focal length. Bearing and area gates are applied by navigation, after detection."
         },
         {
-          "heading": "Collection and delivery planning",
-          "body": "Follow a fixed sweep route and use live detections to trigger object collection.",
+          "heading": "Collection events and capacity-triggered return",
+          "body": "Follow the arena sweep and trigger collection from live target decisions.",
           "points": [
             {
-              "term": "Collection",
-              "text": "Approach a selected target with forward motion to load the passive basket."
+              "term": "Basket constraint",
+              "text": "The passive collector holds three objects. Forward motion captures; reverse motion can release the load."
             },
             {
-              "term": "Delivery",
-              "text": "Interrupt the sweep when the basket is full and return to the delivery zone."
+              "term": "Shared cargo count",
+              "text": "Count collected objects across route segments. A full-basket event interrupts the current motion sequence."
             },
             {
-              "term": "Loaded motion",
-              "text": "Account for object retention during alignment, braking, and return maneuvers."
+              "term": "Return control",
+              "text": "The central controller reads a fresh stationary pose and drives the return route."
+            },
+            {
+              "term": "Released scope",
+              "text": "The forward path records return state. Autonomous unloading and forward-sweep resumption are not implemented in that path."
             }
           ],
           "sources": [
             {
-              "label": "Robot and competition setup",
-              "url": "https://github.com/junjinyong/snu-ai-robot-challenge-2026-team7/blob/a1ee6825b8520c3f9ae39a45872f4587d7bb493d/README.md"
+              "label": "Cargo event and capacity counter",
+              "url": "https://github.com/junjinyong/snu-ai-robot-challenge-2026-team7/blob/a1ee6825b8520c3f9ae39a45872f4587d7bb493d/nav/arena/cargo.py"
+            },
+            {
+              "label": "Return orchestration and release scope",
+              "url": "https://github.com/junjinyong/snu-ai-robot-challenge-2026-team7/blob/a1ee6825b8520c3f9ae39a45872f4587d7bb493d/nav/arena/conductor.py"
             }
           ],
           "figure": {
@@ -416,50 +437,66 @@
           }
         },
         {
-          "heading": "Localization and motion control",
-          "body": "Fit arena walls in LiDAR scans to estimate pose. Use integrated IMU yaw to stop calibrated turn pulses.",
+          "heading": "Geometry-based localization and calibrated control",
+          "body": "Fit the known rectangular arena to LiDAR points and estimate the robot’s pose from its walls.",
           "points": [
             {
-              "term": "Lateral motion",
-              "text": "Use LiDAR feedback for strafing after the timed alternative proved unreliable during calibration."
+              "term": "Wall fit",
+              "text": "Search wall orientation, refine the minimum-area fit, and use robust wall extents to reject distant returns."
+            },
+            {
+              "term": "Turning",
+              "text": "Size a calibrated turn pulse and stop it using integrated IMU yaw."
+            },
+            {
+              "term": "Strafing",
+              "text": "Use LiDAR feedback for lateral motion. The less accurate timed alternative remains disabled by default."
             },
             {
               "term": "Braking",
-              "text": "Apply calibrated reverse pulses and keep cruise speed within the measured braking range."
+              "text": "Apply calibrated reverse pulses and keep cruise speed inside the measured braking range."
             }
           ],
           "sources": [
             {
-              "label": "Motion primitives and measured limits",
+              "label": "Arena wall localization",
+              "url": "https://github.com/junjinyong/snu-ai-robot-challenge-2026-team7/blob/a1ee6825b8520c3f9ae39a45872f4587d7bb493d/nav/arena/localizer.py"
+            },
+            {
+              "label": "Calibrated braking",
+              "url": "https://github.com/junjinyong/snu-ai-robot-challenge-2026-team7/blob/a1ee6825b8520c3f9ae39a45872f4587d7bb493d/nav/arena/stop.py"
+            },
+            {
+              "label": "Turn and strafe design",
               "url": "https://github.com/junjinyong/snu-ai-robot-challenge-2026-team7/blob/a1ee6825b8520c3f9ae39a45872f4587d7bb493d/docs/ARCHITECTURE.md"
             },
             {
-              "label": "Braking implementation",
-              "url": "https://github.com/junjinyong/snu-ai-robot-challenge-2026-team7/blob/a1ee6825b8520c3f9ae39a45872f4587d7bb493d/nav/arena/stop.py"
+              "label": "IMU-terminated turn pulses",
+              "url": "https://github.com/junjinyong/snu-ai-robot-challenge-2026-team7/blob/a1ee6825b8520c3f9ae39a45872f4587d7bb493d/nav/arena/turn.py"
             }
           ]
         },
         {
-          "heading": "On-device and field validation",
-          "body": "Tune perception and motion together on the competition hardware.",
+          "heading": "Perception and motion tested together",
+          "body": "Set detection thresholds for the number of observations available while the robot passes an object.",
           "points": [
             {
-              "term": "Inference latency",
-              "text": "Benchmark models on the Jetson and set detection gates for the available observation window."
+              "term": "Latency",
+              "text": "Benchmark on the Jetson. Scan speed determines how many detection frames reach the decision gate."
             },
             {
-              "term": "Camera reliability",
-              "text": "Check frozen streams and compare raw frames with motion logs during tuning."
+              "term": "Stream reliability",
+              "text": "Detect frozen camera streams and save raw images alongside motion logs for diagnosis."
             }
           ],
           "sources": [
             {
-              "label": "On-device latency benchmark",
-              "url": "https://github.com/junjinyong/snu-ai-robot-challenge-2026-team7/blob/a1ee6825b8520c3f9ae39a45872f4587d7bb493d/vision_bench/bench_models.py"
+              "label": "Observation window and decision thresholds",
+              "url": "https://github.com/junjinyong/snu-ai-robot-challenge-2026-team7/blob/a1ee6825b8520c3f9ae39a45872f4587d7bb493d/docs/ARCHITECTURE.md"
             },
             {
-              "label": "Field tuning",
-              "url": "https://github.com/junjinyong/snu-ai-robot-challenge-2026-team7/blob/a1ee6825b8520c3f9ae39a45872f4587d7bb493d/docs/TUNING.md"
+              "label": "Camera stream checks",
+              "url": "https://github.com/junjinyong/snu-ai-robot-challenge-2026-team7/blob/a1ee6825b8520c3f9ae39a45872f4587d7bb493d/vision_bench/vision_node_dual.py"
             }
           ]
         }
@@ -507,7 +544,7 @@
       "badge": "3rd Place",
       "image": "mri-overview.jpg",
       "image_alt": "Team MRI reconstruction framework using brain and knee experts with Feature VarNet and FI VarNet",
-      "summary": "Reconstruct brain and knee MRI images from undersampled multi-coil frequency measurements.",
+      "summary": "Reconstruct undersampled MRI with acquisition-specific Feature/FI VarNet models and checkpoint averaging.",
       "role": "Team member, 2rm1000, with Jinseok Choi.",
       "tags": [
         "MRI Reconstruction",
@@ -548,102 +585,212 @@
         {
           "label": "2025 announcement",
           "url": "https://ece.snu.ac.kr/community/etc?bbsidx=56492&md=v"
+        },
+        {
+          "label": "Presentation",
+          "url": "https://www.youtube.com/watch?v=m5hwaRKvDUw"
         }
       ],
       "sections": [
         {
-          "heading": "Reconstruction with data consistency",
-          "body": "Use Feature VarNet and FI VarNet to alternate learned reconstruction updates with the MRI measurement model.",
-          "points": [
-            {
-              "term": "Coil sensitivities",
-              "text": "Estimate sensitivity maps from the multi-coil measurements."
-            },
-            {
-              "term": "Learned updates",
-              "text": "Refine feature representations with Feature VarNet and include image-domain cascades in FI VarNet."
-            },
-            {
-              "term": "Data consistency",
-              "text": "Connect each update to the acquired k-space samples through the MRI encoding model."
-            }
-          ],
-          "sources": [
-            {
-              "label": "Reconstruction models",
-              "url": "https://github.com/gates02/fastmri-2-1000/blob/c0b681b6c5d3ad3eb2c50af2f2aede001dea1c9f/utils/model/feature_varnet.py"
-            }
-          ]
-        },
-        {
-          "heading": "Anatomy- and acceleration-specific models",
-          "body": "Train separate experts for each acquisition condition and select them with explicit inference rules.",
+          "heading": "Rule-based expert routing",
+          "body": "Determine the acquisition condition before running its reconstruction model.",
           "points": [
             {
               "term": "Anatomy",
-              "text": "Identify brain or knee inputs from coil count under the challenge data conventions."
+              "text": "Treat 15-coil inputs as knee scans under this challenge’s data convention; route other inputs to brain models."
             },
             {
               "term": "Acceleration",
-              "text": "Read the sampling mask to choose the 4× or 8× expert."
+              "text": "Remove the contiguous calibration region from the sampling-density calculation. Classify the remaining density as 4× or 8×."
+            },
+            {
+              "term": "Selection",
+              "text": "Use these explicit rules to select the configured model or model pair."
             }
           ],
           "sources": [
             {
-              "label": "Expert routing and inference",
+              "label": "Acquisition routing and reconstruction",
               "url": "https://github.com/gates02/fastmri-2-1000/blob/c0b681b6c5d3ad3eb2c50af2f2aede001dea1c9f/utils/learning/test_part.py"
+            },
+            {
+              "label": "Final inference configuration",
+              "url": "https://github.com/gates02/fastmri-2-1000/blob/c0b681b6c5d3ad3eb2c50af2f2aede001dea1c9f/reconstruct.sh"
+            }
+          ],
+          "table": {
+            "columns": [
+              "Input",
+              "Reconstruction in the submission script"
+            ],
+            "rows": [
+              [
+                "Brain · 4×",
+                "Mean of Feature VarNet and FI VarNet"
+              ],
+              [
+                "Brain · 8×",
+                "Mean of Feature VarNet and FI VarNet"
+              ],
+              [
+                "Knee · 4×",
+                "FI VarNet"
+              ],
+              [
+                "Knee · 8×",
+                "Mean of Feature VarNet and FI VarNet"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Feature-domain reconstruction and data consistency",
+          "body": "Estimate coil sensitivities, combine the coil images, and encode them into learned features.",
+          "points": [
+            {
+              "term": "Feature VarNet",
+              "text": "Run 12 feature cascades with 32 feature channels and an 8-channel sensitivity network."
+            },
+            {
+              "term": "FI VarNet",
+              "text": "Follow the 12 feature cascades with six image-domain cascades."
+            },
+            {
+              "term": "Weight sharing",
+              "text": "Share the feature encoder and decoder across cascades. Keep the cascade U-Nets separate and disable attention."
+            },
+            {
+              "term": "Measurement residual",
+              "text": "Decode the features into predicted k-space. Compute disagreement only at acquired samples and encode that residual back into features."
+            },
+            {
+              "term": "Cascade update",
+              "text": "Subtract the learned correction and the weighted measurement-residual correction. Repeat before coil combination and output cropping."
+            }
+          ],
+          "sources": [
+            {
+              "label": "Feature/FI architecture and residual updates",
+              "url": "https://github.com/gates02/fastmri-2-1000/blob/c0b681b6c5d3ad3eb2c50af2f2aede001dea1c9f/utils/model/feature_varnet.py"
+            }
+          ],
+          "formula": "r_k = M ⊙ (k_pred − y)",
+          "formula_note": "M is the acquisition mask, y is measured multi-coil k-space, and k_pred is the current prediction. Each cascade uses this residual for a learned-weight data-consistency update."
+        },
+        {
+          "heading": "Acquisition-aware data processing",
+          "body": "Prepare training examples for the target anatomy and acceleration.",
+          "points": [
+            {
+              "term": "Mask adaptation",
+              "text": "Rebuild the mask for the chosen 4× or 8× setting before applying it to training k-space."
+            },
+            {
+              "term": "MRI augmentation",
+              "text": "Transform the full and masked coil images together, then recompute k-space and the reconstruction target."
+            },
+            {
+              "term": "Schedule",
+              "text": "Use small rotations, shearing, and horizontal flips. Increase augmentation strength with the exponential schedule shown in the presentation."
+            },
+            {
+              "term": "Loss region",
+              "text": "Build an anatomy-specific target mask with thresholding, erosion, and dilation. Mask the prediction and target before computing SSIM loss."
+            },
+            {
+              "term": "Final fit",
+              "text": "The submission scripts pool the supplied training and validation splits for final training."
+            }
+          ],
+          "sources": [
+            {
+              "label": "Mask adaptation and data loading",
+              "url": "https://github.com/gates02/fastmri-2-1000/blob/c0b681b6c5d3ad3eb2c50af2f2aede001dea1c9f/utils/data/load_data.py"
+            },
+            {
+              "label": "Coupled image/k-space augmentation",
+              "url": "https://github.com/gates02/fastmri-2-1000/blob/c0b681b6c5d3ad3eb2c50af2f2aede001dea1c9f/utils/mraugment/data_augment.py"
+            },
+            {
+              "label": "Training-region mask and optimizer",
+              "url": "https://github.com/gates02/fastmri-2-1000/blob/c0b681b6c5d3ad3eb2c50af2f2aede001dea1c9f/utils/learning/train_part.py"
+            },
+            {
+              "label": "Brain training stages",
+              "url": "https://github.com/gates02/fastmri-2-1000/blob/c0b681b6c5d3ad3eb2c50af2f2aede001dea1c9f/train_brain.sh"
+            },
+            {
+              "label": "Knee training stages",
+              "url": "https://github.com/gates02/fastmri-2-1000/blob/c0b681b6c5d3ad3eb2c50af2f2aede001dea1c9f/train_knee.sh"
             }
           ]
         },
         {
-          "heading": "MRI-aware training",
-          "body": "Train with acquisition-aware augmentation, AdamW, and warmup followed by cosine scheduling.",
+          "heading": "Training within the memory budget",
+          "body": "Combine activation checkpointing with DeepSpeed optimizer-state offloading where enabled.",
           "points": [
             {
-              "term": "Augmentation",
-              "text": "Apply small rotations, shearing, and horizontal flips. Increase their strength during training."
+              "term": "Checkpointed cascades",
+              "text": "Recompute intermediate activations during backpropagation instead of keeping every cascade’s activations in GPU memory."
             },
             {
-              "term": "Memory",
-              "text": "Use DeepSpeed and activation checkpointing for the reconstruction networks."
+              "term": "CPU offload",
+              "text": "The DeepSpeed path uses CPU Adam and offloads optimizer state to the CPU."
             },
             {
-              "term": "Checkpoints",
-              "text": "Resume interrupted runs and convert distributed checkpoints into inference weights."
+              "term": "Specialization",
+              "text": "Resume the shared-acceleration brain models for 4× or 8× fine-tuning. Train separate knee experts."
+            },
+            {
+              "term": "Learning rate",
+              "text": "Use warmup followed by cosine scheduling."
             }
           ],
           "sources": [
             {
-              "label": "Training and checkpoint handling",
+              "label": "Checkpointed model forward passes",
+              "url": "https://github.com/gates02/fastmri-2-1000/blob/c0b681b6c5d3ad3eb2c50af2f2aede001dea1c9f/utils/model/feature_varnet.py"
+            },
+            {
+              "label": "DeepSpeed training configuration",
               "url": "https://github.com/gates02/fastmri-2-1000/blob/c0b681b6c5d3ad3eb2c50af2f2aede001dea1c9f/utils/learning/train_part.py"
+            },
+            {
+              "label": "Specialization from trained checkpoints",
+              "url": "https://github.com/gates02/fastmri-2-1000/blob/c0b681b6c5d3ad3eb2c50af2f2aede001dea1c9f/train_brain.sh"
+            }
+          ]
+        },
+        {
+          "heading": "Checkpoint averaging and inference",
+          "body": "Average compatible checkpoints before combining model outputs.",
+          "points": [
+            {
+              "term": "Parameter average",
+              "text": "Load checkpoint tensors on the CPU, average them in float32, and save one model state."
+            },
+            {
+              "term": "Inference cost",
+              "text": "Weight averaging retains one forward pass per model. Output ensembling runs both selected models and averages their reconstructions."
+            },
+            {
+              "term": "Final output",
+              "text": "Collect reconstructed slices by volume and write them in slice order for submission."
+            }
+          ],
+          "sources": [
+            {
+              "label": "CPU checkpoint averaging",
+              "url": "https://github.com/gates02/fastmri-2-1000/blob/c0b681b6c5d3ad3eb2c50af2f2aede001dea1c9f/checkpointAvg.py"
+            },
+            {
+              "label": "Output averaging and volume assembly",
+              "url": "https://github.com/gates02/fastmri-2-1000/blob/c0b681b6c5d3ad3eb2c50af2f2aede001dea1c9f/utils/learning/test_part.py"
             },
             {
               "label": "Training strategy",
               "url": "https://github.com/gates02/fastmri-2-1000/blob/c0b681b6c5d3ad3eb2c50af2f2aede001dea1c9f/README.md"
-            }
-          ]
-        },
-        {
-          "heading": "Weight averaging and output ensembling",
-          "body": "Combine compatible checkpoints and complementary reconstruction models.",
-          "points": [
-            {
-              "term": "Weight averaging",
-              "text": "Average model parameters into one checkpoint without adding inference passes."
-            },
-            {
-              "term": "Output ensembling",
-              "text": "Average reconstructed images from configured Feature VarNet and FI VarNet pairs."
-            }
-          ],
-          "sources": [
-            {
-              "label": "Parameter averaging",
-              "url": "https://github.com/gates02/fastmri-2-1000/blob/c0b681b6c5d3ad3eb2c50af2f2aede001dea1c9f/checkpointAvg.py"
-            },
-            {
-              "label": "Prediction ensembling",
-              "url": "https://github.com/gates02/fastmri-2-1000/blob/c0b681b6c5d3ad3eb2c50af2f2aede001dea1c9f/utils/learning/test_part.py"
             }
           ]
         }
@@ -665,17 +812,19 @@
       "contribution_summary": "I worked on Fourier-domain modeling with Jinseok Choi in Team 2rm1000. The model pipeline and competition submission were team work.",
       "method_heading": "Reconstruction method",
       "overview": "Recover brain and knee MRI images from undersampled multi-coil k-space. K-space contains the frequency-domain measurements. The challenge uses 4× and 8× acceleration.",
-      "result_notes": [],
+      "result_notes": [
+        "Implementation details follow our challenge presentation and released submission code."
+      ],
       "motivation_heading": "Problem",
-      "motivation": "Acquiring fewer k-space samples accelerates MRI scans but leaves incomplete measurements. The task is to reconstruct an image while respecting the samples that were acquired.",
+      "motivation": "Reconstruct brain and knee images from 4× or 8× undersampled multi-coil k-space. The challenge limits inference to 3,600 seconds on a GTX 1080 with 8GB VRAM.",
       "motivation_points": [
         {
-          "term": "Input",
-          "text": "Multi-coil k-space data with 4× or 8× acceleration."
+          "term": "Measurement model",
+          "text": "Retain the acquired frequency samples while learning to correct reconstruction artifacts."
         },
         {
-          "term": "Output",
-          "text": "Reconstructed brain or knee images."
+          "term": "Design choice",
+          "text": "Specialize models by anatomy and acceleration, then allocate ensemble computation by condition."
         }
       ],
       "result_heading": "Competition result",
@@ -718,102 +867,135 @@
       ],
       "sections": [
         {
-          "heading": "Vision-language model adaptation",
-          "body": "Adapt Qwen3.5-27B with LoRA and structured readouts for temporal ordering.",
+          "heading": "Structured readouts from one model pass",
+          "body": "Adapt Qwen3.5-27B with language LoRA. Append ten readout positions after the sentence and four images.",
           "points": [
             {
-              "term": "Pairwise evidence",
-              "text": "Six readouts compare the temporal order of image pairs."
+              "term": "Pairwise order",
+              "text": "Six readouts score which image comes earlier in each image pair."
             },
             {
-              "term": "Position evidence",
-              "text": "Four readouts score chronological positions."
+              "term": "Chronological slots",
+              "text": "Four readouts score the image identity at each position."
             },
             {
-              "term": "Training",
-              "text": "Use temporal-gap supervision and hard-negative ranking in the final training stage."
+              "term": "Output interface",
+              "text": "Read frame-label digit logits from the frozen language-model head instead of generating an answer string."
             }
           ],
           "sources": [
             {
-              "label": "Structured readout and training",
-              "url": "https://github.com/martian35/geekseek-snuai-2026/blob/d303b8668495e053411d8b6a6190d978786cccd7/docs/official_method.md"
+              "label": "Readout scaffold and frozen output head",
+              "url": "https://github.com/martian35/geekseek-snuai-2026/blob/d303b8668495e053411d8b6a6190d978786cccd7/src/geekseek/latent_slot.py"
             }
           ]
         },
         {
-          "heading": "Constrained permutation decoding",
-          "body": "Combine pairwise and position evidence to score all 24 valid image orderings.",
+          "heading": "Score all valid chronological orders",
+          "body": "Enumerate the 24 possible permutations and select the highest-scoring order.",
           "points": [
             {
-              "term": "Sequence selection",
-              "text": "Choose the highest-scoring permutation so every image appears once."
+              "term": "Slot score",
+              "text": "Sum the log-probabilities of the image assigned to each chronological slot."
             },
             {
-              "term": "Submission format",
-              "text": "Convert the ordered image sequence into per-input ranks using the inverse permutation."
+              "term": "Pair score",
+              "text": "Use the difference between the two frame-label logits. Add or subtract it according to the candidate’s pair order."
+            },
+            {
+              "term": "Rank conversion",
+              "text": "Invert the selected image sequence to produce the per-input ranks required by the competition."
             }
           ],
           "sources": [
             {
-              "label": "Rank and chronological-order conversion",
+              "label": "Joint permutation score and decode",
+              "url": "https://github.com/martian35/geekseek-snuai-2026/blob/d303b8668495e053411d8b6a6190d978786cccd7/src/geekseek/latent_slot.py"
+            },
+            {
+              "label": "Chronological sequence to rank conversion",
               "url": "https://github.com/martian35/geekseek-snuai-2026/blob/d303b8668495e053411d8b6a6190d978786cccd7/src/geekseek/ordering.py"
-            },
-            {
-              "label": "Structured readout and training",
-              "url": "https://github.com/martian35/geekseek-snuai-2026/blob/d303b8668495e053411d8b6a6190d978786cccd7/docs/official_method.md"
             }
-          ]
+          ],
+          "formula": "order score = slot log-probability + signed pairwise agreement"
         },
         {
-          "heading": "Aggregation across input orderings",
-          "body": "Evaluate four image arrangements to reduce sensitivity to presentation order.",
+          "heading": "Align predictions across four input arrangements",
+          "body": "Evaluate the same sample under four image orderings before decoding.",
           "points": [
             {
-              "term": "Alignment",
-              "text": "Map each arrangement’s logits back to the original image identities."
+              "term": "Image identity",
+              "text": "Remap slot logits to the original image labels."
+            },
+            {
+              "term": "Pair orientation",
+              "text": "Remap pair identities and flip the signed score when a pair’s display order is reversed."
             },
             {
               "term": "Aggregation",
-              "text": "Average the aligned logits and decode the combined evidence."
-            },
-            {
-              "term": "Validation",
-              "text": "Test the permutation mappings and final submission format."
+              "text": "Average the aligned slot and pair logits, then run the same 24-permutation decoder."
             }
           ],
           "sources": [
             {
-              "label": "Canonical aggregation",
+              "label": "Canonical remapping and Random4 aggregation",
               "url": "https://github.com/martian35/geekseek-snuai-2026/blob/d303b8668495e053411d8b6a6190d978786cccd7/src/geekseek/infer_random4.py"
-            },
-            {
-              "label": "Permutation regression checks",
-              "url": "https://github.com/martian35/geekseek-snuai-2026/blob/d303b8668495e053411d8b6a6190d978786cccd7/tests/test_core.py"
             }
           ]
         },
         {
-          "heading": "Snapshot averaging",
-          "body": "Average nine language-LoRA snapshots from one training trajectory in CPU float32.",
+          "heading": "Temporal supervision during fine-tuning",
+          "body": "Continue from the language adapter with temporal-gap and ranking objectives.",
           "points": [
             {
-              "term": "Single adapter",
-              "text": "Merge the snapshots into one adapter without extra model passes."
+              "term": "Gap target",
+              "text": "Predict the absolute chronological separation of each image pair. This auxiliary head is used only during training."
             },
             {
-              "term": "Inference cost",
-              "text": "The four input-order evaluations remain part of the final pipeline."
+              "term": "Hard negatives",
+              "text": "Compare the true sequence against adjacent swaps, a high-scoring medium-distance order, and full reversal."
+            },
+            {
+              "term": "Staged update",
+              "text": "Train the gap head first with the adapter frozen, then jointly fine-tune at a smaller adapter learning rate."
             }
           ],
           "sources": [
             {
-              "label": "Exp43 Full-SWA",
+              "label": "Temporal objectives and staged training",
               "url": "https://github.com/martian35/geekseek-snuai-2026/blob/d303b8668495e053411d8b6a6190d978786cccd7/docs/official_method.md"
             },
             {
-              "label": "Post-competition boundary",
-              "url": "https://github.com/martian35/geekseek-snuai-2026/blob/d303b8668495e053411d8b6a6190d978786cccd7/docs/post_competition.md"
+              "label": "Gap targets and ranking negatives",
+              "url": "https://github.com/martian35/geekseek-snuai-2026/blob/d303b8668495e053411d8b6a6190d978786cccd7/research/official_training/temporal_losses.py"
+            }
+          ]
+        },
+        {
+          "heading": "One averaged language adapter",
+          "body": "Average nine language-LoRA snapshots from the same training trajectory.",
+          "points": [
+            {
+              "term": "Parameter mean",
+              "text": "Average LoRA A/B tensors on the CPU in float32 and cast them back to the stored dtype."
+            },
+            {
+              "term": "Inference model",
+              "text": "Use one averaged adapter with the frozen base model. The training-only gap head is excluded."
+            },
+            {
+              "term": "Compute",
+              "text": "Parameter averaging adds no extra forward passes; Random4 still evaluates four input arrangements."
+            }
+          ],
+          "sources": [
+            {
+              "label": "Official final adapter and exclusions",
+              "url": "https://github.com/martian35/geekseek-snuai-2026/blob/d303b8668495e053411d8b6a6190d978786cccd7/docs/official_method.md"
+            },
+            {
+              "label": "Adapter averaging implementation",
+              "url": "https://github.com/martian35/geekseek-snuai-2026/blob/d303b8668495e053411d8b6a6190d978786cccd7/research/official_training/average_lora_adapters.py"
             }
           ]
         }
@@ -893,12 +1075,12 @@
           "body": "Estimate generation from weather conditions and the turbine power curve.",
           "points": [
             {
-              "term": "Atmospheric features",
-              "text": "Include air-density estimates, using the Arden–Buck equation in feature construction."
+              "term": "Physical estimate",
+              "text": "Use weather and turbine characteristics to compute an initial power-curve forecast."
             },
             {
-              "term": "Physical structure",
-              "text": "Use the power curve as the initial forecast before learning a correction."
+              "term": "Correction target",
+              "text": "Subtract this estimate from observed generation to form the residual training target."
             }
           ],
           "sources": [
@@ -927,19 +1109,23 @@
               "url": "../../assets/wind-architecture.webp"
             }
           ],
-          "formula": "hybrid forecast = physical baseline + learned residual"
+          "formula": "residual target = observed generation − physical forecast\nhybrid forecast = physical forecast + predicted residual"
         },
         {
           "heading": "Ensemble and hyperparameter optimization",
           "body": "Combine the hybrid model with Ridge Regression and Random Forest forecasts.",
           "points": [
             {
-              "term": "Optimization",
-              "text": "Use Optuna to tune model hyperparameters and ensemble weights."
+              "term": "Model tuning",
+              "text": "Use Optuna to select model hyperparameters."
+            },
+            {
+              "term": "Ensemble tuning",
+              "text": "Optimize the weighted combination of the hybrid, Ridge Regression, and Random Forest forecasts."
             },
             {
               "term": "Evaluation",
-              "text": "Inspect site-wise generation distributions alongside NMAE and settlement revenue."
+              "text": "Inspect site-wise prediction distributions as well as aggregate error and settlement revenue."
             }
           ],
           "sources": [
@@ -1061,29 +1247,34 @@
           "sources": []
         },
         {
-          "heading": "Face tracking and servo control",
-          "body": "Read frames with Picamera2. Detect faces with OpenCV’s Haar cascade and track the largest face.",
+          "heading": "Pixel error to incremental servo motion",
+          "body": "Capture frames with Picamera2, run the Haar-cascade face detector, and select the largest detected face.",
           "points": [
             {
-              "term": "Image error",
-              "text": "Normalize the face center’s horizontal and vertical offsets from the image center."
+              "term": "Feedback signal",
+              "text": "Measure the selected face center relative to the image center and normalize by image width and height."
             },
             {
-              "term": "Feedback control",
-              "text": "Convert these errors into incremental pan and tilt commands. The final implementation uses proportional feedback with zero derivative gain."
+              "term": "Control law",
+              "text": "Multiply each normalized error by a proportional gain of 30 to obtain the incremental servo-angle command."
             },
             {
-              "term": "Servo output",
-              "text": "Clamp the requested angles and convert them into calibrated pigpio pulse widths."
+              "term": "Actuation",
+              "text": "Add the increment to the current angle, clamp it to the servo limits, and map it to calibrated pulse width."
+            },
+            {
+              "term": "Lost detection",
+              "text": "Skip automatic updates when no valid face center is available and turn off the detection LED."
             }
           ],
           "sources": [
             {
-              "label": "Vision-to-servo control loop",
+              "label": "Face selection, error computation, and servo output",
               "url": "https://github.com/alvin0808/face-traker/blob/a0bd5d2e9e8cc208e3ed826f7da3a1a22d7963e1/final.py"
             }
           ],
-          "formula": "e_x = (W/2 − c_x) / W;  e_y = (H/2 − c_y) / H",
+          "formula": "e_x = (W/2 − c_x) / W; e_y = (H/2 − c_y) / H\nΔθ_pan = 30 e_x; Δθ_tilt = 30 e_y",
+          "formula_note": "W and H are image dimensions; c_x and c_y are the face center. The released controller sets both derivative gains to zero.",
           "figure": {
             "image": "filming-software.webp",
             "alt": "Team diagram of the filming device software and control flow",
@@ -1091,25 +1282,25 @@
           }
         },
         {
-          "heading": "Remote control and device state",
-          "body": "Read LIRC remote commands in a separate thread while face tracking runs.",
+          "heading": "Concurrent remote control and shutdown",
+          "body": "Run the LIRC infrared reader in a separate thread alongside the camera loop.",
           "points": [
             {
-              "term": "Modes",
-              "text": "Switch between automatic tracking and manual operation."
+              "term": "Mode switch",
+              "text": "KEY_0 switches automatic tracking on or off."
             },
             {
-              "term": "Manual input",
-              "text": "Move either servo axis, stop motion, or exit."
+              "term": "Manual motion",
+              "text": "Directional keys start continuous motion on either axis; KEY_5 stops the servos."
             },
             {
-              "term": "Status and shutdown",
-              "text": "Indicate face detection with an LED. Stop the camera and disable servo pulses on exit."
+              "term": "Exit",
+              "text": "KEY_9 ends the loop. Reset the camera pose, stop capture, disable servo pulses, and join the remote thread."
             }
           ],
           "sources": [
             {
-              "label": "Remote input and cleanup",
+              "label": "Remote thread and resource cleanup",
               "url": "https://github.com/alvin0808/face-traker/blob/a0bd5d2e9e8cc208e3ed826f7da3a1a22d7963e1/final.py"
             }
           ]
@@ -1195,83 +1386,92 @@
       ],
       "sections": [
         {
-          "heading": "TaXer: period-aware features",
-          "body": "Use TimesNet-style FFT analysis to identify dominant periods in the input sequence.",
+          "heading": "TaXer: learn temporal context from dominant periods",
+          "body": "Pass the input window through a TimesNet feature extractor before the forecasting transformer.",
           "points": [
             {
-              "term": "Period alignment",
-              "text": "Reshape the sequence according to each selected period."
+              "term": "Period selection",
+              "text": "Use FFT amplitudes to select dominant periods and reshape the sequence into within-period and across-period axes."
             },
             {
-              "term": "Feature extraction",
-              "text": "Apply 2D convolution to capture variation within and across periods."
+              "term": "Temporal features",
+              "text": "Apply the TimesNet 2D convolution blocks, then project their output to the transformer embedding dimension."
+            },
+            {
+              "term": "Context sharing",
+              "text": "Broadcast the projected temporal context to each variable’s forecasting branch."
             }
           ],
           "sources": [
             {
-              "label": "Feature extraction and projection",
+              "label": "Temporal extractor, projection, and broadcasting",
               "url": "https://github.com/GolfOscarr/DL-Project/blob/ba0bbe1aaefa8c088993f7dba6cb474351b6b640/models/TaXer/TaXer.py"
             },
             {
-              "label": "Cross-attention interface",
-              "url": "https://github.com/GolfOscarr/DL-Project/blob/ba0bbe1aaefa8c088993f7dba6cb474351b6b640/models/TaXer/layers/Encoder.py"
+              "label": "FFT period detection and periodic feature blocks",
+              "url": "https://github.com/GolfOscarr/DL-Project/blob/ba0bbe1aaefa8c088993f7dba6cb474351b6b640/models/TimesNet/TimesNet.py"
             }
           ]
         },
         {
-          "heading": "Transformer integration",
-          "body": "Project the extracted temporal features into the transformer embedding dimension.",
+          "heading": "Global-token cross-attention",
+          "body": "Normalize each variable’s input window and split it into patch tokens plus one global token.",
           "points": [
             {
-              "term": "Sequence branch",
-              "text": "Create variable-wise patch embeddings and a global token."
+              "term": "Patch self-attention",
+              "text": "Model relationships among patches within each variable branch."
             },
             {
-              "term": "Feature branch",
-              "text": "Broadcast the projected temporal context across variables."
-            },
-            {
-              "term": "Cross-attention",
-              "text": "Let the sequence representation query this temporal context."
+              "term": "Temporal cross-attention",
+              "text": "Use the global token as the query and the projected temporal features as keys and values."
             },
             {
               "term": "Forecast head",
-              "text": "Produce predictions and restore each variable’s original scale."
+              "text": "Flatten the updated patch/global-token representation and project it to the prediction horizon."
+            },
+            {
+              "term": "Output scale",
+              "text": "Restore the input window’s per-variable mean and standard deviation after prediction."
             }
           ],
           "sources": [
             {
-              "label": "Feature extraction and projection",
-              "url": "https://github.com/GolfOscarr/DL-Project/blob/ba0bbe1aaefa8c088993f7dba6cb474351b6b640/models/TaXer/TaXer.py"
+              "label": "Global query and temporal keys/values",
+              "url": "https://github.com/GolfOscarr/DL-Project/blob/ba0bbe1aaefa8c088993f7dba6cb474351b6b640/models/TaXer/layers/Encoder.py"
             },
             {
-              "label": "Cross-attention interface",
-              "url": "https://github.com/GolfOscarr/DL-Project/blob/ba0bbe1aaefa8c088993f7dba6cb474351b6b640/models/TaXer/layers/Encoder.py"
+              "label": "Prediction and de-normalization",
+              "url": "https://github.com/GolfOscarr/DL-Project/blob/ba0bbe1aaefa8c088993f7dba6cb474351b6b640/models/TaXer/TaXer.py"
             }
           ],
-          "formula": "temporal features → linear projection → cross-attention context"
+          "formula": "Q = global token; K, V = projected temporal features",
+          "formula_note": "The auxiliary context comes from the same input window. It is an extracted representation rather than an additional measured sensor stream."
         },
         {
-          "heading": "WaXer: convolutional alternative",
-          "body": "Replace the periodic extractor with WaveNet-style dilated causal convolutions.",
+          "heading": "WaXer: replace the temporal prior",
+          "body": "Use a WaveNet feature extractor through the same projection and cross-attention interface.",
           "points": [
             {
-              "term": "Shared interface",
-              "text": "Retain the projection and transformer integration pattern."
+              "term": "Causal convolutions",
+              "text": "Increase dilation as 1, 2, 4, … and trim right padding to exclude future samples."
             },
             {
-              "term": "Comparison",
-              "text": "Evaluate forecast error and model size for the alternative temporal prior."
+              "term": "Gating",
+              "text": "Multiply tanh-filter and sigmoid-gate outputs. Combine residual paths with accumulated skip features."
+            },
+            {
+              "term": "Shared forecaster",
+              "text": "Feed these features into the same variable-wise transformer and forecasting head."
             }
           ],
           "sources": [
             {
-              "label": "WaveNet–transformer integration",
-              "url": "https://github.com/GolfOscarr/DL-Project/blob/ba0bbe1aaefa8c088993f7dba6cb474351b6b640/models/WaXer/WaXer.py"
+              "label": "Dilated gated convolution and skip paths",
+              "url": "https://github.com/GolfOscarr/DL-Project/blob/ba0bbe1aaefa8c088993f7dba6cb474351b6b640/models/WaXer/layers/WaveNet.py"
             },
             {
-              "label": "Team report",
-              "url": "../../documents/taxer-report.pdf"
+              "label": "WaXer feature-to-transformer interface",
+              "url": "https://github.com/GolfOscarr/DL-Project/blob/ba0bbe1aaefa8c088993f7dba6cb474351b6b640/models/WaXer/WaXer.py"
             }
           ]
         }

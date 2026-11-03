@@ -158,6 +158,10 @@ def project_section(s, index=None):
         out += '<ul class="method-bullets">' + ''.join('<li><strong>'+esc(p['term'])+':</strong> '+esc(p['text'])+'</li>' for p in s['points']) + '</ul>'
     if s.get('formula'):
         out += '<p class="method-equation"><code>'+esc(s['formula'])+'</code></p>'
+    if s.get('formula_note'):
+        out += '<p class="formula-note">'+esc(s['formula_note'])+'</p>'
+    if s.get('table'):
+        out += project_result_table({'result_table': s['table']})
     if s.get('figure'):
         out += project_figure(s['figure'])
     return out + '</section>'

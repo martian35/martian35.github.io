@@ -14,7 +14,7 @@
       "Autonomous driving",
       "Robot learning"
     ],
-    "cv_url": "/CV_Dong_Hwi_Kim.pdf"
+    "cv_url": "/CV_Dong_Hwi_Kim.pdf?v=bbe8687fe823"
   },
   "research": [
     {
@@ -541,7 +541,7 @@
       "eyebrow": "SNU FastMRI Challenge · Team 2rm1000",
       "date": "2025",
       "category": "Medical Imaging",
-      "badge": "3rd Place",
+      "badge": "3rd out of 183 teams",
       "image": "mri-overview.jpg",
       "image_alt": "Team MRI reconstruction framework using brain and knee experts with Feature VarNet and FI VarNet",
       "summary": "Reconstruct undersampled MRI with acquisition-specific Feature/FI VarNet models and checkpoint averaging.",
@@ -553,7 +553,7 @@
       ],
       "metrics": [
         {
-          "value": "3rd",
+          "value": "3rd out of 183 teams",
           "label": "Final placement"
         },
         {
@@ -808,7 +808,7 @@
       "technical_notes_title": "Implementation notes & source evidence",
       "hero_width": 1837,
       "hero_height": 919,
-      "result_summary": "3rd place, 2025 SNU FastMRI Challenge; KRW 2,500,000 team prize.",
+      "result_summary": "3rd out of 183 teams, 2025 SNU FastMRI Challenge; KRW 2,500,000 team prize.",
       "contribution_summary": "I worked on Fourier-domain modeling with Jinseok Choi in Team 2rm1000. The model pipeline and competition submission were team work.",
       "method_heading": "Reconstruction method",
       "overview": "Recover brain and knee MRI images from undersampled multi-coil k-space. K-space contains the frequency-domain measurements. The challenge uses 4× and 8× acceleration.",
@@ -1570,7 +1570,7 @@
     },
     {
       "year": "2025",
-      "title": "3rd Place",
+      "title": "3rd out of 183 teams",
       "event": "SNU FastMRI Challenge",
       "type": "Team award"
     },

@@ -30,6 +30,9 @@
 .publication-row .work-meta em{color:inherit;font-style:italic}
 .review-status{color:#a42a19;font-weight:700}
 .publication-authors{margin:4px 0;font-size:13px}
+.publication-author-notes{font-size:11px;color:#666;line-height:1.4;margin:2px 0 6px}
+.publication-authors sup{font-size:.75em;line-height:0}
+.work-copy .publication-status,.publication-status{margin:5px 0;font-size:13px}
 .publication-abstract{margin-top:6px}
 .publication-abstract summary{display:list-item;list-style:none;width:fit-content;color:var(--accent);cursor:pointer}
 .publication-abstract summary::-webkit-details-marker{display:none}

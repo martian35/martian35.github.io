@@ -94,20 +94,35 @@ def row(item, research=False):
 
 
 def publication_meta(item):
-    return f'<p class="work-meta"><em>{esc(item["venue"])} {item["year"]}</em> · <span class="review-status">{esc(item["status"])}</span></p>'
+    return f'<p class="work-meta"><em>{esc(item["venue_full"])} ({esc(item["venue"])}), {item["year"]}</em></p><p class="publication-status"><span class="review-status">{esc(item["status"])}</span></p>'
+
+
+def publication_authors(item):
+    authors = []
+    for author in item['authors']:
+        name = esc(author['name'])
+        if author['name'] == PERSON['name']:
+            name = '<strong>' + name + '</strong>'
+        if author.get('equal_contribution'):
+            name += '<sup title="Equal contribution">*</sup>'
+        if author.get('corresponding'):
+            name += '<sup title="Corresponding author">†</sup>'
+        authors.append(name)
+    names = ', '.join(authors[:-1]) + ', and ' + authors[-1]
+    return '<p class="publication-authors">' + names + '</p><p class="publication-author-notes">* Equal contribution · † Corresponding author</p>'
 
 
 def publication_row(item):
     return f'''<article class="work-row publication-row" id="publication-{esc(item['id'])}">
 <div class="work-media"><div class="work-image publication-image"><img src="assets/{esc(item['image'])}" alt="{esc(item['image_alt'])}" width="{item['image_width']}" height="{item['image_height']}" loading="lazy"></div></div>
-<div class="work-copy"><h3>{esc(item['title'])}</h3><p class="publication-authors">First author: <strong>{esc(item['first_author'])}</strong></p>
+<div class="work-copy"><h3>{esc(item['title'])}</h3>{publication_authors(item)}
 {publication_meta(item)}<details class="publication-abstract"><summary>Abs<span class="sr-only">: {esc(item['title'])}</span></summary><p>{esc(item['abstract'])}</p></details></div></article>'''
 
 
 def publication_page(item):
     body = head(item['title']+' | Dong Hwi Kim', item['summary'], f'projects/{item["id"]}/', '../../') + header('../../')
     body += f'''<main id="main" class="detail-main publication-page"><a class="back-link" href="../../#publications">← Back to publications</a>
-<header class="project-heading"><h1>{esc(item['title'])}</h1><p>First author: <strong>{esc(item['first_author'])}</strong></p>{publication_meta(item)}</header>
+<header class="project-heading"><h1>{esc(item['title'])}</h1>{publication_authors(item)}{publication_meta(item)}</header>
 <figure class="publication-figure"><img src="../../assets/{esc(item['image'])}" alt="{esc(item['image_alt'])}" width="{item['image_width']}" height="{item['image_height']}"></figure>
 <section class="publication-abstract-text" aria-labelledby="abstract"><h2 id="abstract">Abstract</h2><p>{esc(item['abstract'])}</p></section></main>'''
     return body + footer('../../')

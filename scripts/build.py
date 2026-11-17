@@ -109,7 +109,7 @@ def publication_authors(item):
             name += '<sup title="Corresponding author">†</sup>'
         authors.append(name)
     names = ', '.join(authors[:-1]) + ', and ' + authors[-1]
-    return '<p class="publication-authors">' + names + '</p><p class="publication-author-notes">* Equal contribution · † Corresponding author</p>'
+    return '<p class="publication-authors">' + names + '</p>'
 
 
 def publication_row(item):

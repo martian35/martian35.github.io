@@ -25,6 +25,21 @@
 .work-copy .item-links{margin-top:7px}
 .project-heading>.overline{margin:5px 0}
 
+/* Publication entries expose only the abstract until public resources are added. */
+.publication-row .publication-image img{height:auto;max-height:none;object-fit:contain}
+.publication-row .work-meta em{color:inherit;font-style:italic}
+.review-status{color:#a42a19;font-weight:700}
+.publication-authors{margin:4px 0;font-size:13px}
+.publication-abstract{margin-top:6px}
+.publication-abstract summary{display:list-item;list-style:none;width:fit-content;color:var(--accent);cursor:pointer}
+.publication-abstract summary::-webkit-details-marker{display:none}
+.publication-abstract summary:hover{color:#f09228}
+.publication-abstract summary:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.publication-abstract[open] summary{margin-bottom:10px}
+.publication-abstract p,.publication-abstract-text p{line-height:1.65}
+.publication-figure{max-width:560px;margin:0 auto 28px}
+.publication-figure img{width:100%;height:auto}
+.publication-abstract-text{margin:24px 0}
 /* Keep the academic page compact; put the explanation before implementation detail. */
 .profile-context{margin:-6px 0 20px}
 .profile-context p{line-height:1.6}

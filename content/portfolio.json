@@ -19,48 +19,22 @@
   "research": [
     {
       "id": "gaussian-slam",
-      "title": "3D Gaussian Splatting for SLAM",
-      "eyebrow": "RPM Robotics Lab · SNU",
-      "status": "Manuscript in preparation",
-      "date": "Ongoing",
-      "image": "slam-concept.svg",
-      "image_alt": "Conceptual illustration of camera observations, Gaussian scene representation, and camera trajectory; not an experimental result",
-      "summary": "Ongoing research on Gaussian scene representations for camera tracking and 3D mapping.",
-      "role": "Research on 3D Gaussian Splatting-based SLAM at RPM Robotics Lab.",
-      "tags": [
-        "3D Gaussian Splatting",
-        "SLAM",
-        "3D Reconstruction"
-      ],
-      "links": [],
-      "sections": [
-        {
-          "heading": "Gaussian scene mapping",
-          "body": "Investigating 3D Gaussian Splatting for SLAM and geometrically consistent mapping.",
-          "sources": [],
-          "points": []
-        }
-      ],
-      "illustrative": true,
+      "title": "View Management with Gaussian Placement and Opacity Regularization for Online 3DGS",
+      "status": "Under Review",
+      "venue": "CVPR",
+      "year": 2027,
+      "venue_full": "IEEE/CVF Conference on Computer Vision and Pattern Recognition",
+      "first_author": "Dong Hwi Kim",
+      "abstract_only": true,
+      "abstract": "The realistic rendering of 3D Gaussian Splatting (3DGS) has drawn interest from real-time applications that require maps to be built online. This led to coupling 3DGS with SLAM, providing camera poses and initial Gaussians for the map. However, the map is still optimized with designs inherited from conventional SLAM, which train only on keyframes selected for localization and regularize geometry with uncertain frontend depth. These designs overlook the model complexity of a 3DGS map: with millions of parameters but few views of each region, the map overfits to sparse inputs. Resolving this is challenging, as every view and Gaussian added to the map competes for the same real-time budget. We close this gap from both sides. To add views while keyframes preserve the structure of the map, we progressively admit non-keyframe images as mapping updates complete and allocate the limited updates across different groups of frames according to the supervision each group provides. To control the model complexity of the map, edge-guided initialization places new Gaussians where image detail requires them. To complement the uncertain frontend depth, Self-Referenced Opacity Regularization (SOR) uses accumulated rendering evidence, at no extra rendering cost, to suppress the opacity of Gaussians that persistently contribute in front of a map-derived surface reference. Together, these designs improve both the appearance and the geometry of online maps within the available online optimization budget.",
+      "image": "online-3dgs-teaser.webp",
+      "image_alt": "Online Gaussian map with camera trajectory, keyframes, intermediate views, edge-guided initialization, and self-referenced opacity regularization",
+      "image_width": 1100,
+      "image_height": 854,
+      "summary": "View management, edge-guided Gaussian initialization, and self-referenced opacity regularization for online 3D Gaussian mapping.",
       "category": "3D Vision & SLAM",
-      "card_role": "First-author manuscript in preparation.",
-      "hero_caption": "Conceptual illustration; method details and results are unpublished.",
-      "related": [
-        "splataug-fr3",
-        "robot-challenge"
-      ],
-      "method_heading": "Research focus",
-      "public_method": false,
-      "result_summary": "First-author manuscript in preparation.",
-      "contribution_summary": "Undergraduate research with Prof. Ayoung Kim at RPM Robotics Lab, Seoul National University.",
-      "gallery": [],
-      "overview": "Research on camera motion estimation and Gaussian scene representations. A first-author manuscript is in preparation.",
-      "result_notes": [],
-      "motivation_heading": "Research background",
-      "motivation": "SLAM estimates camera motion while building a map of the environment. This research studies 3D Gaussian Splatting as the map representation.",
-      "motivation_points": [],
-      "result_heading": "Current status",
-      "result_intro": "First-author manuscript in preparation."
+      "links": [],
+      "public_method": false
     },
     {
       "id": "splataug-fr3",
@@ -1625,6 +1599,6 @@
     "service_recognition": true,
     "project_documents": true
   },
-  "research_intro": "Current work on 3D Gaussian mapping and robot-learning data augmentation.",
+  "research_intro": "Ongoing work in visual data augmentation for robot learning.",
   "projects_intro": "Projects in robotics, control, and machine learning. Each page explains the task, method, and results."
 }

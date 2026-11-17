@@ -51,7 +51,16 @@ def main():
             checked += 1
     data = json.loads((ROOT / 'content/portfolio.json').read_text())
     assert len(data['research']) == 2 and len(data['projects']) == 6
-    assert data['research'][0]['status'] == 'Manuscript in preparation'
+    paper = data['research'][0]
+    assert paper['status'] == 'Under Review' and paper['venue'] == 'CVPR' and paper['year'] == 2027
+    assert paper['abstract_only'] and paper['abstract'] and not paper['links']
+    assert not paper['public_method']
+    home = (OUT / 'index.html').read_text()
+    publication = home.split('id="publication-gaussian-slam"', 1)[1].split('</article>', 1)[0]
+    assert '<summary>Abs' in publication and '<details class="publication-abstract">' in publication
+    assert '<a ' not in publication, 'Abstract-only publication must not expose resource links'
+    paper_page = (OUT / 'projects/gaussian-slam/index.html').read_text()
+    assert 'id="abstract"' in paper_page and 'id="methodology"' not in paper_page
     assert all('SNU AI Challenge' != a['event'] for a in data['awards'])
     assert (OUT / '.nojekyll').exists()
     assert len(pages) == 10, f'Expected 10 HTML pages including 404, got {len(pages)}'

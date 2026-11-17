@@ -42,6 +42,13 @@
       "selected_image": "taxer-method.webp",
       "source_page": null,
       "selection_note": "Retain the architecture figure from the supplied team course presentation."
+    },
+    {
+      "project": "gaussian-slam",
+      "selected_image": "online-3dgs-teaser.webp",
+      "source_page": null,
+      "selection_note": "Rendered directly from the user-supplied teaser_tum.pdf, preserving the complete figure. Selected over pipeline_review.pdf because the representative scene and three contributions remain more legible at publication-thumbnail size. Only the abstract and this figure are public; the manuscript PDF and pipeline are not uploaded.",
+      "reviewed_on": "2026-11-17"
     }
   ],
   "project_explanation_figures": {

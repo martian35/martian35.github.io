@@ -59,7 +59,7 @@ def head(title, description, path='', prefix=''):
 def header(prefix=''):
     home = prefix or './'
     cv = ' / '+anchor('CV',PERSON['cv_url']) if PERSON.get('cv_url') else ''
-    return f'<header class="site-header"><a href="{home}">Dong Hwi Kim</a><nav aria-label="Main navigation"><a href="{home}#research">Research</a> / <a href="{home}#projects">Projects</a> / <a href="{home}#experience">Experience</a>{cv}</nav></header>'
+    return f'<header class="site-header"><a href="{home}">Dong Hwi Kim</a><nav aria-label="Main navigation"><a href="{home}#publications">Publications</a> / <a href="{home}#research">Research</a> / <a href="{home}#projects">Projects</a> / <a href="{home}#experience">Experience</a>{cv}</nav></header>'
 
 
 def footer(prefix=''):
@@ -93,6 +93,26 @@ def row(item, research=False):
 <p class="work-description">{esc(item['summary'])}</p>{item_links(item)}</div></article>'''
 
 
+def publication_meta(item):
+    return f'<p class="work-meta"><em>{esc(item["venue"])} {item["year"]}</em> · <span class="review-status">{esc(item["status"])}</span></p>'
+
+
+def publication_row(item):
+    return f'''<article class="work-row publication-row" id="publication-{esc(item['id'])}">
+<div class="work-media"><div class="work-image publication-image"><img src="assets/{esc(item['image'])}" alt="{esc(item['image_alt'])}" width="{item['image_width']}" height="{item['image_height']}" loading="lazy"></div></div>
+<div class="work-copy"><h3>{esc(item['title'])}</h3><p class="publication-authors">First author: <strong>{esc(item['first_author'])}</strong></p>
+{publication_meta(item)}<details class="publication-abstract"><summary>Abs<span class="sr-only">: {esc(item['title'])}</span></summary><p>{esc(item['abstract'])}</p></details></div></article>'''
+
+
+def publication_page(item):
+    body = head(item['title']+' | Dong Hwi Kim', item['summary'], f'projects/{item["id"]}/', '../../') + header('../../')
+    body += f'''<main id="main" class="detail-main publication-page"><a class="back-link" href="../../#publications">← Back to publications</a>
+<header class="project-heading"><h1>{esc(item['title'])}</h1><p>First author: <strong>{esc(item['first_author'])}</strong></p>{publication_meta(item)}</header>
+<figure class="publication-figure"><img src="../../assets/{esc(item['image'])}" alt="{esc(item['image_alt'])}" width="{item['image_width']}" height="{item['image_height']}"></figure>
+<section class="publication-abstract-text" aria-labelledby="abstract"><h2 id="abstract">Abstract</h2><p>{esc(item['abstract'])}</p></section></main>'''
+    return body + footer('../../')
+
+
 def profile_portrait():
     if PROFILE_IMAGE == 'portrait-original.jpg':
         # Keep the framing in the HTML as well as CSS so stale styles cannot
@@ -116,9 +136,11 @@ def home():
 <p>{esc(p['intro'])}</p><p>{bio}</p>
 <p class="profile-links">{(anchor('CV',p['cv_url'])+' / ') if p.get('cv_url') else ''}{anchor('Email', 'mailto:'+p['email'])} / {anchor('GitHub',p['github'])} / {anchor('LinkedIn',p['linkedin'])}</p>
 </div>{profile_portrait()}</section>
+<section id="publications" class="section" aria-labelledby="publications-title"><h2 id="publications-title">Selected Publications</h2>
+<div class="work-list">{''.join(publication_row(x) for x in DATA['research'] if x.get('abstract_only'))}</div></section>
 <section id="research" class="section" aria-labelledby="research-title"><h2 id="research-title">Research</h2>
 <p class="section-intro">{esc(DATA.get('research_intro', 'Ongoing projects in 3D mapping and visual data augmentation for robot learning.'))}</p>
-<div class="work-list">{''.join(row(x,True) for x in DATA['research'])}</div></section>
+<div class="work-list">{''.join(row(x,True) for x in DATA['research'] if not x.get('abstract_only'))}</div></section>
 <section id="projects" class="section" aria-labelledby="projects-title"><h2 id="projects-title">Selected Projects</h2>
 <p class="section-intro">{esc(DATA.get('projects_intro', 'Engineering and machine learning projects, with implementation details, design decisions, and results on each project page.'))}</p>
 <div class="work-list">{''.join(row(x) for x in DATA['projects'])}</div></section>
@@ -201,6 +223,8 @@ def project_references(item):
 
 
 def project(item, research=False):
+    if item.get('abstract_only'):
+        return publication_page(item)
     title = item['title']
     group = 'research' if research else 'projects'
     body = head(title+' | Dong Hwi Kim', item['summary'], f'projects/{item["id"]}/', '../../') + header('../../')

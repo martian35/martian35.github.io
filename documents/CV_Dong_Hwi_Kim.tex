@@ -3,11 +3,14 @@
 \documentclass[a4paper,11pt]{article}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
-\usepackage[margin=20mm]{geometry}
+\usepackage[left=20mm,right=20mm,top=17mm,bottom=17mm]{geometry}
 \usepackage{tabularx,array,titlesec,enumitem,needspace}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{hyperref}
-\usepackage{fontawesome5}
+\IfFileExists{fontawesome5.sty}{\usepackage{fontawesome5}}{%
+  \newcommand{\faGithub}{}\newcommand{\faGlobe}{}%
+  \newcommand{\faLinkedin}{}\newcommand{\faEnvelope}{}%
+}
 \hypersetup{colorlinks=true,urlcolor=Blue,linkcolor=Blue,
   pdftitle={Dong Hwi Kim - Curriculum Vitae},pdfauthor={Dong Hwi Kim}}
 \urlstyle{same}
@@ -17,7 +20,7 @@
 \pagestyle{empty}
 \raggedbottom
 \titleformat{\section}{\Large\scshape\raggedright}{}{0em}{}[\color{gray}\titlerule]
-\titlespacing*{\section}{0pt}{7pt}{6pt}
+\titlespacing*{\section}{0pt}{6pt}{5pt}
 \newcommand{\entry}[2]{\Needspace{3\baselineskip}\noindent
   \begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X r@{}}\textbf{#1}& #2\end{tabularx}\par\nobreak}
 \newcommand{\lab}[3]{\entry{#1}{#2}\textit{Undergraduate Student Researcher}\quad Advisor: #3\par\nobreak}
@@ -37,8 +40,13 @@
 \vspace{-6pt}
 
 \section{Summary}
-I study 3D Gaussian Splatting for mapping and robot learning. My interests also include
-3D vision, perception, control, robotics, and autonomous driving.
+Undergraduate student at Seoul National University pursuing a double major
+in Mechanical Engineering and Electrical \& Computer Engineering.
+My research interests center on how machines can interpret and connect
+multimodal observations in their physical and task-specific contexts.
+I aim to draw on knowledge across domains to derive useful information
+and task-appropriate representations from these observations, supporting
+how machines understand their environment, make decisions, and act.
 
 \section{Education}
 \begin{tabularx}{\linewidth}{@{}p{30mm}>{\raggedright\arraybackslash}X@{}}
@@ -59,13 +67,14 @@ In: \textit{IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR
 \section{Research Experience}
 \lab{AIDAS Lab, Seoul National University}{Jun. 2026 -- present}{Prof. Jaeyoung Do}
 \begin{points}
-\item Develop the 3D Gaussian Splatting augmentation module for a collaborative robot-learning dataset project.
-\item Align reconstructed FR3 scenes and replay robot motion using forward kinematics. Render demonstrations from calibrated viewpoints.
+\item Develop a 3D Gaussian Splatting augmentation module to generate multi-view demonstrations for a collaborative robot-learning dataset project.
+\item Align FR3 scenes, replay robot motion with forward kinematics, and render calibrated viewpoints.
 \end{points}
 
 \lab{RPM Robotics Lab, Seoul National University}{Feb. 2026 -- present}{Prof. Ayoung Kim}
 \begin{points}
-\item Investigate 3D Gaussian Splatting for SLAM and geometrically consistent scene mapping.
+\item Study online 3D Gaussian mapping under limited observations and optimization budgets.
+\item Co-first-author work on view management, Gaussian placement, and opacity regularization for geometrically consistent maps; CVPR 2027 submission under review.
 \end{points}
 
 \lab{Visual \& Geometric Intelligence Lab, SNU}{Sep. 2025 -- Jan. 2026}{Prof. Jaesik Park}
@@ -92,21 +101,21 @@ In: \textit{IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR
 \href{https://martian35.github.io/projects/robot-challenge/}{Project}\enspace$|$\enspace
 \href{https://github.com/junjinyong/snu-ai-robot-challenge-2026-team7}{GitHub}\par
 Contributed to perception, planning, data collection, hardware, and system integration.
-Our team combined dual-camera segmentation, geometric target selection, and LiDAR/IMU-based motion control.
+Our team connected dual-camera segmentation and geometric target selection with LiDAR/IMU-based motion control for autonomous collection and delivery.
 The robot placed \textbf{2nd} in the SNU AI Robot Challenge, scoring \textbf{140/200} in the final.}
 
 \project{Multimodal Scene Reordering}{2026}{%
 \href{https://martian35.github.io/projects/scene-reordering/}{Project}\enspace$|$\enspace
 \href{https://github.com/martian35/geekseek-snuai-2026}{GitHub}\par
-Team GeekSeek adapted Qwen3.5-27B with LoRA to order four shuffled frames.
+Team GeekSeek adapted Qwen3.5-27B with LoRA to infer temporal order from a sentence and four shuffled frames.
 The submission scores valid permutations and aggregates predictions across input orderings.
 Our team finished \textbf{8th overall} in the SNU AI Challenge.}
 
 \project{Accelerated MRI Reconstruction}{2025}{%
 \href{https://martian35.github.io/projects/fastmri/}{Project}\enspace$|$\enspace
 \href{https://github.com/gates02/fastmri-2-1000}{GitHub}\par
-Worked with Team 2rm1000 on reconstruction from undersampled k-space.
-Our pipeline combines Feature/FI VarNet, data consistency, anatomy- and acceleration-specific models, and ensembling.
+Worked on Fourier-domain modeling in Team 2rm1000 to reconstruct MRI from undersampled k-space.
+Our pipeline connects learned Feature/FI VarNet reconstruction with measurement data consistency, acquisition-specific models, and ensembling.
 The team placed \textbf{3rd} in the SNU FastMRI Challenge at 4$\times$/8$\times$ acceleration.}
 
 \project{Physics-Guided Wind Power Forecasting}{2025}{%
@@ -114,6 +123,13 @@ The team placed \textbf{3rd} in the SNU FastMRI Challenge at 4$\times$/8$\times$
 Designed model architecture and optimized hyperparameters in Team Zephyr Analytics.
 We combined a physical turbine power curve with LightGBM residual learning and a weighted ensemble.
 Our team placed \textbf{3rd out of 270 teams}, reporting \textbf{19.34\% NMAE}.}
+
+\project{TaXer and WaXer: Time-Series Forecasting}{2025}{%
+\href{https://martian35.github.io/projects/taxer/}{Project}\enspace$|$\enspace
+\href{https://github.com/GolfOscarr/DL-Project}{GitHub}\par
+Compared periodic and convolutional temporal representations in a team deep-learning course project.
+TaXer uses FFT-derived periodic features; WaXer uses dilated causal convolutions.
+Both connect these features to a transformer forecaster through cross-attention.}
 
 \project{Automated Filming Device}{2024}{%
 \href{https://martian35.github.io/projects/automated-filming/}{Project}\enspace$|$\enspace
@@ -135,5 +151,5 @@ Robotics \& Vision & 3D Gaussian Splatting, robot kinematics, motion planning, v
 Languages & Korean (native), English (fluent), Chinese (conversational)
 \end{tabularx}
 \vfill
-\begin{center}\footnotesize Last updated: November 17, 2026\end{center}
+\begin{center}\footnotesize Last updated: November 23, 2026\end{center}
 \end{document}

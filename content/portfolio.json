@@ -5,8 +5,8 @@
     "email": "martian35@snu.ac.kr",
     "github": "https://github.com/martian35",
     "linkedin": "https://www.linkedin.com/in/martian35/",
-    "updated": "November 2026",
-    "intro": "I am an undergraduate at Seoul National University, double majoring in Mechanical Engineering and Electrical and Computer Engineering. I study how machines can turn multimodal observations into representations that support decision-making and control, with a particular interest in using geometric, physical, and domain knowledge to connect sensor data with learned models.",
+    "updated": "November 23, 2026",
+    "intro": "I am an undergraduate at Seoul National University pursuing a double major in Mechanical Engineering and Electrical and Computer Engineering. My research interests center on how machines can interpret and connect multimodal observations in their physical and task-specific contexts. I aim to draw on knowledge across domains to derive useful information and task-appropriate representations from these observations, supporting how machines understand their environment, make decisions, and act.",
     "bio": "At the RPM Robotics Lab, I work with Prof. Ayoung Kim on online 3D Gaussian mapping. At the AIDAS Lab, I develop visual data augmentation for robot learning using reconstructed scenes and robot kinematics. These projects explore how visual representations are built and how they can become useful learning data.",
     "interests": [
       "Multimodal perception & scene representations",
@@ -14,7 +14,7 @@
       "Robot learning & control",
       "Autonomous systems"
     ],
-    "cv_url": "/CV_Dong_Hwi_Kim.pdf?v=8383d85b75ae",
+    "cv_url": "/CV_Dong_Hwi_Kim.pdf?v=5146069e4f8a",
     "research_approach": "I aim to start from a practical need and refine it into a research question through analysis and experimentation. My ME/ECE training and projects across robotics, imaging, energy, and time-series learning help me connect ideas across domains. In doctoral research, I hope to extend this perspective toward how autonomous systems perceive, understand, and act in the physical world."
   },
   "research": [

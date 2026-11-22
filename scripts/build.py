@@ -151,6 +151,7 @@ def home():
 <p>{esc(p['intro'])}</p><p>{bio}</p>
 <p class="profile-links">{(anchor('CV',p['cv_url'])+' / ') if p.get('cv_url') else ''}{anchor('Email', 'mailto:'+p['email'])} / {anchor('GitHub',p['github'])} / {anchor('LinkedIn',p['linkedin'])}</p>
 </div>{profile_portrait()}</section>
+<section id="research-approach" class="section" aria-labelledby="research-approach-title"><h2 id="research-approach-title">Research Approach</h2><p>{esc(p['research_approach'])}</p></section>
 <section id="publications" class="section" aria-labelledby="publications-title"><h2 id="publications-title">Selected Publications</h2>
 <div class="work-list">{''.join(publication_row(x) for x in DATA['research'] if x.get('abstract_only'))}</div></section>
 <section id="research" class="section" aria-labelledby="research-title"><h2 id="research-title">Research</h2>
@@ -264,6 +265,8 @@ def project(item, research=False):
     for g in item.get('result_figures',[]):
         body += project_figure(g)
     body += '</section>'+project_references(item)
+    if item.get('research_connection'):
+        body += '<section id="research-connection" class="article-section"><h2>Connection to my research interests</h2><p>'+esc(item['research_connection'])+'</p></section>'
     body += '</div><nav class="project-bottom" aria-label="Project navigation"><a href="../../#'+group+'">← All '+group+'</a><a href="mailto:'+esc(PERSON['email'])+'">Contact me ↗</a></nav></main>'
     return body + footer('../../')
 

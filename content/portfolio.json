@@ -6,15 +6,16 @@
     "github": "https://github.com/martian35",
     "linkedin": "https://www.linkedin.com/in/martian35/",
     "updated": "November 2026",
-    "intro": "I am an undergraduate at Seoul National University studying Mechanical Engineering and Electrical and Computer Engineering. My interests span 3D vision and perception, control, robotics, and autonomous driving.",
-    "bio": "At the RPM Robotics Lab, I work with Prof. Ayoung Kim on 3D Gaussian Splatting for SLAM and 3D mapping. At the AIDAS Lab, my collaboration with Prof. Jaeyoung Do focuses on visual data augmentation for robot learning using reconstructed scenes and robot kinematics.",
+    "intro": "I am an undergraduate at Seoul National University, double majoring in Mechanical Engineering and Electrical and Computer Engineering. I study how machines can turn multimodal observations into representations that support decision-making and control, with a particular interest in using geometric, physical, and domain knowledge to connect sensor data with learned models.",
+    "bio": "At the RPM Robotics Lab, I work with Prof. Ayoung Kim on online 3D Gaussian mapping. At the AIDAS Lab, I develop visual data augmentation for robot learning using reconstructed scenes and robot kinematics. These projects explore how visual representations are built and how they can become useful learning data.",
     "interests": [
-      "3D vision & perception",
-      "Control & robotics",
-      "Autonomous driving",
-      "Robot learning"
+      "Multimodal perception & scene representations",
+      "Geometric & physical structure in learning",
+      "Robot learning & control",
+      "Autonomous systems"
     ],
-    "cv_url": "/CV_Dong_Hwi_Kim.pdf?v=8383d85b75ae"
+    "cv_url": "/CV_Dong_Hwi_Kim.pdf?v=8383d85b75ae",
+    "research_approach": "I aim to start from a practical need and refine it into a research question through analysis and experimentation. My ME/ECE training and projects across robotics, imaging, energy, and time-series learning help me connect ideas across domains. In doctoral research, I hope to extend this perspective toward how autonomous systems perceive, understand, and act in the physical world."
   },
   "research": [
     {
@@ -60,7 +61,7 @@
       "date": "Ongoing",
       "image": "splataug.jpg",
       "image_alt": "An FR3 manipulation episode rendered from three camera viewpoints using Gaussian scene assets",
-      "summary": "Render multi-view robot demonstrations from reconstructed scenes and robot kinematics.",
+      "summary": "Turn reconstructed scenes and robot kinematics into calibrated multi-view demonstrations for robot learning.",
       "role": "Responsible for the 3DGS data augmentation module within a larger collaborative dataset project.",
       "tags": [
         "3D Gaussian Splatting",
@@ -260,7 +261,7 @@
         "The broader dataset project is ongoing. Robot-policy performance has not yet been established by these generation checks."
       ],
       "motivation_heading": "Motivation",
-      "motivation": "Recorded demonstrations capture a task from a fixed set of cameras. A reconstructed scene lets us replay robot motion and render additional viewpoints.",
+      "motivation": "A scene representation becomes useful to robot learning when it can generate observations that remain consistent with robot motion and camera geometry. Recorded demonstrations capture a task from a fixed set of cameras; reconstructing the scene lets us replay that motion and render additional viewpoints.",
       "motivation_points": [
         {
           "term": "Goal",
@@ -272,7 +273,8 @@
         }
       ],
       "result_heading": "Current progress",
-      "result_intro": "The module generates rendered manipulation episodes and checks their geometry and visibility."
+      "result_intro": "The module generates rendered manipulation episodes and checks their geometry and visibility.",
+      "research_connection": "This work extends my interest from building scene representations to using them as data for learned systems. It asks how geometry, robot kinematics, and camera calibration can constrain visual augmentation. Downstream policy evaluation remains ongoing."
     }
   ],
   "projects": [
@@ -285,7 +287,7 @@
       "badge": "2nd Place",
       "image": "robot.jpg",
       "image_alt": "Team 7's autonomous mecanum-wheel robot in the competition arena",
-      "summary": "A mecanum-wheel robot that converts dual-camera detections into object collection and return maneuvers.",
+      "summary": "Connect camera, LiDAR, and IMU observations with target selection, motion control, and autonomous object delivery.",
       "role": "Contributed across perception and model training, planning, data collection, hardware, and system integration with Team 7.",
       "tags": [
         "Robot Perception",
@@ -523,7 +525,8 @@
         }
       ],
       "result_heading": "Competition result",
-      "result_intro": "2026 SNU AI Robot Challenge. The final score combines two competition runs."
+      "result_intro": "2026 SNU AI Robot Challenge. The final score combines two competition runs.",
+      "research_connection": "This project gave me hands-on experience connecting perception to physical action. Working across data collection, planning, hardware, and integration showed me how the usefulness of sensor information depends on the robot mechanism, observation timing, and control requirements."
     },
     {
       "id": "fastmri",
@@ -534,7 +537,7 @@
       "badge": "3rd out of 183 teams",
       "image": "mri-overview.jpg",
       "image_alt": "Team MRI reconstruction framework using brain and knee experts with Feature VarNet and FI VarNet",
-      "summary": "Reconstruct undersampled MRI with acquisition-specific Feature/FI VarNet models and checkpoint averaging.",
+      "summary": "Connect learned MRI reconstruction with Fourier-domain measurements and data consistency at 4× and 8× acceleration.",
       "role": "Team member, 2rm1000, with Jinseok Choi.",
       "tags": [
         "MRI Reconstruction",
@@ -818,7 +821,8 @@
         }
       ],
       "result_heading": "Competition result",
-      "result_intro": "2025 SNU FastMRI Challenge."
+      "result_intro": "2025 SNU FastMRI Challenge.",
+      "research_connection": "MRI provides a concrete example of connecting measured data with a learned representation through a known acquisition model. Working on Fourier-domain modeling strengthened my interest in using domain structure to guide learning."
     },
     {
       "id": "scene-reordering",
@@ -829,7 +833,7 @@
       "badge": "8th Place",
       "image": "scene-ordering.svg",
       "image_alt": "Diagram of mapping frame-order views into a common coordinate system for Random4 inference",
-      "summary": "Recover the chronological order of four shuffled images using a vision-language model.",
+      "summary": "Infer temporal structure from language and shuffled images using a vision-language model and valid-permutation decoding.",
       "tags": [
         "Multimodal LLMs",
         "Temporal Reasoning",
@@ -1021,7 +1025,8 @@
         }
       ],
       "result_heading": "Competition result",
-      "result_intro": "2026 SNU AI Challenge. Results refer to the official final-selected submission."
+      "result_intro": "2026 SNU AI Challenge. Results refer to the official final-selected submission.",
+      "research_connection": "This task explores how language and visual observations can be connected to a structured account of an event. The temporal-ordering objective broadened my experience beyond scene geometry to contextual and semantic relationships between observations."
     },
     {
       "id": "wind-forecasting",
@@ -1032,7 +1037,7 @@
       "badge": "3rd Place · Excellence Award",
       "image": "wind-team-cover.webp",
       "image_alt": "Zephyr Analytics team cover for the 2025 Wind Power Prediction Competition",
-      "summary": "Forecast hourly wind generation by correcting a physical power curve with learned residuals.",
+      "summary": "Combine a physical turbine power curve with learned residual corrections to forecast hourly wind generation.",
       "role": "Model architecture design and hyperparameter optimization.",
       "tags": [
         "Physics-Guided ML",
@@ -1168,7 +1173,8 @@
         }
       ],
       "result_heading": "Competition result",
-      "result_intro": "2025 BDA × EWP × 60Hertz Wind Power Forecasting Competition."
+      "result_intro": "2025 BDA × EWP × 60Hertz Wind Power Forecasting Competition.",
+      "research_connection": "Designing a model around a turbine power curve let me use domain knowledge as a starting point for learning. The residual model handles deviations from that physical baseline, informing my broader interest in how physical context can structure learned predictions."
     },
     {
       "id": "automated-filming",
@@ -1179,7 +1185,7 @@
       "badge": "Grand Prize",
       "image": "filming-device.webp",
       "image_alt": "Sunflower-inspired face-tracking camera device with a yellow phone mount and white circular base",
-      "summary": "A Raspberry Pi camera mount with automatic face tracking and infrared remote control.",
+      "summary": "Translate visual face-location errors into pan–tilt servo commands in a Raspberry Pi filming prototype.",
       "tags": [
         "Mechatronics",
         "Face Tracking",
@@ -1333,7 +1339,8 @@
       "motivation": "A solo creator needs to move without continually adjusting the camera. Our prototype keeps the subject in frame with two-axis rotation and provides manual control through an infrared remote.",
       "motivation_points": [],
       "result_heading": "Award and demonstration",
-      "result_intro": "2024 HD Hyundai Mechatronics Competition."
+      "result_intro": "2024 HD Hyundai Mechatronics Competition.",
+      "research_connection": "The filming device introduced me to turning a visual observation into a feedback signal for a physical mechanism. I later extended this hands-on experience in the SNU AI Robot Challenge, which required coordinating multiple sensors, planning, and control."
     },
     {
       "id": "taxer",
@@ -1344,7 +1351,7 @@
       "badge": "Course Project",
       "image": "taxer-method.webp",
       "image_alt": "Original presentation slide showing the TaXer periodic feature extraction and cross-attention architecture",
-      "summary": "Combine a transformer forecaster with periodic or dilated-convolution temporal features.",
+      "summary": "Compare periodic and causal-convolutional features as temporal context for a transformer forecaster.",
       "tags": [
         "Time-Series Forecasting",
         "Transformers",
@@ -1520,7 +1527,8 @@
             "0.1569"
           ]
         ]
-      }
+      },
+      "research_connection": "This course project examined how different assumptions about temporal structure change the features supplied to a learned model. Comparing periodic and causal-convolutional representations contributed to my interest in the interface between domain structure and learning."
     }
   ],
   "experience": [
@@ -1615,6 +1623,6 @@
     "service_recognition": true,
     "project_documents": true
   },
-  "research_intro": "Ongoing work in visual data augmentation for robot learning.",
-  "projects_intro": "Projects in robotics, control, and machine learning. Each page explains the task, method, and results."
+  "research_intro": "My current work connects online scene representations with data generation for robot learning; hands-on robotics projects extend this interest to sensing, planning, and control.",
+  "projects_intro": "Projects across robotics, imaging, energy, and time-series learning explore how measurement structure, physical models, and temporal context can inform learned systems."
 }

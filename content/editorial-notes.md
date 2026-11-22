@@ -31,11 +31,11 @@ Do not synthesize benchmark plots, MRI examples, or robot trials from imagined d
 
 The mapping project asks how a 3D representation is built and checked. The augmentation project asks how reconstructed assets can support robot-learning data. Earlier projects provide concrete examples of measurement consistency, physical constraints, representation interfaces, and software–hardware integration. These connections explain the research direction without claiming that all projects solve the same problem.
 
-Both research entries remain ongoing. Manuscript preparation is not publication. Rendering and kinematic validation are not evidence of downstream physical policy success. Team-level implementation must stay distinct from individually verified contributions.
+The online mapping manuscript is under review at CVPR 2027, with only its abstract and teaser public. The robot-learning augmentation collaboration remains ongoing. An under-review submission is not an accepted publication. Rendering and kinematic validation are not evidence of downstream physical policy success. Team-level implementation must stay distinct from individually verified contributions.
 
 ## Personal introduction
 
-Keep the homepage introduction concise: academic background, broad research interests, and current laboratory work. Reflective paragraphs about engineering training, cultural background, and learning attitudes are excluded from the homepage. The manuscript is described only as a first-author manuscript in preparation, without a target venue.
+Keep the homepage introduction concise: academic background, broad research interests, and current laboratory work. The November 22, 2026 update reflects the user-supplied research-direction and PhD-values notes. Keep a short Research Approach paragraph on practical problem formulation and connections across domains. Link online mapping, robot-learning data generation, and hands-on sensing/control as complementary experiences; describe broader multimodal autonomy as a research goal. The manuscript is a co-first-author CVPR 2027 submission under review.
 
 Example SOPs and other people's CVs were used only as writing references. Their publications, roles, and achievements are not the user's credentials.
 
@@ -57,4 +57,5 @@ Edit `summary`, `at_glance`, `sections`, `technical_notes`, and `status` in `con
 
 ## Scope corrections
 
-The user clarified that their Robot Challenge contribution spans vision, planning, data collection, hardware, and integration. README role summaries must not narrow that first-hand account to vision alone. The Gaussian SLAM work has a first-author manuscript in preparation and no public repository. Do not name a planned submission venue. OpenMAVIS/Aria pipeline materials are not evidence for this manuscript and must not be linked as its implementation. The paper is in preparation, not submitted, under review, or accepted.
+The user clarified that their Robot Challenge contribution spans vision, planning, data collection, hardware, and integration. README role summaries must not narrow that first-hand account to vision alone. The Gaussian SLAM work has a co-first-author manuscript under review at CVPR 2027 and no public repository. Preserve the abstract-only public presentation. OpenMAVIS/Aria pipeline materials are not evidence for this manuscript and must not be linked as its implementation. The paper is under review and must not be represented as accepted.
+

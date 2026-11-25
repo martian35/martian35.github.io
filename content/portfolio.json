@@ -5,7 +5,7 @@
     "email": "martian35@snu.ac.kr",
     "github": "https://github.com/martian35",
     "linkedin": "https://www.linkedin.com/in/martian35/",
-    "updated": "November 23, 2026",
+    "updated": "November 25, 2026",
     "intro": "I am an undergraduate at Seoul National University pursuing a double major in Mechanical Engineering and Electrical and Computer Engineering. My research interests center on how machines can interpret and connect multimodal observations in their physical and task-specific contexts. I aim to draw on knowledge across domains to derive useful information and task-appropriate representations from these observations, supporting how machines understand their environment, make decisions, and act.",
     "bio": "At the RPM Robotics Lab, I work with Prof. Ayoung Kim on online 3D Gaussian mapping. At the AIDAS Lab, I develop visual data augmentation for robot learning using reconstructed scenes and robot kinematics. These projects explore how visual representations are built and how they can become useful learning data.",
     "interests": [
@@ -14,7 +14,7 @@
       "Robot learning & control",
       "Autonomous systems"
     ],
-    "cv_url": "/CV_Dong_Hwi_Kim.pdf?v=5146069e4f8a",
+    "cv_url": "/CV_Dong_Hwi_Kim.pdf?v=13ab9719efaa",
     "research_approach": "I aim to start from a practical need and refine it into a research question through analysis and experimentation. My ME/ECE training and projects across robotics, imaging, energy, and time-series learning help me connect ideas across domains. In doctoral research, I hope to extend this perspective toward how autonomous systems perceive, understand, and act in the physical world."
   },
   "research": [
@@ -26,14 +26,23 @@
       "year": 2027,
       "venue_full": "IEEE/CVF Conference on Computer Vision and Pattern Recognition",
       "abstract_only": true,
-      "abstract": "The realistic rendering of 3D Gaussian Splatting (3DGS) has drawn interest from real-time applications that require maps to be built online. This led to coupling 3DGS with SLAM, providing camera poses and initial Gaussians for the map. However, the map is still optimized with designs inherited from conventional SLAM, which train only on keyframes selected for localization and regularize geometry with uncertain frontend depth. These designs overlook the model complexity of a 3DGS map: with millions of parameters but few views of each region, the map overfits to sparse inputs. Resolving this is challenging, as every view and Gaussian added to the map competes for the same real-time budget. We close this gap from both sides. To add views while keyframes preserve the structure of the map, we progressively admit non-keyframe images as mapping updates complete and allocate the limited updates across different groups of frames according to the supervision each group provides. To control the model complexity of the map, edge-guided initialization places new Gaussians where image detail requires them. To complement the uncertain frontend depth, Self-Referenced Opacity Regularization (SOR) uses accumulated rendering evidence, at no extra rendering cost, to suppress the opacity of Gaussians that persistently contribute in front of a map-derived surface reference. Together, these designs improve both the appearance and the geometry of online maps within the available online optimization budget.",
+      "abstract": "The realistic rendering of 3D Gaussian Splatting (3DGS) has drawn interest from real-time applications that require maps to be built online. This led to coupling 3DGS with SLAM, providing camera poses and initial Gaussians for the map. However, the map is still optimized with designs inherited from conventional SLAM, which train only on keyframes selected for localization and regularize geometry with uncertain frontend depth. These designs overlook the model complexity of a 3DGS map: with millions of parameters but few views of each region, the map overfits to sparse inputs. Resolving this is challenging, as every view and Gaussian added to the map competes for the same real-time budget. We close this gap from both sides. To add views while keyframes preserve the structure of the map, we progressively admit non-keyframe images as mapping updates complete and allocate the limited updates across different groups of frames according to the supervision each group provides. To control the model complexity of the map, edge-guided initialization places new Gaussians where image detail requires them. To complement the uncertain frontend depth, Self-Referenced Opacity Regularization (SOR) uses accumulated rendering evidence, at no extra rendering cost, to suppress the opacity of Gaussians that persistently contribute in front of a map-derived surface reference. Together, these designs improve both the appearance and the geometry of online maps within the real-time budget.",
       "image": "online-3dgs-teaser.webp",
       "image_alt": "Online Gaussian map with camera trajectory, keyframes, intermediate views, edge-guided initialization, and self-referenced opacity regularization",
       "image_width": 1100,
       "image_height": 854,
       "summary": "View management, edge-guided Gaussian initialization, and self-referenced opacity regularization for online 3D Gaussian mapping.",
       "category": "3D Vision & SLAM",
-      "links": [],
+      "links": [
+        {
+          "label": "arXiv",
+          "url": "https://arxiv.org/abs/2611.32025"
+        },
+        {
+          "label": "PDF",
+          "url": "https://arxiv.org/pdf/2611.32025"
+        }
+      ],
       "public_method": false,
       "authors": [
         {
@@ -51,7 +60,9 @@
           "name": "Ayoung Kim",
           "corresponding": true
         }
-      ]
+      ],
+      "arxiv_id": "2611.32025",
+      "arxiv_submitted": "2026-11-24"
     },
     {
       "id": "splataug-fr3",

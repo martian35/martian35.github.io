@@ -53,14 +53,22 @@ def main():
     assert len(data['research']) == 2 and len(data['projects']) == 6
     paper = data['research'][0]
     assert paper['status'] == 'Under Review' and paper['venue'] == 'CVPR' and paper['year'] == 2027
-    assert paper['abstract_only'] and paper['abstract'] and not paper['links']
+    assert paper['abstract_only'] and paper['abstract']
+    paper_links = {
+        'arXiv': 'https://arxiv.org/abs/2611.32025',
+        'PDF': 'https://arxiv.org/pdf/2611.32025',
+    }
+    assert {link['label']: link['url'] for link in paper['links']} == paper_links
     assert not paper['public_method']
     home = (OUT / 'index.html').read_text()
     publication = home.split('id="publication-gaussian-slam"', 1)[1].split('</article>', 1)[0]
     assert '<summary>Abs' in publication and '<details class="publication-abstract">' in publication
-    assert '<a ' not in publication, 'Abstract-only publication must not expose resource links'
+    for url in paper_links.values():
+        assert f'href="{url}"' in publication, f'Missing publication link: {url}'
     paper_page = (OUT / 'projects/gaussian-slam/index.html').read_text()
     assert 'id="abstract"' in paper_page and 'id="methodology"' not in paper_page
+    for url in paper_links.values():
+        assert f'href="{url}"' in paper_page, f'Missing paper-page link: {url}'
     assert all('SNU AI Challenge' != a['event'] for a in data['awards'])
     assert (OUT / '.nojekyll').exists()
     assert len(pages) == 10, f'Expected 10 HTML pages including 404, got {len(pages)}'

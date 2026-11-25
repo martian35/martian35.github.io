@@ -14,7 +14,7 @@
       "Robot learning & control",
       "Autonomous systems"
     ],
-    "cv_url": "/CV_Dong_Hwi_Kim.pdf?v=13ab9719efaa",
+    "cv_url": "/CV_Dong_Hwi_Kim.pdf?v=0cd4cf3a21e3",
     "research_approach": "I aim to start from a practical need and refine it into a research question through analysis and experimentation. My ME/ECE training and projects across robotics, imaging, energy, and time-series learning help me connect ideas across domains. In doctoral research, I hope to extend this perspective toward how autonomous systems perceive, understand, and act in the physical world."
   },
   "research": [
@@ -37,10 +37,6 @@
         {
           "label": "arXiv",
           "url": "https://arxiv.org/abs/2611.32025"
-        },
-        {
-          "label": "PDF",
-          "url": "https://arxiv.org/pdf/2611.32025"
         }
       ],
       "public_method": false,

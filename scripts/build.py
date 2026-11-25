@@ -32,6 +32,7 @@ PROFILE_IMAGE = 'portrait-original.jpg' if not OPTIONS.public or PUBLICATION.get
 ORIGIN = 'https://martian35.github.io'
 STYLE_PATH = ROOT / 'style.css' if OPTIONS.github_root else ROOT / 'dist/style.css'
 STYLE_REVISION = hashlib.sha256(STYLE_PATH.read_bytes()).hexdigest()[:12]
+SCRIPT_REVISION = hashlib.sha256((ROOT / 'site.js').read_bytes()).hexdigest()[:12]
 
 
 def esc(value):
@@ -52,7 +53,7 @@ def head(title, description, path='', prefix=''):
 <meta property="og:type" content="website"><meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(description)}">
 <meta property="og:url" content="{ORIGIN}/{path}"><meta property="og:image" content="{ORIGIN}/assets/{PROFILE_IMAGE}"><meta name="twitter:card" content="summary">
 <link rel="icon" href="{prefix}assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="{prefix}style.css?v={STYLE_REVISION}">
-<script src="{prefix}site.js" defer></script></head><body>
+<script src="{prefix}site.js?v={SCRIPT_REVISION}" defer></script></head><body>
 <a class="skip-link" href="#main">Skip to content</a>'''
 
 
@@ -113,16 +114,19 @@ def publication_authors(item):
 
 
 def publication_row(item):
+    abstract_id = 'abstract-' + item['id']
+    arxiv = next(link['url'] for link in item['links'] if link['label'] == 'arXiv')
     return f'''<article class="work-row publication-row" id="publication-{esc(item['id'])}">
 <div class="work-media"><div class="work-image publication-image"><img src="assets/{esc(item['image'])}" alt="{esc(item['image_alt'])}" width="{item['image_width']}" height="{item['image_height']}" loading="lazy"></div></div>
 <div class="work-copy"><h3>{esc(item['title'])}</h3>{publication_authors(item)}
-{publication_meta(item)}<details class="publication-abstract"><summary>Abs<span class="sr-only">: {esc(item['title'])}</span></summary><p>{esc(item['abstract'])}</p></details>{item_links(item,True)}</div></article>'''
+{publication_meta(item)}<div class="publication-links"><button type="button" class="publication-toggle" data-abstract-toggle aria-expanded="false" aria-controls="{esc(abstract_id)}">Abs</button><span aria-hidden="true">/</span>{anchor('arXiv',arxiv)}</div><div id="{esc(abstract_id)}" class="publication-abstract-panel" hidden><p>{esc(item['abstract'])}</p></div></div></article>'''
 
 
 def publication_page(item):
+    arxiv = next(link['url'] for link in item['links'] if link['label'] == 'arXiv')
     body = head(item['title']+' | Dong Hwi Kim', item['summary'], f'projects/{item["id"]}/', '../../') + header('../../')
     body += f'''<main id="main" class="detail-main publication-page"><a class="back-link" href="../../#publications">← Back to publications</a>
-<header class="project-heading"><h1>{esc(item['title'])}</h1>{publication_authors(item)}{publication_meta(item)}{item_links(item,True)}</header>
+<header class="project-heading"><h1>{esc(item['title'])}</h1>{publication_authors(item)}{publication_meta(item)}<div class="publication-links">{anchor('Abs','#abstract')}<span aria-hidden="true">/</span>{anchor('arXiv',arxiv)}</div></header>
 <figure class="publication-figure"><img src="../../assets/{esc(item['image'])}" alt="{esc(item['image_alt'])}" width="{item['image_width']}" height="{item['image_height']}"></figure>
 <section class="publication-abstract-text" aria-labelledby="abstract"><h2 id="abstract">Abstract</h2><p>{esc(item['abstract'])}</p></section></main>'''
     return body + footer('../../')

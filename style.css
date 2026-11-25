@@ -43,6 +43,10 @@
 .publication-figure{max-width:560px;margin:0 auto 28px}
 .publication-figure img{width:100%;height:auto}
 .publication-abstract-text{margin:24px 0}
+.publication-links{display:flex;align-items:baseline;gap:8px;margin-top:6px;line-height:1.55}
+.publication-toggle{appearance:none;border:0;padding:0;background:none;color:var(--accent);font:inherit;cursor:pointer}
+.publication-toggle:hover{color:#f09228}
+.publication-abstract-panel{margin-top:10px;line-height:1.65}
 /* Keep the academic page compact; put the explanation before implementation detail. */
 .profile-context{margin:-6px 0 20px}
 .profile-context p{line-height:1.6}

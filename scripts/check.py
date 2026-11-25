@@ -56,13 +56,15 @@ def main():
     assert paper['abstract_only'] and paper['abstract']
     paper_links = {
         'arXiv': 'https://arxiv.org/abs/2611.32025',
-        'PDF': 'https://arxiv.org/pdf/2611.32025',
     }
     assert {link['label']: link['url'] for link in paper['links']} == paper_links
     assert not paper['public_method']
     home = (OUT / 'index.html').read_text()
     publication = home.split('id="publication-gaussian-slam"', 1)[1].split('</article>', 1)[0]
-    assert '<summary>Abs' in publication and '<details class="publication-abstract">' in publication
+    assert 'data-abstract-toggle' in publication and '>Abs</button>' in publication
+    assert 'aria-controls="abstract-gaussian-slam"' in publication
+    assert 'id="abstract-gaussian-slam" class="publication-abstract-panel" hidden' in publication
+    assert 'https://arxiv.org/pdf/' not in publication
     for url in paper_links.values():
         assert f'href="{url}"' in publication, f'Missing publication link: {url}'
     paper_page = (OUT / 'projects/gaussian-slam/index.html').read_text()

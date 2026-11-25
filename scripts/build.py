@@ -119,14 +119,14 @@ def publication_row(item):
     return f'''<article class="work-row publication-row" id="publication-{esc(item['id'])}">
 <div class="work-media"><div class="work-image publication-image"><img src="assets/{esc(item['image'])}" alt="{esc(item['image_alt'])}" width="{item['image_width']}" height="{item['image_height']}" loading="lazy"></div></div>
 <div class="work-copy"><h3>{esc(item['title'])}</h3>{publication_authors(item)}
-{publication_meta(item)}<div class="publication-links"><button type="button" class="publication-toggle" data-abstract-toggle aria-expanded="false" aria-controls="{esc(abstract_id)}">Abs</button><span aria-hidden="true">/</span>{anchor('arXiv',arxiv)}</div><div id="{esc(abstract_id)}" class="publication-abstract-panel" hidden><p>{esc(item['abstract'])}</p></div></div></article>'''
+{publication_meta(item)}<div class="publication-links"><button type="button" class="publication-toggle" data-abstract-toggle aria-expanded="false" aria-controls="{esc(abstract_id)}">abs</button><span aria-hidden="true">/</span>{anchor('arXiv',arxiv)}</div><div id="{esc(abstract_id)}" class="publication-abstract-panel" hidden><p>{esc(item['abstract'])}</p></div></div></article>'''
 
 
 def publication_page(item):
     arxiv = next(link['url'] for link in item['links'] if link['label'] == 'arXiv')
     body = head(item['title']+' | Dong Hwi Kim', item['summary'], f'projects/{item["id"]}/', '../../') + header('../../')
     body += f'''<main id="main" class="detail-main publication-page"><a class="back-link" href="../../#publications">← Back to publications</a>
-<header class="project-heading"><h1>{esc(item['title'])}</h1>{publication_authors(item)}{publication_meta(item)}<div class="publication-links">{anchor('Abs','#abstract')}<span aria-hidden="true">/</span>{anchor('arXiv',arxiv)}</div></header>
+<header class="project-heading"><h1>{esc(item['title'])}</h1>{publication_authors(item)}{publication_meta(item)}<div class="publication-links">{anchor('abs','#abstract')}<span aria-hidden="true">/</span>{anchor('arXiv',arxiv)}</div></header>
 <figure class="publication-figure"><img src="../../assets/{esc(item['image'])}" alt="{esc(item['image_alt'])}" width="{item['image_width']}" height="{item['image_height']}"></figure>
 <section class="publication-abstract-text" aria-labelledby="abstract"><h2 id="abstract">Abstract</h2><p>{esc(item['abstract'])}</p></section></main>'''
     return body + footer('../../')

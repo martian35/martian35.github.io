@@ -61,7 +61,7 @@ def main():
     assert not paper['public_method']
     home = (OUT / 'index.html').read_text()
     publication = home.split('id="publication-gaussian-slam"', 1)[1].split('</article>', 1)[0]
-    assert 'data-abstract-toggle' in publication and '>Abs</button>' in publication
+    assert 'data-abstract-toggle' in publication and '>abs</button>' in publication
     assert 'aria-controls="abstract-gaussian-slam"' in publication
     assert 'id="abstract-gaussian-slam" class="publication-abstract-panel" hidden' in publication
     assert 'https://arxiv.org/pdf/' not in publication
